@@ -1,10 +1,13 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>Loom Robotics</title>
+		<title>Loom Robotics — Decentralized Robotic Construction</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="description" content="Loom Robotics develops decentralized robotic construction systems using coordinated autonomous worker robots. LEGOSwarm is our modular research platform for swarm assembly." />
+		<link rel="icon" type="image/png" href="images/logo-mark.png" />
 		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/brand.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 	</head>
 	<body class="is-preload">
@@ -14,9 +17,8 @@
 
 				<!-- Intro -->
 					<div id="intro">
-						<h1>Loom<br />
-						Robotics</h1>
-						<p>Autonomous construction solutions <a href="https://www.youtube.com/channel/UCpjbNt2DCMKCNqQ9IGROmjg">@LoomRobotics</a>
+						<a href="index.html" class="hero-logo"><img src="images/transp-white.png" alt="Loom Robotics" /></a>
+						<p>Loom Robotics develops decentralized robotic construction systems using coordinated autonomous worker robots.</p>
 						<ul class="actions">
 							<li><a href="#header" class="button icon solid solo fa-arrow-down scrolly">Continue</a></li>
 						</ul>
@@ -24,80 +26,175 @@
 
 				<!-- Header -->
 					<header id="header">
-						<a href="index.html" class="logo">Loom</a>
+						<a href="index.html" class="logo"><img class="logo-mark" src="images/transp-white.png" alt="" />Loom Robotics</a>
 					</header>
 
 				<!-- Nav -->
 					<nav id="nav">
 						<ul class="links">
-							<li class="active"><a href="index.html">This is Loom</a></li>
-							<li><a href="generic.html">LEGOSwarm</a></li>
-							<li><a href="elements.html">Careers</a></li>
+							<li class="active"><a href="index.html">Loom Robotics</a></li>
+							<li><a href="about.html">About</a></li>
+							<li><a href="technical.html">Technical Overview</a></li>
+							<li><a href="devlog.html">Dev Log</a></li>
+							<li><a href="gallery.html">Media</a></li>
+							<li><a href="architecture.html">Architecture</a></li>
 						</ul>
 						<ul class="icons">
-							<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-							<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-							<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-							<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+							<li><a href="https://github.com/LoomRobotics/LEGOSwarm" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
 						</ul>
 					</nav>
 
 				<!-- Main -->
 					<div id="main">
 
-						<!-- Featured Post -->
+						<!-- Mission (Tier 1) -->
 							<article class="post featured">
 								<header class="major">
-									<span class="date">May 27, 2026</span>
-									<h2><a href="#">inspired by<br />
-									nature</a></h2>
-									<p>Loom is driven by strong passions for nature and building systems.</p>
+									<span class="eyebrow">Mission</span>
+									<h2>Robotic construction,<br />
+									built by a swarm.</h2>
+									<p>LEGOSwarm is a modular distributed robotics research platform for decentralized physical assembly. A team of autonomous mobile robots collaboratively assembles structures within a controlled arena. A supervisory planning layer — the Foreman — parses a digital construction model into a dependency graph and releases buildable steps to the swarm, while execution, navigation, placement, and verification remain fully decentralized.</p>
 								</header>
-								<a href="#" class="image main"><img src="images/pic01.jpg" alt="" /></a>
+								<a href="about.html" class="image main"><img src="images/pic01.jpg" alt="" /></a>
 								<ul class="actions special">
-									<li><a href="#" class="button large">Full Story</a></li>
+									<li><a href="about.html" class="button large">Read the Mission</a></li>
 								</ul>
 							</article>
 
-						<!-- Posts -->
+						<!-- Capability highlights (Tier 2) -->
+							<section class="post">
+								<header class="major">
+									<span class="eyebrow">Capabilities</span>
+									<h2>What the worker robots do</h2>
+								</header>
+								<div class="capabilities">
+									<div class="capability">
+										<h3>Autonomous Navigation</h3>
+										<p>Each worker localizes and plans its own paths through the arena, avoiding obstacles and other robots without central control.</p>
+									</div>
+									<div class="capability">
+										<h3>Part Detection</h3>
+										<p>Onboard perception identifies and locates LEGO parts for pickup, classifying geometry under controlled lighting.</p>
+									</div>
+									<div class="capability">
+										<h3>Generalized Manipulation</h3>
+										<p>A 4-DOF arm and gripper handle common LEGO geometries — grasping, transporting, and placing bricks with verification.</p>
+									</div>
+									<div class="capability">
+										<h3>Visual Sensing</h3>
+										<p>Robots read the build specification visually, mapping booklet-style instructions to physical placement steps.</p>
+									</div>
+									<div class="capability">
+										<h3>Task-Based Operation</h3>
+										<p>Workers pull buildable steps and coordinate with minimal broadcasting between the Foreman and the swarm.</p>
+									</div>
+									<div class="capability">
+										<h3>Fault Tolerance</h3>
+										<p>The system degrades gracefully under partial robot failure, with stigmergic coordination filling the gaps.</p>
+									</div>
+								</div>
+								<p class="text-steel"><em>Placeholder imagery — robot renders and hardware photos to follow.</em></p>
+							</section>
+
+						<!-- Architecture layers (Tier 3) -->
+							<section class="post">
+								<header class="major">
+									<span class="eyebrow">System Architecture</span>
+									<h2>Five coordinated layers</h2>
+								</header>
+								<ul class="layers">
+									<li><span class="layer-id">Layer 1</span><span class="layer-name">Mission</span><span class="layer-desc">Dependency-graph generation, build planning, Foreman instruction parsing, task decomposition.</span></li>
+									<li><span class="layer-id">Layer 2</span><span class="layer-name">Swarm Coordination</span><span class="layer-desc">Task allocation, congestion management, conflict resolution, decentralized communication.</span></li>
+									<li><span class="layer-id">Layer 3</span><span class="layer-name">Robot Autonomy</span><span class="layer-desc">Navigation, localization, SLAM, manipulation, path planning, obstacle avoidance.</span></li>
+									<li><span class="layer-id">Layer 4</span><span class="layer-name">Hardware</span><span class="layer-desc">Jetson compute, cameras, actuators, grippers, power systems, sensors, networking.</span></li>
+									<li><span class="layer-id">Layer 5</span><span class="layer-name">Simulation &amp; Training</span><span class="layer-desc">Isaac Sim, digital twins, synthetic datasets, reinforcement-learning environments.</span></li>
+								</ul>
+								<ul class="actions special">
+									<li><a href="technical.html" class="button">Technical Overview</a></li>
+								</ul>
+							</section>
+
+						<!-- Architecture explorer teaser (Tier 4) -->
+							<section class="post">
+								<div class="arch-teaser">
+									<span class="badge">Coming in V2</span>
+									<h2>Interactive Architecture Explorer</h2>
+									<p>An optional, zoomable systems map for exploring how a single instruction propagates from the Foreman through the swarm and down to brick placement.</p>
+									<ul class="actions special">
+										<li><a href="architecture.html" class="button primary">Explore Architecture</a></li>
+									</ul>
+								</div>
+							</section>
+
+						<!-- Latest development updates -->
 							<section class="posts">
+								<header class="major">
+									<span class="eyebrow">Development Log</span>
+									<h2>Latest updates</h2>
+								</header>
 								<article>
 									<header>
-										<span class="date">April 24, 2026</span>
-										<h2><a href="#">Protoype<br />
-										testing</a></h2>
+										<span class="status-pill">May 26, 2026</span>
+										<h2><a href="devlog.html">Bring-up &amp; first 3D-printed parts</a></h2>
 									</header>
-									<a href="#" class="image fit"><img src="images/pic02.jpg" alt="" /></a>
-									<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis magna etiam.</p>
+									<a href="devlog.html" class="image fit"><img src="images/pic02.jpg" alt="" /></a>
+									<p>Starting code is in place and we are experimenting with the 3D printer to fabricate the first worker chassis and gripper iterations. Early effort is focused on the mechanical platform and the perception scaffolding needed for part detection.</p>
 									<ul class="actions special">
-										<li><a href="#" class="button">Full Story</a></li>
+										<li><a href="devlog.html" class="button">Read Entry</a></li>
 									</ul>
 								</article>
 								<article>
 									<header>
-										<span class="date">May 20, 2026</span>
-										<h2><a href="#">Primis eget<br />
-										imperdiet lorem</a></h2>
+										<span class="status-pill">Upcoming</span>
+										<h2><a href="devlog.html">Decentralized task allocation</a></h2>
 									</header>
-									<a href="#" class="image fit"><img src="images/pic03.jpg" alt="" /></a>
-									<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis magna etiam.</p>
+									<a href="devlog.html" class="image fit"><img src="images/pic03.jpg" alt="" /></a>
+									<p>Next on the bench: validating stigmergic construction workflows against a centralized baseline, and measuring how task allocation holds up as robot count and structure complexity increase.</p>
 									<ul class="actions special">
-										<li><a href="#" class="button">Full Story</a></li>
+										<li><a href="devlog.html" class="button">Read Entry</a></li>
 									</ul>
+								</article>
+							</section>
+
+							<!-- Media gallery preview -->
+							<section class="post">
+								<header class="major">
+									<span class="eyebrow">Media</span>
+									<h2>Renders, hardware &amp; simulation</h2>
+								</header>
+								<div class="media-grid">
+									<a href="gallery.html" class="media-tile"><span class="media-placeholder">Robot renders</span><span class="media-label">Renders</span></a>
+									<a href="gallery.html" class="media-tile"><span class="media-placeholder">Gripper / CAD</span><span class="media-label">CAD &amp; design</span></a>
+									<a href="gallery.html" class="media-tile"><span class="media-placeholder">Hardware photos</span><span class="media-label">Hardware</span></a>
+									<a href="gallery.html" class="media-tile"><span class="media-placeholder">Node diagrams</span><span class="media-label">Architecture</span></a>
+									<a href="gallery.html" class="media-tile"><span class="media-placeholder">Simulation clips</span><span class="media-label">Simulation</span></a>
+									<a href="gallery.html" class="media-tile"><span class="media-placeholder">Design sheets</span><span class="media-label">Industrial design</span></a>
+								</div>
+								<p class="text-steel"><em>Placeholder tiles &mdash; real renders, CAD, and footage to follow.</em></p>
+								<ul class="actions special">
+									<li><a href="gallery.html" class="button">View Media Gallery</a></li>
+								</ul>
+							</section>
+
+							<!-- Roadmap -->
+							<section class="post">
+								<header class="major">
+									<span class="eyebrow">Roadmap</span>
+									<h2>Where the platform is headed</h2>
+								</header>
+								<ul class="roadmap">
+									<li class="done"><span class="status-pill done">Underway</span><h3>Hardware bring-up</h3><p>First worker chassis and gripper iterations on the 3D printer; starting code and perception scaffolding in place.</p></li>
+									<li class="current"><span class="status-pill current">In progress</span><h3>Perception &amp; part detection</h3><p>Onboard identification and localization of LEGO parts under controlled lighting for reliable pickup.</p></li>
+									<li class="next"><span class="status-pill next">Next</span><h3>Generalized manipulation</h3><p>A 4-DOF arm and gripper grasping, transporting, and placing common brick geometries with verification.</p></li>
+									<li class="next"><span class="status-pill next">Next</span><h3>Decentralized task allocation</h3><p>Validating stigmergic construction workflows against a centralized baseline as robot count and structure complexity scale.</p></li>
+									<li class="next"><span class="status-pill next">Planned</span><h3>Simulation &amp; training</h3><p>Digital twins and synthetic datasets in Isaac Sim to train and validate swarm behavior before hardware.</p></li>
+								</ul>
 							</section>
 
 						<!-- Footer -->
 							<footer>
 								<div class="pagination">
-									<!--<a href="#" class="previous">Prev</a>-->
-									<a href="#" class="page active">1</a>
-									<a href="#" class="page">2</a>
-									<a href="#" class="page">3</a>
-									<span class="extra">&hellip;</span>
-									<a href="#" class="page">8</a>
-									<a href="#" class="page">9</a>
-									<a href="#" class="page">10</a>
-									<a href="#" class="next">Next</a>
+									<a href="devlog.html" class="button">All Development Updates</a>
 								</div>
 							</footer>
 
@@ -128,25 +225,22 @@
 						</section>
 						<section class="split contact">
 							<section class="alt">
-								<h3>Address</h3>
-								<p>1234 Somewhere Road #87257<br />
-								Nashville, TN 00000-0000</p>
+								<h3>Lab</h3>
+								<p>Loom Robotics — Research Platform<br />
+								Decentralized robotic construction systems</p>
 							</section>
 							<section>
-								<h3>Phone</h3>
-								<p><a href="#">(000) 000-0000</a></p>
+								<h3>Project</h3>
+								<p>LEGOSwarm</p>
 							</section>
 							<section>
-								<h3>Email</h3>
-								<p><a href="#">info@untitled.tld</a></p>
+								<h3>Contact</h3>
+								<p><a href="#">hello@loomrobotics.com</a></p>
 							</section>
 							<section>
-								<h3>Social</h3>
+								<h3>Code</h3>
 								<ul class="icons alt">
-									<li><a href="#" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
-									<li><a href="#" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
-									<li><a href="#" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
-									<li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+									<li><a href="https://github.com/LoomRobotics/LEGOSwarm" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
 								</ul>
 							</section>
 						</section>
@@ -154,7 +248,7 @@
 
 				<!-- Copyright -->
 					<div id="copyright">
-						<ul><li>&copy; LoomRobotics</li><li>Careers: <a href="https://html5up.net">Careers</a></li></ul>
+						<ul><li>&copy; Loom Robotics</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
 					</div>
 
 			</div>

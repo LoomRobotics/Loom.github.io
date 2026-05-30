@@ -1,0 +1,21 @@
+# OS / editor cruft
+Thumbs.db
+desktop.ini
+.DS_Store
+*.swp
+
+# Local agent / workspace files
+.claude/
+*.md.bak
+
+# Not required to run the site (not served / not compiled):
+
+# Dev + planning docs
+*.md
+README.txt
+
+# Sass sources — NOT compiled; site loads the precompiled assets/css/main.css
+assets/sass/
+
+# Brand source set (working logos live in images/)
+Loom-Robotics-Logos/
