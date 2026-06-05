@@ -19,25 +19,19 @@
 		<!-- Wrapper -->
 			<div id="wrapper">
 
-				<!-- Header -->
-					<header id="header">
-						<a href="index.html" class="logo"><img class="logo-mark" src="images/transp-white.png" alt="" />Loom Robotics</a>
-					</header>
-
-				<!-- Nav -->
-					<nav id="nav">
-						<ul class="links">
+				<!-- Header + Nav (rendered from assets/js/site.config.js via site.js) -->
+					<div data-loom="header"></div>
+					<div data-loom="nav"></div>
+					<noscript>
+						<nav id="nav"><ul class="links">
 							<li><a href="index.html">Loom Robotics</a></li>
 							<li><a href="about.html">About</a></li>
 							<li><a href="technical.html">Technical Overview</a></li>
 							<li><a href="devlog.html">Dev Log</a></li>
-							<li class="active"><a href="gallery.html">Media</a></li>
+							<li><a href="gallery.html">Media</a></li>
 							<li><a href="architecture.html">Architecture</a></li>
-						</ul>
-						<ul class="icons">
-							<li><a href="https://github.com/LoomRobotics/LEGOSwarm" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
-						</ul>
-					</nav>
+						</ul></nav>
+					</noscript>
 
 				<!-- Main -->
 					<div id="main">
@@ -120,60 +114,15 @@
 
 					</div>
 
-				<!-- Footer -->
-					<footer id="footer">
-						<section>
-							<form method="post" action="#">
-								<div class="fields">
-									<div class="field">
-										<label for="name">Name</label>
-										<input type="text" name="name" id="name" />
-									</div>
-									<div class="field">
-										<label for="email">Email</label>
-										<input type="text" name="email" id="email" />
-									</div>
-									<div class="field">
-										<label for="message">Message</label>
-										<textarea name="message" id="message" rows="3"></textarea>
-									</div>
-								</div>
-								<ul class="actions">
-									<li><input type="submit" value="Send Message" /></li>
-								</ul>
-							</form>
-						</section>
-						<section class="split contact">
-							<section class="alt">
-								<h3>Lab</h3>
-								<p>Loom Robotics — Research Platform<br />
-								Decentralized robotic construction systems</p>
-							</section>
-							<section>
-								<h3>Project</h3>
-								<p>LEGOSwarm</p>
-							</section>
-							<section>
-								<h3>Contact</h3>
-								<p><a href="#">hello@loomrobotics.com</a></p>
-							</section>
-							<section>
-								<h3>Code</h3>
-								<ul class="icons alt">
-									<li><a href="https://github.com/LoomRobotics/LEGOSwarm" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
-								</ul>
-							</section>
-						</section>
-					</footer>
-
-				<!-- Copyright -->
-					<div id="copyright">
-						<ul><li>&copy; Loom Robotics</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
-					</div>
+				<!-- Footer + Copyright (rendered from assets/js/site.config.js via site.js) -->
+					<div data-loom="footer"></div>
+					<div data-loom="copyright"></div>
 
 			</div>
 
 		<!-- Scripts -->
+			<script src="assets/js/site.config.js"></script>
+			<script src="assets/js/site.js"></script>
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/jquery.scrollex.min.js"></script>
 			<script src="assets/js/jquery.scrolly.min.js"></script>

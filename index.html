@@ -8,6 +8,7 @@
 		<link rel="icon" type="image/png" href="images/logo-mark.png" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<link rel="stylesheet" href="assets/css/brand.css" />
+		<link rel="stylesheet" href="assets/css/explorer.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 	</head>
 	<body class="is-preload">
@@ -18,31 +19,26 @@
 				<!-- Intro -->
 					<div id="intro">
 						<a href="index.html" class="hero-logo"><img src="images/transp-white.png" alt="Loom Robotics" /></a>
-						<p>Loom Robotics develops decentralized robotic construction systems using coordinated autonomous worker robots.</p>
+						<p>Loom Robotics develops<br />
+						decentralized robotic construction systems.</p>
 						<ul class="actions">
 							<li><a href="#header" class="button icon solid solo fa-arrow-down scrolly">Continue</a></li>
 						</ul>
 					</div>
 
-				<!-- Header -->
-					<header id="header">
-						<a href="index.html" class="logo"><img class="logo-mark" src="images/transp-white.png" alt="" />Loom Robotics</a>
-					</header>
-
-				<!-- Nav -->
-					<nav id="nav">
-						<ul class="links">
-							<li class="active"><a href="index.html">Loom Robotics</a></li>
+				<!-- Header + Nav (rendered from assets/js/site.config.js via site.js) -->
+					<div data-loom="header"></div>
+					<div data-loom="nav"></div>
+					<noscript>
+						<nav id="nav"><ul class="links">
+							<li><a href="index.html">Loom Robotics</a></li>
 							<li><a href="about.html">About</a></li>
 							<li><a href="technical.html">Technical Overview</a></li>
 							<li><a href="devlog.html">Dev Log</a></li>
 							<li><a href="gallery.html">Media</a></li>
 							<li><a href="architecture.html">Architecture</a></li>
-						</ul>
-						<ul class="icons">
-							<li><a href="https://github.com/LoomRobotics/LEGOSwarm" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
-						</ul>
-					</nav>
+						</ul></nav>
+					</noscript>
 
 				<!-- Main -->
 					<div id="main">
@@ -52,8 +48,8 @@
 								<header class="major">
 									<span class="eyebrow">Mission</span>
 									<h2>Robotic construction,<br />
-									built by a swarm.</h2>
-									<p>LEGOSwarm is a modular distributed robotics research platform for decentralized physical assembly. A team of autonomous mobile robots collaboratively assembles structures within a controlled arena. A supervisory planning layer — the Foreman — parses a digital construction model into a dependency graph and releases buildable steps to the swarm, while execution, navigation, placement, and verification remain fully decentralized.</p>
+									made possible.</h2>
+									<p>Our flagship system "WEAVE" enables fault tolerant swarm orchestration and decentralized robotic assembly.</p>
 								</header>
 								<a href="about.html" class="image main"><img src="images/pic01.jpg" alt="" /></a>
 								<ul class="actions special">
@@ -70,23 +66,23 @@
 								<div class="capabilities">
 									<div class="capability">
 										<h3>Autonomous Navigation</h3>
-										<p>Each worker localizes and plans its own paths through the arena, avoiding obstacles and other robots without central control.</p>
+										<p>Each worker localizes and plans its own paths, avoiding obstacles without central control.</p>
 									</div>
 									<div class="capability">
 										<h3>Part Detection</h3>
-										<p>Onboard perception identifies and locates LEGO parts for pickup, classifying geometry under controlled lighting.</p>
+										<p>Onboard perception identifies and locates parts for pickup.</p>
 									</div>
 									<div class="capability">
 										<h3>Generalized Manipulation</h3>
-										<p>A 4-DOF arm and gripper handle common LEGO geometries — grasping, transporting, and placing bricks with verification.</p>
+										<p>An arm and gripper handle various geometries — transporting, and placing bricks with self-verification.</p>
 									</div>
 									<div class="capability">
 										<h3>Visual Sensing</h3>
-										<p>Robots read the build specification visually, mapping booklet-style instructions to physical placement steps.</p>
+										<p>Robots read the build specification visually, mapping instructions to physical placement steps.</p>
 									</div>
 									<div class="capability">
 										<h3>Task-Based Operation</h3>
-										<p>Workers pull buildable steps and coordinate with minimal broadcasting between the Foreman and the swarm.</p>
+										<p>Workers pull buildable steps and coordinate with minimal broadcasting to human supervisors.</p>
 									</div>
 									<div class="capability">
 										<h3>Fault Tolerance</h3>
@@ -103,27 +99,49 @@
 									<h2>Five coordinated layers</h2>
 								</header>
 								<ul class="layers">
-									<li><span class="layer-id">Layer 1</span><span class="layer-name">Mission</span><span class="layer-desc">Dependency-graph generation, build planning, Foreman instruction parsing, task decomposition.</span></li>
-									<li><span class="layer-id">Layer 2</span><span class="layer-name">Swarm Coordination</span><span class="layer-desc">Task allocation, congestion management, conflict resolution, decentralized communication.</span></li>
-									<li><span class="layer-id">Layer 3</span><span class="layer-name">Robot Autonomy</span><span class="layer-desc">Navigation, localization, SLAM, manipulation, path planning, obstacle avoidance.</span></li>
-									<li><span class="layer-id">Layer 4</span><span class="layer-name">Hardware</span><span class="layer-desc">Jetson compute, cameras, actuators, grippers, power systems, sensors, networking.</span></li>
-									<li><span class="layer-id">Layer 5</span><span class="layer-name">Simulation &amp; Training</span><span class="layer-desc">Isaac Sim, digital twins, synthetic datasets, reinforcement-learning environments.</span></li>
+									<li><span class="layer-id">Layer 1</span><span class="layer-name">Design</span><span class="layer-desc">Build planning, instruction parsing, task decomposition.</span></li>
+									<li><span class="layer-id">Layer 2</span><span class="layer-name">Swarm Coordination</span><span class="layer-desc">Task allocation, conflict resolution, decentralized communication.</span></li>
+									<li><span class="layer-id">Layer 3</span><span class="layer-name">Robot Autonomy</span><span class="layer-desc">Navigation, manipulation, path planning, obstacle avoidance.</span></li>
+									<li><span class="layer-id">Layer 4</span><span class="layer-name">Hardware</span><span class="layer-desc">Cameras, actuators, grippers, power systems, sensors, networking.</span></li>
+									<li><span class="layer-id">Layer 5</span><span class="layer-name">Simulation &amp; Training</span><span class="layer-desc">Digital twins, synthetic datasets, reinforcement-learning environments.</span></li>
 								</ul>
 								<ul class="actions special">
 									<li><a href="technical.html" class="button">Technical Overview</a></li>
 								</ul>
 							</section>
 
-						<!-- Architecture explorer teaser (Tier 4) -->
+						<!-- Architecture explorer preview (Tier 4 — Level-1 animated mini-graph) -->
 							<section class="post">
-								<div class="arch-teaser">
-									<span class="badge">Coming in V2</span>
+								<header class="major">
+									<span class="eyebrow">System Map</span>
 									<h2>Interactive Architecture Explorer</h2>
 									<p>An optional, zoomable systems map for exploring how a single instruction propagates from the Foreman through the swarm and down to brick placement.</p>
-									<ul class="actions special">
-										<li><a href="architecture.html" class="button primary">Explore Architecture</a></li>
-									</ul>
+								</header>
+								<div class="arch-mini" aria-hidden="true">
+									<svg viewBox="0 0 640 160" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Animated preview: data flowing through Mission, Swarm, Autonomy, and Hardware layers">
+										<!-- spine edges -->
+										<line class="mini-edge" x1="148" y1="80" x2="192" y2="80" />
+										<line class="mini-edge" x1="308" y1="80" x2="352" y2="80" />
+										<line class="mini-edge" x1="468" y1="80" x2="512" y2="80" />
+										<!-- nodes -->
+										<rect class="mini-node" x="32"  y="56" width="116" height="48" rx="6" />
+										<rect class="mini-node" x="192" y="56" width="116" height="48" rx="6" />
+										<rect class="mini-node" x="352" y="56" width="116" height="48" rx="6" />
+										<rect class="mini-node is-physical" x="512" y="56" width="116" height="48" rx="6" />
+										<!-- labels -->
+										<text class="mini-label" x="90"  y="84" text-anchor="middle">Mission</text>
+										<text class="mini-label" x="250" y="84" text-anchor="middle">Swarm</text>
+										<text class="mini-label" x="410" y="84" text-anchor="middle">Autonomy</text>
+										<text class="mini-label" x="570" y="84" text-anchor="middle">Hardware</text>
+										<!-- travelling data pulses -->
+										<circle class="mini-pulse p1" r="4" />
+										<circle class="mini-pulse p2" r="4" />
+										<circle class="mini-pulse p3" r="4" />
+									</svg>
 								</div>
+								<ul class="actions special">
+									<li><a href="architecture.html" class="button primary">Explore Architecture</a></li>
+								</ul>
 							</section>
 
 						<!-- Latest development updates -->
@@ -134,22 +152,22 @@
 								</header>
 								<article>
 									<header>
-										<span class="status-pill">May 26, 2026</span>
-										<h2><a href="devlog.html">Bring-up &amp; first 3D-printed parts</a></h2>
+										<span class="status-pill current">In progress</span>
+										<h2><a href="devlog.html">First build, in simulation</a></h2>
 									</header>
-									<a href="devlog.html" class="image fit"><img src="images/pic02.jpg" alt="" /></a>
-									<p>Starting code is in place and we are experimenting with the 3D printer to fabricate the first worker chassis and gripper iterations. Early effort is focused on the mechanical platform and the perception scaffolding needed for part detection.</p>
+									<a href="devlog.html" class="image fit"><img src="images/pic09.jpg" alt="" /></a>
+									<p>The full pipeline ran end-to-end for the first time. In a Gazebo physics simulation, a single worker reads its next job, drives to the part, picks it, places it, and verifies its own work before declaring the step done — intent in, verified placement out, no human in the loop.</p>
 									<ul class="actions special">
 										<li><a href="devlog.html" class="button">Read Entry</a></li>
 									</ul>
 								</article>
 								<article>
 									<header>
-										<span class="status-pill">Upcoming</span>
-										<h2><a href="devlog.html">Decentralized task allocation</a></h2>
+										<span class="status-pill">June 2, 2026</span>
+										<h2><a href="devlog.html">A swarm with no boss</a></h2>
 									</header>
-									<a href="devlog.html" class="image fit"><img src="images/pic03.jpg" alt="" /></a>
-									<p>Next on the bench: validating stigmergic construction workflows against a centralized baseline, and measuring how task allocation holds up as robot count and structure complexity increase.</p>
+									<a href="devlog.html" class="image fit"><img src="images/pic07.jpg" alt="" /></a>
+									<p>No central scheduler. Every robot carries its own live copy of the build plan and they stay in agreement by exchanging only a couple of small messages per job; work claimed with self-expiring leases reopens automatically if a robot drops out.</p>
 									<ul class="actions special">
 										<li><a href="devlog.html" class="button">Read Entry</a></li>
 									</ul>
@@ -183,11 +201,11 @@
 									<h2>Where the platform is headed</h2>
 								</header>
 								<ul class="roadmap">
-									<li class="done"><span class="status-pill done">Underway</span><h3>Hardware bring-up</h3><p>First worker chassis and gripper iterations on the 3D printer; starting code and perception scaffolding in place.</p></li>
-									<li class="current"><span class="status-pill current">In progress</span><h3>Perception &amp; part detection</h3><p>Onboard identification and localization of LEGO parts under controlled lighting for reliable pickup.</p></li>
-									<li class="next"><span class="status-pill next">Next</span><h3>Generalized manipulation</h3><p>A 4-DOF arm and gripper grasping, transporting, and placing common brick geometries with verification.</p></li>
-									<li class="next"><span class="status-pill next">Next</span><h3>Decentralized task allocation</h3><p>Validating stigmergic construction workflows against a centralized baseline as robot count and structure complexity scale.</p></li>
-									<li class="next"><span class="status-pill next">Planned</span><h3>Simulation &amp; training</h3><p>Digital twins and synthetic datasets in Isaac Sim to train and validate swarm behavior before hardware.</p></li>
+									<li class="done"><span class="status-pill done">Done</span><h3>Decentralized coordination</h3><p>A replicated build plan that every robot carries, with no central scheduler — claiming, recovery, and convergence proven in software.</p></li>
+									<li class="current"><span class="status-pill current">In progress</span><h3>Single-worker build in simulation</h3><p>One simulated worker driving the full loop in Gazebo: drive, pick, place, and self-verify each step against ground truth.</p></li>
+									<li class="next"><span class="status-pill next">Next</span><h3>Multi-robot decentralized build</h3><p>Many workers claiming and assembling concurrently, with congestion-aware navigation and coalitions for jobs too large for one arm.</p></li>
+									<li class="next"><span class="status-pill next">Next</span><h3>Perception &amp; part detection</h3><p>Replacing simulation ground truth with real onboard vision — identifying, localizing, and verifying LEGO parts under real lighting.</p></li>
+									<li class="next"><span class="status-pill next">Planned</span><h3>Hardware bring-up</h3><p>First worker chassis and gripper iterations on the 3D printer, then sim-to-real onto onboard compute.</p></li>
 								</ul>
 							</section>
 
@@ -200,60 +218,15 @@
 
 					</div>
 
-				<!-- Footer -->
-					<footer id="footer">
-						<section>
-							<form method="post" action="#">
-								<div class="fields">
-									<div class="field">
-										<label for="name">Name</label>
-										<input type="text" name="name" id="name" />
-									</div>
-									<div class="field">
-										<label for="email">Email</label>
-										<input type="text" name="email" id="email" />
-									</div>
-									<div class="field">
-										<label for="message">Message</label>
-										<textarea name="message" id="message" rows="3"></textarea>
-									</div>
-								</div>
-								<ul class="actions">
-									<li><input type="submit" value="Send Message" /></li>
-								</ul>
-							</form>
-						</section>
-						<section class="split contact">
-							<section class="alt">
-								<h3>Lab</h3>
-								<p>Loom Robotics — Research Platform<br />
-								Decentralized robotic construction systems</p>
-							</section>
-							<section>
-								<h3>Project</h3>
-								<p>LEGOSwarm</p>
-							</section>
-							<section>
-								<h3>Contact</h3>
-								<p><a href="#">hello@loomrobotics.com</a></p>
-							</section>
-							<section>
-								<h3>Code</h3>
-								<ul class="icons alt">
-									<li><a href="https://github.com/LoomRobotics/LEGOSwarm" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
-								</ul>
-							</section>
-						</section>
-					</footer>
-
-				<!-- Copyright -->
-					<div id="copyright">
-						<ul><li>&copy; Loom Robotics</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
-					</div>
+				<!-- Footer + Copyright (rendered from assets/js/site.config.js via site.js) -->
+					<div data-loom="footer"></div>
+					<div data-loom="copyright"></div>
 
 			</div>
 
 		<!-- Scripts -->
+			<script src="assets/js/site.config.js"></script>
+			<script src="assets/js/site.js"></script>
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/jquery.scrollex.min.js"></script>
 			<script src="assets/js/jquery.scrolly.min.js"></script>

@@ -15,25 +15,19 @@
 		<!-- Wrapper -->
 			<div id="wrapper">
 
-				<!-- Header -->
-					<header id="header">
-						<a href="index.html" class="logo"><img class="logo-mark" src="images/transp-white.png" alt="" />Loom Robotics</a>
-					</header>
-
-				<!-- Nav -->
-					<nav id="nav">
-						<ul class="links">
+				<!-- Header + Nav (rendered from assets/js/site.config.js via site.js) -->
+					<div data-loom="header"></div>
+					<div data-loom="nav"></div>
+					<noscript>
+						<nav id="nav"><ul class="links">
 							<li><a href="index.html">Loom Robotics</a></li>
 							<li><a href="about.html">About</a></li>
 							<li><a href="technical.html">Technical Overview</a></li>
-							<li class="active"><a href="devlog.html">Dev Log</a></li>
+							<li><a href="devlog.html">Dev Log</a></li>
 							<li><a href="gallery.html">Media</a></li>
 							<li><a href="architecture.html">Architecture</a></li>
-						</ul>
-						<ul class="icons">
-							<li><a href="https://github.com/LoomRobotics/LEGOSwarm" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
-						</ul>
-					</nav>
+						</ul></nav>
+					</noscript>
 
 				<!-- Main -->
 					<div id="main">
@@ -42,102 +36,72 @@
 							<header class="major">
 								<span class="eyebrow">Development Log</span>
 								<h1>Engineering journal</h1>
-								<p>A running record of hardware revisions, perception and navigation experiments, coordination tests, and the failures in between. This log is the long-term archive of how LEGOSwarm gets built.</p>
+								<p>A running record of the software, hardware, and simulation work behind LEGOSwarm — coordination experiments, manipulation and perception tests, and the failures in between. This log is the long-term archive of how the platform gets built.</p>
 							</header>
 						</section>
 
 						<section class="posts">
 							<article>
 								<header>
+									<span class="status-pill current">In progress</span>
+									<h2>First build, in simulation</h2>
+								</header>
+								<span class="image fit"><img src="images/pic09.jpg" alt="" /></span>
+								<p>The full pipeline ran end-to-end for the first time. In a Gazebo physics simulation, a single worker reads its next job from the shared build plan, drives to the part, picks it, places it, and then checks its own work against ground truth before declaring the step done. It is not clean yet — early runs tipped the robot over and shoved parts around on retries, and we are still tuning the arm and grasp for a reliably repeatable &ldquo;complete.&rdquo; But the loop is closed: intent in, verified placement out, with no human in the loop.</p>
+							</article>
+							<article>
+								<header>
+									<span class="status-pill">June 3, 2026</span>
+									<h2>Teaching one robot to build</h2>
+								</header>
+								<span class="image fit"><img src="images/pic05.jpg" alt="" /></span>
+								<p>Before a swarm can build anything, one robot has to. We built the worker engine inside WEAVE (Workload Execution and Autonomous Verification Engine) — the layer that turns a single job into motion. Jobs compile down through reusable &ldquo;recipes&rdquo; into behavior trees, with recovery and verification built in at every step: a placement is never marked complete until it has been independently verified, otherwise the job is handed back to the swarm. A deliberate seam separates the robot&rsquo;s decision-making — deterministic, and fully testable on a laptop — from the physical acting, so the same logic drives a stub, a simulator, or real hardware unchanged.</p>
+							</article>
+							<article>
+								<header>
+									<span class="status-pill">June 2, 2026</span>
+									<h2>A swarm with no boss</h2>
+								</header>
+								<span class="image fit"><img src="images/pic07.jpg" alt="" /></span>
+								<p>Most multi-robot systems lean on a central scheduler handing out assignments. WEAVE has none. Every robot carries its own live copy of the build plan, and the copies stay in agreement purely by exchanging small messages — no dispatcher, no broker, no polling. Robots claim work with short-lived &ldquo;leases&rdquo; that expire on their own, so if a robot vanishes mid-task its work automatically reopens for someone else, with no central health-monitor noticing. We found a way to make the whole swarm agree on who-does-what at a cost of only a couple of messages per job; the comparison against a traditional centralized baseline is one of the experiments we are running.</p>
+							</article>
+							<article>
+								<header>
+									<span class="status-pill">May 30, 2026</span>
+									<h2>The blueprint is the brain</h2>
+								</header>
+								<span class="image fit"><img src="images/pic02.jpg" alt="" /></span>
+								<p>WEAVE starts by turning a real LEGO instruction booklet into something a swarm can reason about. A vision-language model reads the booklet page by page, and each assembly step becomes a node in a dependency graph — what part, where it goes, and what must exist before it. Parts are grounded against a real catalog so the plan refers to canonical components, not guesses. The result is a single living graph that is simultaneously the blueprint, the task list, and the progress tracker — the shared source of truth every robot works from.</p>
+							</article>
+							<article>
+								<header>
 									<span class="status-pill">May 26, 2026</span>
-									<h2><a href="#">Bring-up &amp; first 3D-printed parts</a></h2>
+									<h2>Bring-up &amp; first 3D-printed parts</h2>
 								</header>
-								<a href="#" class="image fit"><img src="images/pic06.jpg" alt="" /></a>
+								<span class="image fit"><img src="images/pic06.jpg" alt="" /></span>
 								<p>Starting code is in place and we are experimenting with the 3D printer to fabricate the first worker chassis and gripper iterations. Early effort is focused on the mechanical platform and the perception scaffolding needed for part detection.</p>
-								<ul class="actions special">
-									<li><a href="#" class="button">Full Entry</a></li>
-								</ul>
 							</article>
 							<article>
 								<header>
-									<span class="status-pill">Planned</span>
-									<h2><a href="#">Decentralized task allocation</a></h2>
+									<span class="status-pill next">Planned</span>
+									<h2>Multi-robot decentralized build</h2>
 								</header>
-								<a href="#" class="image fit"><img src="images/pic07.jpg" alt="" /></a>
-								<p>Validating stigmergic construction workflows against a centralized baseline, and measuring how task allocation holds up as robot count and structure complexity increase.</p>
-								<ul class="actions special">
-									<li><a href="#" class="button">Full Entry</a></li>
-								</ul>
-							</article>
-							<article>
-								<header>
-									<span class="status-pill">Planned</span>
-									<h2><a href="#">Sim-to-real perception</a></h2>
-								</header>
-								<a href="#" class="image fit"><img src="images/pic08.jpg" alt="" /></a>
-								<p>Establishing the simulation-to-reality workflow: training part-detection models on synthetic datasets and transferring them onto onboard compute.</p>
-								<ul class="actions special">
-									<li><a href="#" class="button">Full Entry</a></li>
-								</ul>
+								<span class="image fit"><img src="images/pic08.jpg" alt="" /></span>
+								<p>Scaling from one worker to many: several robots pulling and claiming jobs from their own replicated build plans and assembling concurrently, with congestion-aware navigation and coalitions for jobs too large for a single arm. We will measure how the swarm holds up as robot count and structure complexity increase, against a centralized baseline.</p>
 							</article>
 						</section>
 
 					</div>
 
-				<!-- Footer -->
-					<footer id="footer">
-						<section>
-							<form method="post" action="#">
-								<div class="fields">
-									<div class="field">
-										<label for="name">Name</label>
-										<input type="text" name="name" id="name" />
-									</div>
-									<div class="field">
-										<label for="email">Email</label>
-										<input type="text" name="email" id="email" />
-									</div>
-									<div class="field">
-										<label for="message">Message</label>
-										<textarea name="message" id="message" rows="3"></textarea>
-									</div>
-								</div>
-								<ul class="actions">
-									<li><input type="submit" value="Send Message" /></li>
-								</ul>
-							</form>
-						</section>
-						<section class="split contact">
-							<section class="alt">
-								<h3>Lab</h3>
-								<p>Loom Robotics — Research Platform<br />
-								Decentralized robotic construction systems</p>
-							</section>
-							<section>
-								<h3>Project</h3>
-								<p>LEGOSwarm</p>
-							</section>
-							<section>
-								<h3>Contact</h3>
-								<p><a href="#">hello@loomrobotics.com</a></p>
-							</section>
-							<section>
-								<h3>Code</h3>
-								<ul class="icons alt">
-									<li><a href="https://github.com/LoomRobotics/LEGOSwarm" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
-								</ul>
-							</section>
-						</section>
-					</footer>
-
-				<!-- Copyright -->
-					<div id="copyright">
-						<ul><li>&copy; Loom Robotics</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
-					</div>
+				<!-- Footer + Copyright (rendered from assets/js/site.config.js via site.js) -->
+					<div data-loom="footer"></div>
+					<div data-loom="copyright"></div>
 
 			</div>
 
 		<!-- Scripts -->
+			<script src="assets/js/site.config.js"></script>
+			<script src="assets/js/site.js"></script>
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/jquery.scrollex.min.js"></script>
 			<script src="assets/js/jquery.scrolly.min.js"></script>

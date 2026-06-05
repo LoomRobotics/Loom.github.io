@@ -1,13 +1,14 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>Architecture Explorer — Loom Robotics</title>
+		<title>Architecture Explorer — Loomtest Robotics</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<meta name="description" content="The interactive architecture explorer for the LEGOSwarm platform — a zoomable systems map. Coming in V2." />
+		<meta name="description" content="Interactive architecture explorer for the LEGOSwarm platform — a zoomable map of the mission, swarm, autonomy, hardware, and simulation layers." />
 		<link rel="icon" type="image/png" href="images/logo-mark.png" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<link rel="stylesheet" href="assets/css/brand.css" />
+		<link rel="stylesheet" href="assets/css/explorer.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 	</head>
 	<body class="is-preload">
@@ -15,25 +16,19 @@
 		<!-- Wrapper -->
 			<div id="wrapper">
 
-				<!-- Header -->
-					<header id="header">
-						<a href="index.html" class="logo"><img class="logo-mark" src="images/transp-white.png" alt="" />Loom Robotics</a>
-					</header>
-
-				<!-- Nav -->
-					<nav id="nav">
-						<ul class="links">
+				<!-- Header + Nav (rendered from assets/js/site.config.js via site.js) -->
+					<div data-loom="header"></div>
+					<div data-loom="nav"></div>
+					<noscript>
+						<nav id="nav"><ul class="links">
 							<li><a href="index.html">Loom Robotics</a></li>
 							<li><a href="about.html">About</a></li>
 							<li><a href="technical.html">Technical Overview</a></li>
 							<li><a href="devlog.html">Dev Log</a></li>
 							<li><a href="gallery.html">Media</a></li>
-							<li class="active"><a href="architecture.html">Architecture</a></li>
-						</ul>
-						<ul class="icons">
-							<li><a href="https://github.com/LoomRobotics/LEGOSwarm" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
-						</ul>
-					</nav>
+							<li><a href="architecture.html">Architecture</a></li>
+						</ul></nav>
+					</noscript>
 
 				<!-- Main -->
 					<div id="main">
@@ -42,76 +37,53 @@
 							<header class="major">
 								<span class="eyebrow">Architecture Explorer</span>
 								<h1>Interactive systems map</h1>
-								<p>This will become a zoomable, node-based map for exploring how a single instruction propagates from the Foreman through the swarm and down to physical brick placement. It is designed to support the robotics story — optional, performant, and easy to navigate — rather than dominate it.</p>
+								<p>A zoomable, node-based map of how a single instruction propagates from the Foreman through the swarm and down to physical brick placement. Hover a subsystem for a summary; click it for detail.</p>
 							</header>
 
-							<div class="arch-teaser">
-								<span class="badge">Coming in V2</span>
-								<h2>Under construction</h2>
-								<p>The first interactive version will layer the five system tiers — Mission, Swarm Coordination, Robot Autonomy, Hardware, and Simulation — with hover summaries and animated data flows. For now, explore the static breakdown in the Technical Overview.</p>
-								<ul class="actions special">
-									<li><a href="technical.html" class="button primary">Technical Overview</a></li>
-									<li><a href="index.html" class="button">Back to Home</a></li>
-								</ul>
-							</div>
-						</section>
+							<!-- Explorer (graph rendered by assets/js/explorer.js from graph.data.js) -->
+							<div class="arch-stage">
+								<div id="arch-explorer" role="application" aria-label="Interactive architecture graph"></div>
 
-					</div>
-
-				<!-- Footer -->
-					<footer id="footer">
-						<section>
-							<form method="post" action="#">
-								<div class="fields">
-									<div class="field">
-										<label for="name">Name</label>
-										<input type="text" name="name" id="name" />
-									</div>
-									<div class="field">
-										<label for="email">Email</label>
-										<input type="text" name="email" id="email" />
-									</div>
-									<div class="field">
-										<label for="message">Message</label>
-										<textarea name="message" id="message" rows="3"></textarea>
-									</div>
+								<div id="arch-controls" aria-label="Graph controls">
+									<button type="button" data-action="zoom-in" title="Zoom in" aria-label="Zoom in">+</button>
+									<button type="button" data-action="zoom-out" title="Zoom out" aria-label="Zoom out">&minus;</button>
+									<button type="button" data-action="fit" title="Fit to screen" aria-label="Fit to screen">&#9633;</button>
+									<button type="button" class="reset" data-action="reset" title="Reset view" aria-label="Reset view">Reset</button>
 								</div>
-								<ul class="actions">
-									<li><input type="submit" value="Send Message" /></li>
-								</ul>
-							</form>
-						</section>
-						<section class="split contact">
-							<section class="alt">
-								<h3>Lab</h3>
-								<p>Loom Robotics — Research Platform<br />
-								Decentralized robotic construction systems</p>
-							</section>
-							<section>
-								<h3>Project</h3>
-								<p>LEGOSwarm</p>
-							</section>
-							<section>
-								<h3>Contact</h3>
-								<p><a href="#">hello@loomrobotics.com</a></p>
-							</section>
-							<section>
-								<h3>Code</h3>
-								<ul class="icons alt">
-									<li><a href="https://github.com/LoomRobotics/LEGOSwarm" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
-								</ul>
-							</section>
-						</section>
-					</footer>
 
-				<!-- Copyright -->
-					<div id="copyright">
-						<ul><li>&copy; Loom Robotics</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
+								<ul id="arch-legend" aria-label="Layer legend"></ul>
+
+								<aside id="arch-panel" aria-label="Subsystem detail">
+									<div class="arch-panel-head">
+										<h2 id="arch-panel-title">Details</h2>
+										<button type="button" class="close" data-action="close" aria-label="Close panel">&times;</button>
+									</div>
+									<div id="arch-panel-body"></div>
+								</aside>
+							</div>
+
+							<noscript>
+								<p>The interactive graph requires JavaScript. For the full text breakdown of all five layers, see the <a href="technical.html">Technical Overview</a>.</p>
+							</noscript>
+
+							<p class="text-steel"><em>Subsystem write-ups are placeholders &mdash; concise technical detail and diagrams will be filled in per node.</em></p>
+
+							<ul class="actions special">
+								<li><a href="technical.html" class="button">Technical Overview</a></li>
+							</ul>
+						</section>
+
 					</div>
+
+				<!-- Footer + Copyright (rendered from assets/js/site.config.js via site.js) -->
+					<div data-loom="footer"></div>
+					<div data-loom="copyright"></div>
 
 			</div>
 
 		<!-- Scripts -->
+			<script src="assets/js/site.config.js"></script>
+			<script src="assets/js/site.js"></script>
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/jquery.scrollex.min.js"></script>
 			<script src="assets/js/jquery.scrolly.min.js"></script>
@@ -119,6 +91,10 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<!-- Architecture Explorer: data → vendored engine → our wrapper -->
+			<script src="assets/js/graph.data.js"></script>
+			<script src="assets/js/vendor/cytoscape.min.js"></script>
+			<script src="assets/js/explorer.js"></script>
 
 	</body>
 </html>
