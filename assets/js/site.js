@@ -81,7 +81,7 @@
 	var copyright =
 		'<div id="copyright"><ul>' +
 			"<li>&copy; " + cfg.brand + "</li>" +
-			'<li>Design: <a href="https://html5up.net">HTML5 UP</a></li>' +
+			'<li>Open-Source Code: <a href="https://github.com/LoomRobotics/LEGOSwarm">LEGOSwarm</a></li>' +
 		"</ul></div>";
 
 	mount("header", header);
