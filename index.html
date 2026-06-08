@@ -151,22 +151,22 @@
 								</header>
 								<article>
 									<header>
-										<span class="status-pill current">In progress</span>
-										<h2><a href="devlog.html">First build, in simulation</a></h2>
+										<span class="status-pill">June 8, 2026</span>
+										<h2><a href="devlog.html">A worker that really builds</a></h2>
 									</header>
-									<a href="devlog.html" class="image fit"><img src="images/pic09.jpg" alt="" /></a>
-									<p>The full pipeline ran end-to-end for the first time. In a Gazebo physics simulation, a single worker reads its next job, drives to the part, picks it, places it, and verifies its own work before declaring the step done — intent in, verified placement out, no human in the loop.</p>
+									<a href="devlog.html" class="image fit"><img src="images/pic01.jpg" alt="" /></a>
+									<p>From a shaky first run to a reliable one. The worker was quietly drifting on wheel odometry and missing its marks; switching it to navigate against ground-truth position fixed the accuracy, and tuning the drive base and grasp made the carry rigid. It now drives out to parts scattered around the arena and lays them down in a tidy row, within a few millimeters of target, on its own.</p>
 									<ul class="actions special">
 										<li><a href="devlog.html" class="button">Read Entry</a></li>
 									</ul>
 								</article>
 								<article>
 									<header>
-										<span class="status-pill">June 2, 2026</span>
-										<h2><a href="devlog.html">A swarm with no boss</a></h2>
+										<span class="status-pill">June 4, 2026</span>
+										<h2><a href="devlog.html">First build, in simulation</a></h2>
 									</header>
-									<a href="devlog.html" class="image fit"><img src="images/pic07.jpg" alt="" /></a>
-									<p>No central scheduler. Every robot carries its own live copy of the build plan and they stay in agreement by exchanging only a couple of small messages per job; work claimed with self-expiring leases reopens automatically if a robot drops out.</p>
+									<a href="devlog.html" class="image fit"><img src="images/pic09.jpg" alt="" /></a>
+									<p>The full pipeline ran end-to-end for the first time. In a Gazebo physics simulation, a single worker reads its next job, drives to the part, picks it, places it, and verifies its own work before declaring the step done — intent in, verified placement out, no human in the loop.</p>
 									<ul class="actions special">
 										<li><a href="devlog.html" class="button">Read Entry</a></li>
 									</ul>
@@ -201,7 +201,7 @@
 								</header>
 								<ul class="roadmap">
 									<li class="done"><span class="status-pill done">Done</span><h3>Decentralized coordination</h3><p>A replicated build plan that every robot carries, with no central scheduler — claiming, recovery, and convergence proven in software.</p></li>
-									<li class="current"><span class="status-pill current">In progress</span><h3>Single-worker build in simulation</h3><p>One simulated worker driving the full loop in Gazebo: drive, pick, place, and self-verify each step against ground truth.</p></li>
+									<li class="done"><span class="status-pill done">Done</span><h3>Single-worker build in simulation</h3><p>One simulated worker driving the full loop in Gazebo: drive, pick, place, and self-verify each step against ground truth — placing within millimeters of target.</p></li>
 									<li class="next"><span class="status-pill next">Next</span><h3>Multi-robot decentralized build</h3><p>Many workers claiming and assembling concurrently, with congestion-aware navigation and coalitions for jobs too large for one arm.</p></li>
 									<li class="next"><span class="status-pill next">Next</span><h3>Perception &amp; part detection</h3><p>Replacing simulation ground truth with real onboard vision — identifying, localizing, and verifying LEGO parts under real lighting.</p></li>
 									<li class="next"><span class="status-pill next">Planned</span><h3>Hardware bring-up</h3><p>First worker chassis and gripper iterations on the 3D printer, then sim-to-real onto onboard compute.</p></li>

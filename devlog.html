@@ -43,7 +43,15 @@
 						<section class="posts">
 							<article>
 								<header>
-									<span class="status-pill current">In progress</span>
+									<span class="status-pill">June 8, 2026</span>
+									<h2>A worker that really builds</h2>
+								</header>
+								<span class="image fit"><img src="images/pic01.jpg" alt="" /></span>
+								<p>The first end-to-end run worked, but it wasn&rsquo;t pretty &mdash; the robot tipped, shoved parts around, and rarely finished cleanly. This update is about making it reliable, and the biggest culprit was hiding in plain sight: the worker was navigating by wheel odometry, which quietly drifts, so it kept driving to almost-the-right place and just missing. We switched it to navigate against ground-truth position &mdash; a stand-in for the localization a real robot will eventually run on its own &mdash; and the accuracy snapped into place. From there it was honest engineering: giving the drive base enough torque to actually turn, holding each part rigidly to the gripper through the carry instead of letting it flash or fling across the arena, and spacing the supply parts and build targets so the robot never trips over its own work. The result is a worker that drives out to parts scattered around the arena, carries each one cleanly, and lays them down in a tidy row &mdash; placing within a few millimeters of target, on its own, from start to finish.</p>
+							</article>
+							<article>
+								<header>
+									<span class="status-pill">June 4, 2026</span>
 									<h2>First build, in simulation</h2>
 								</header>
 								<span class="image fit"><img src="images/pic09.jpg" alt="" /></span>
