@@ -1,16 +1,16 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>Technical Overview — Loom Robotics</title>
+		<title>White Paper — Loom Robotics</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<meta name="description" content="A system breakdown of the LEGOSwarm platform: mission planning, swarm coordination, robot autonomy, hardware, and simulation." />
+		<meta name="description" content="WEAVE: a fault-tolerant robotic swarm orchestration system that enables function through sparse, low-bandwidth data transmissions. The LEGOSwarm research white paper." />
 		<link rel="icon" type="image/png" href="images/logo-mark.png" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<link rel="stylesheet" href="assets/css/brand.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 	</head>
-	<body class="is-preload">
+	<body class="is-preload page-whitepaper">
 
 		<!-- Wrapper -->
 			<div id="wrapper">
@@ -22,7 +22,7 @@
 						<nav id="nav"><ul class="links">
 							<li><a href="index.html">Loom Robotics</a></li>
 							<li><a href="about.html">About</a></li>
-							<li><a href="technical.html">Technical Overview</a></li>
+							<li><a href="technical.html">White Paper</a></li>
 							<li><a href="devlog.html">Dev Log</a></li>
 							<li><a href="gallery.html">Media</a></li>
 							<li><a href="architecture.html">Architecture</a></li>
@@ -32,34 +32,114 @@
 				<!-- Main -->
 					<div id="main">
 
-						<!-- Post -->
-							<section class="post">
+						<!-- White paper -->
+							<section class="post whitepaper">
 								<header class="major">
-									<span class="eyebrow">Technical Overview</span>
-									<h1>System breakdown</h1>
-									<p>LEGOSwarm is organized into five coordinated layers, from high-level mission planning down to physical hardware and the simulation environment used to train and validate behavior. Diagrams and detailed write-ups will be added to each layer as the platform matures.</p>
+									<span class="eyebrow">White Paper</span>
+									<h1>WEAVE: Workload Execution and Autonomous Verification Engine</h1>
+									<p class="paper-subtitle">A fault-tolerant robotic swarm orchestration system that enables function through sparse and low-bandwidth data transmissions.</p>
+									<p><span class="status-pill current">Draft &middot; Living document</span></p>
 								</header>
-								<div class="image main"><img src="images/pic05.jpg" alt="" /></div>
 
-								<h2>Layer 1 — Mission</h2>
-								<p>High-level planning: dependency-graph generation, build planning, Foreman instruction parsing, and task decomposition. The Foreman converts a digital construction model into an ordered set of buildable steps and releases them to the swarm.</p>
-								<p class="text-steel"><em>[ Diagram slot: build-model &rarr; dependency graph ]</em></p>
+								<div class="paper-layout">
 
-								<h2>Layer 2 — Swarm Coordination</h2>
-								<p>Distributed coordination: task allocation, congestion management, conflict resolution, local negotiation, and decentralized communication. Coordination is stigmergic and broadcast-light — robots respond to shared state in the arena rather than continuous instruction.</p>
-								<p class="text-steel"><em>[ Diagram slot: task-allocation flow ]</em></p>
+									<!-- Sticky table of contents (scroll-spy highlights the active entry) -->
+									<aside class="paper-toc">
+										<nav aria-label="White paper contents">
+											<span class="toc-label">Contents</span>
+											<ol>
+												<li><a href="#abstract">Abstract</a></li>
+												<li>
+													<a href="#introduction">1 &middot; Introduction</a>
+													<ol>
+														<li><a href="#sec-1-1">1.1 &middot; Motivation</a></li>
+														<li><a href="#sec-1-2">1.2 &middot; The bandwidth bottleneck</a></li>
+														<li><a href="#sec-1-4">1.4 &middot; The WEAVE approach</a></li>
+														<li><a href="#contributions">Contributions</a></li>
+													</ol>
+												</li>
+											</ol>
+										</nav>
+									</aside>
 
-								<h2>Layer 3 — Robot Autonomy</h2>
-								<p>Per-robot autonomy: navigation, localization, SLAM, manipulation, path planning, and obstacle avoidance. Each worker executes its assigned step end-to-end and verifies the result.</p>
-								<p class="text-steel"><em>[ Diagram slot: per-robot autonomy pipeline ]</em></p>
+									<article class="paper-body">
 
-								<h2>Layer 4 — Hardware</h2>
-								<p>Physical systems: Jetson compute, cameras, actuators, a 4-DOF arm and gripper, power systems, sensors, and networking. The mechanical platform is iterated only as far as research requires.</p>
-								<p class="text-steel"><em>[ Diagram slot: hardware block diagram ]</em></p>
+										<section id="abstract" class="paper-section">
+											<h2>Abstract</h2>
+											<p>Traditional multi-agent construction swarms rely heavily on continuous, high-bandwidth global state synchronization or centralized task arbiters, which suffer from communication bottlenecks, network contention, and single-point-of-failure vulnerabilities in degraded environments. We introduce <strong>WEAVE</strong>, a fault-tolerant system architecture that enables sparse, low-bandwidth transmissions to robot swarms. The LEGOSwarm research platform employs this decentralized, event-sourced coordination architecture that decouples structural intent from robotic execution by splitting the system state into a declarative, directed Assembly Graph (the read model) and an immutable, append-only Event Log (the write model). Rather than exchanging heavy 3D spatial representations or monolithic graphs, individual agents coordinate asynchronously by emitting and replaying lightweight, transactional graph-mutation events. By formulating physical assembly as a continuous, local state-reconciliation loop, we establish a lock-free, lease-based task reservation table that ensures eventual consistency across partitioned networks. Furthermore, we incorporate a distributed &ldquo;Build &rarr; Verify &rarr; Continue&rdquo; pipeline using directed constraints to enforce multi-agent verification boundaries, preventing structural error propagation. Simulation benchmarks demonstrate that the proposed architecture significantly minimizes communication bandwidth, scales linearly with the swarm population, and maintains structural integrity under severe wireless latency and agent attrition.</p>
+										</section>
 
-								<h2>Layer 5 — Simulation &amp; Training</h2>
-								<p>Simulation systems: Isaac Sim, digital twins, synthetic datasets, and reinforcement-learning environments supporting a simulation-to-reality workflow.</p>
-								<p class="text-steel"><em>[ Diagram slot: sim-to-real loop ]</em></p>
+										<section id="introduction" class="paper-section">
+											<h2>1 &middot; Introduction</h2>
+
+											<div id="sec-1-1" class="paper-subsection">
+												<h3>1.1 &middot; Motivation</h3>
+												<p>The orchestration of autonomous multi-agent systems for physical construction in unstructured, remote, or extreme environments&mdash;such as space pre-assembly, planetary habitat setup, and disaster-relief operations&mdash;presents a fundamental tension between global task coherence and localized resource constraints. In such environments, traditional coordination paradigms are bottlenecked by the physical realities of the deployment site, including high-latency communication, frequent network partitions, and unpredictable agent attrition.</p>
+											</div>
+
+											<div id="sec-1-2" class="paper-subsection">
+												<h3>1.2 &middot; The bandwidth bottleneck</h3>
+												<p>Traditional state-of-the-art multi-robot task allocation (MRTA) and collaborative assembly frameworks rely on continuous, high-overhead state synchronization. Robots must exchange large 3D spatial representations, dense occupancy grids, or complex pose-graphs to maintain a unified worldview. As the swarm population N and structural complexity M scale, the network bandwidth required to broadcast these global structures grows quadratically, rapidly saturating ad-hoc wireless channels. Furthermore, parallel task execution under these paradigms introduces severe synchronization contention; when multiple robots attempt to manipulate the same object or occupy the same workspace coordinate, resolving the conflict requires centralized arbiters or synchronous, multi-round auction protocols that stall execution.</p>
+											</div>
+
+											<div id="sec-1-4" class="paper-subsection">
+												<h3>1.4 &middot; The WEAVE approach</h3>
+												<p>To resolve these limitations, we present <strong>WEAVE</strong>: a novel system architecture that transposes the enterprise software design principles of Event Sourcing (ES) and Command Query Responsibility Segregation (CQRS) to physical, spatial 3D robotic assembly. LEGOSwarm operates on WEAVE, proving that individual robots do not directly mutate or synchronize global project states. Instead, the absolute source of truth is maintained as an immutable, append-only ledger of discrete transition events (the write model). Each autonomous robot in the swarm maintains a local copy of this event stream, which it processes asynchronously to reconstruct and update a local projection of the global Assembly Graph (the read model). In this framework, the physical progress of the construction site is modeled as a continuous feedback loop designed to systematically minimize the spatial and structural error vector e(t) over time:</p>
+												<div class="paper-eq" role="math" aria-label="e of t equals s desired of t minus s current of t">
+													e(t) = s<sub>desired</sub>(t) &minus; s<sub>current</sub>(t)
+												</div>
+												<p class="paper-eq-caption">where the swarm&rsquo;s collective actuator actions serve as a distributed regulator trying to drive e(t) &rarr; 0.</p>
+											</div>
+
+											<div id="contributions" class="paper-subsection">
+												<h3>Contributions</h3>
+												<p>This architecture introduces four primary contributions to the field of swarm robotics:</p>
+
+												<div class="contribution">
+													<span class="contribution-id">1.4.1</span>
+													<div class="contribution-body">
+														<h4>Dual-Layer CQRS Partitioning</h4>
+														<p>We decouple the physical, spatial truth of the assembly (represented by the Assembly Graph) from the transactional history of its construction (stored in the Event Log). This division allows workers to coordinate solely by exchanging lightweight delta updates rather than monolithic map structures.</p>
+													</div>
+												</div>
+
+												<div class="contribution">
+													<span class="contribution-id">1.4.2</span>
+													<div class="contribution-body">
+														<h4>Lock-Free, Lease-Based Task Allocation</h4>
+														<p>We replace high-latency negotiation and auction protocols with local, replicated reservation tables governed by self-expiring leases. This allows robots to claim assembly nodes with zero network negotiation, while guaranteeing graceful recovery if an agent suffers hardware failure or falls offline.</p>
+													</div>
+												</div>
+
+												<div class="contribution">
+													<span class="contribution-id">1.4.3</span>
+													<div class="contribution-body">
+														<h4>Directed Peer Verification Loops</h4>
+														<p>We establish a strict &ldquo;Build &rarr; Verify &rarr; Continue&rdquo; constraint directly in the graph topology. By programmatically enforcing that a second, independent robot must inspect and verify a placement before dependent task nodes are unlocked, we mitigate structural drift and prevent cascading alignment errors.</p>
+													</div>
+												</div>
+
+												<div class="contribution">
+													<span class="contribution-id">1.4.4</span>
+													<div class="contribution-body">
+														<h4>Structured Machine Intent Objects</h4>
+														<p>We elevate node &ldquo;Notes&rdquo; from unstructured, human-readable strings to first-class, machine-readable intent objects. This enables robots to dynamically discover, interpret, and implement alternative plans&mdash;such as substituting materials on the fly&mdash;without human intervention or centralized rescheduling.</p>
+													</div>
+												</div>
+											</div>
+										</section>
+
+										<!--
+											TO ADD A NEW SECTION (e.g. "2 · Architecture"):
+											  1) Paste a new <section id="…" class="paper-section"> … </section> block here.
+											  2) Add a matching <li><a href="#…">…</a></li> to the .paper-toc list above.
+											The scroll-spy (assets/js/whitepaper.js) picks up any .paper-section / .paper-subsection
+											with an id automatically — no JS changes needed.
+										-->
+
+									</article>
+
+								</div>
 							</section>
 
 					</div>
@@ -80,6 +160,7 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script src="assets/js/whitepaper.js"></script>
 
 	</body>
 </html>
