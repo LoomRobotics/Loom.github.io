@@ -20,11 +20,11 @@ window.LOOM = {
 	// Primary navigation — order here is the order shown on every page.
 	nav: [
 		{ label: "Loom Robotics",      href: "index.html" },
-		{ label: "About",              href: "about.html" },
-		{ label: "White Paper",        href: "technical.html" },
-		{ label: "Dev Log",            href: "devlog.html" },
+		{ label: "WEAVE",              href: "technical.html" },
+		{ label: "LEGOSwarm",          href: "about.html" },
+		{ label: "Architecture",       href: "architecture.html" },
 		{ label: "Media",              href: "gallery.html" },
-		{ label: "Architecture",       href: "architecture.html" }
+		{ label: "Dev Log",            href: "devlog.html" }
 	],
 
 	// Footer "Lab" column copy (one <p> line per array entry).
