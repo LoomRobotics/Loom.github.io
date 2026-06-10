@@ -66,6 +66,14 @@
 														<li><a href="#sec-2-3">2.3 &middot; Event-driven architectures &amp; GitOps</a></li>
 													</ol>
 												</li>
+												<li>
+													<a href="#system-architecture">3 &middot; System Architecture</a>
+													<ol>
+														<li><a href="#sec-3-1">3.1 &middot; Assembly Graph (DAG)</a></li>
+														<li><a href="#sec-3-2">3.2 &middot; The Event Log</a></li>
+														<li><a href="#sec-3-3">3.3 &middot; Topological data flow</a></li>
+													</ol>
+												</li>
 											</ol>
 										</nav>
 									</aside>
@@ -143,89 +151,56 @@
 
 											<div id="sec-2-1" class="paper-subsection">
 												<h3>2.1 &middot; Multi-Agent Task Allocation (MRTA) in Robotic Construction</h3>
-
-												<div class="contribution">
-													<span class="contribution-id">2.1.1</span>
-													<div class="contribution-body">
-														<p>Distributed assembly requires partitioning a complex structural plan into distinct tasks and assigning them to available agents. Traditional state-of-the-art frameworks, such as SwarmBuild, utilize market-based or auction-based assignment protocols (e.g., Sequential Single Item (SSI) or Ordered Single Item (OSI) bidding) to dynamically allocate tasks based on distance and capability.</p>
-													</div>
-												</div>
-
-												<div class="contribution">
-													<span class="contribution-id">2.1.2</span>
-													<div class="contribution-body">
-														<p>While these protocols effectively optimize task distribution in fully connected networks, they suffer from high latency and severe performance degradation under intermittent connectivity. Each auction round requires multiple consensus steps across the network; if a communication partition occurs during a bidding window, the allocation stalls.</p>
-													</div>
-												</div>
-
-												<div class="contribution">
-													<span class="contribution-id">2.1.3</span>
-													<div class="contribution-body">
-														<p>Additionally, parallel task claiming in decentralized environments typically relies on lock-based synchronization. If N agents compete for L task locks, the network contention scales as O(N&times;L), introducing severe synchronization overhead. Under LEGOSwarm, we bypass auction phases entirely by using a lock-free, lease-based reservation protocol modeled on Conflict-Free Replicated Data Types (CRDTs), achieving strong eventual consistency (SEC) without centralized arbitration.</p>
-													</div>
-												</div>
+												<p>Distributed assembly requires partitioning a complex structural plan into distinct tasks and assigning them to available agents. Traditional state-of-the-art frameworks, such as SwarmBuild, utilize market-based or auction-based assignment protocols (e.g., Sequential Single Item (SSI) or Ordered Single Item (OSI) bidding) to dynamically allocate tasks based on distance and capability.</p>
+												<p>While these protocols effectively optimize task distribution in fully connected networks, they suffer from high latency and severe performance degradation under intermittent connectivity. Each auction round requires multiple consensus steps across the network; if a communication partition occurs during a bidding window, the allocation stalls.</p>
+												<p>Additionally, parallel task claiming in decentralized environments typically relies on lock-based synchronization. If N agents compete for L task locks, the network contention scales as O(N&times;L), introducing severe synchronization overhead. Under LEGOSwarm, we bypass auction phases entirely by using a lock-free, lease-based reservation protocol modeled on Conflict-Free Replicated Data Types (CRDTs), achieving strong eventual consistency (SEC) without centralized arbitration.</p>
 											</div>
 
 											<div id="sec-2-2" class="paper-subsection">
 												<h3>2.2 &middot; Distributed Memory and Consensus in Robotic Swarms</h3>
-
-												<div class="contribution">
-													<span class="contribution-id">2.2.1</span>
-													<div class="contribution-body">
-														<p>Operating in GPS-denied or communication-degraded environments requires swarms to function as self-contained infrastructures. Prior works, such as SwarmMesh, have investigated the realization of shared global memories across mobile robot swarms to store topography and belief maps. These systems formulate distributed storage as a heterogeneous bin-packing optimization problem, routing data chunks across mobile nodes.</p>
-													</div>
-												</div>
-
-												<div class="contribution">
-													<span class="contribution-id">2.2.2</span>
-													<div class="contribution-body">
-														<p>Similarly, the Risk-Aware Swarm Storage (RASS) protocol utilizes potential-based percolation algorithms to route critical metadata away from high-risk spatial peripheries toward more reliable interior base stations.</p>
-													</div>
-												</div>
-
-												<div class="contribution">
-													<span class="contribution-id">2.2.3</span>
-													<div class="contribution-body">
-														<p>While these storage protocols efficiently manage partitioned file chunks, they are not designed to maintain transactional, consistent state machines for spatial assembly. Conversely, protocols like SwarmDAG address network partitioning by spawning localized ledger forks using virtual synchrony, which are later reconciled via gossip-based merge steps.</p>
-													</div>
-												</div>
-
-												<div class="contribution">
-													<span class="contribution-id">2.2.4</span>
-													<div class="contribution-body">
-														<p>LEGOSwarm builds upon this concept of decentralized consensus by utilizing a structured event-stream ledger, ensuring that even if a network partition occurs, parallel teams can proceed with independent physical construction blocks and safely reconcile their state histories upon reconnection.</p>
-													</div>
-												</div>
+												<p>Operating in GPS-denied or communication-degraded environments requires swarms to function as self-contained infrastructures. Prior works, such as SwarmMesh, have investigated the realization of shared global memories across mobile robot swarms to store topography and belief maps. These systems formulate distributed storage as a heterogeneous bin-packing optimization problem, routing data chunks across mobile nodes.</p>
+												<p>Similarly, the Risk-Aware Swarm Storage (RASS) protocol utilizes potential-based percolation algorithms to route critical metadata away from high-risk spatial peripheries toward more reliable interior base stations.</p>
+												<p>While these storage protocols efficiently manage partitioned file chunks, they are not designed to maintain transactional, consistent state machines for spatial assembly. Conversely, protocols like SwarmDAG address network partitioning by spawning localized ledger forks using virtual synchrony, which are later reconciled via gossip-based merge steps.</p>
+												<p>LEGOSwarm builds upon this concept of decentralized consensus by utilizing a structured event-stream ledger, ensuring that even if a network partition occurs, parallel teams can proceed with independent physical construction blocks and safely reconcile their state histories upon reconnection.</p>
 											</div>
 
 											<div id="sec-2-3" class="paper-subsection">
 												<h3>2.3 &middot; Event-Driven Architectures and GitOps in Multi-Agent Systems</h3>
+												<p>The application of event-driven and declarative control loops has recently emerged as a powerful paradigm for managing complex software systems. In industrial automation, the Line Information System Architecture (LISA)&mdash;often referred to as the &ldquo;Tweeting Factory&rdquo;&mdash;replaces centralized orchestration with decentralized choreography, where thousands of heterogeneous devices (PLCs, sensors, and assembly robots) independently observe and react to a stream of immutable published events.</p>
+												<p>In the domain of virtual multi-agent systems, Event Sourcing for Autonomous Agents (ESAA) and runtimes like ActiveGraph demonstrate that an agent&rsquo;s state can be managed by treating an append-only transaction log (activity.jsonl) as the absolute source of truth, from which the current state of a workspace is deterministically projected (roadmap.json). This is closely paired with the GitOps pattern&mdash;popularized by Kubernetes operators&mdash;where controllers continuously monitor actual system states, compare them against declared desired configurations, and run idempotent reconciliation loops to align the two.</p>
+												<p>The primary novelty of LEGOSwarm is the translation of these software-engineering concepts&mdash;specifically event-sourced state projection, transactional boundaries, and GitOps-style reconciliation&mdash;into the physical, three-dimensional spatial coordinates of a robotic construction site.</p>
+											</div>
+										</section>
 
-												<div class="contribution">
-													<span class="contribution-id">2.3.1</span>
-													<div class="contribution-body">
-														<p>The application of event-driven and declarative control loops has recently emerged as a powerful paradigm for managing complex software systems. In industrial automation, the Line Information System Architecture (LISA)&mdash;often referred to as the &ldquo;Tweeting Factory&rdquo;&mdash;replaces centralized orchestration with decentralized choreography, where thousands of heterogeneous devices (PLCs, sensors, and assembly robots) independently observe and react to a stream of immutable published events.</p>
-													</div>
-												</div>
+										<section id="system-architecture" class="paper-section">
+											<h2>3 &middot; System Architecture &amp; Data Topology</h2>
+											<p>The LEGOSwarm architecture fundamentally decouples physical state execution from logical mission intent. Instead of utilizing a central scheduler to distribute global state maps or explicit task assignments, the system treats the mission objective as a shared, evolving data structure. The state is synchronized across the swarm via an append-only log of granular mutations.</p>
 
-												<div class="contribution">
-													<span class="contribution-id">2.3.2</span>
-													<div class="contribution-body">
-														<p>In the domain of virtual multi-agent systems, Event Sourcing for Autonomous Agents (ESAA) and runtimes like ActiveGraph demonstrate that an agent&rsquo;s state can be managed by treating an append-only transaction log (activity.jsonl) as the absolute source of truth, from which the current state of a workspace is deterministically projected (roadmap.json). This is closely paired with the GitOps pattern&mdash;popularized by Kubernetes operators&mdash;where controllers continuously monitor actual system states, compare them against declared desired configurations, and run idempotent reconciliation loops to align the two.</p>
-													</div>
-												</div>
+											<div id="sec-3-1" class="paper-subsection">
+												<h3>3.1 &middot; The Assembly Graph as a Directed Acyclic Graph (DAG)</h3>
+												<p>The complete structural objective is formalized as a Directed Acyclic Graph, expressed mathematically as <em>G</em> = (<em>V</em>, <em>E</em>), where:</p>
+												<p><em>V</em> (Vertices/Nodes): Represent discrete, atomic physical assembly operations (e.g., structural placement, material manipulation, or spatial inspection).</p>
+												<p><em>E</em> (Edges): Define strict unidirectional topological and physical dependencies between nodes (e.g., structural support, logical precedence, or verification gating).</p>
+												<p>The Assembly Graph represents the absolute historical and structural &ldquo;truth&rdquo; of the build. It contains the exact geometric, materials, and constraint parameters required to realize the physical structure.</p>
+											</div>
 
-												<div class="contribution">
-													<span class="contribution-id">2.3.3</span>
-													<div class="contribution-body">
-														<p>The primary novelty of LEGOSwarm is the translation of these software-engineering concepts&mdash;specifically event-sourced state projection, transactional boundaries, and GitOps-style reconciliation&mdash;into the physical, three-dimensional spatial coordinates of a robotic construction site.</p>
-													</div>
-												</div>
+											<div id="sec-3-2" class="paper-subsection">
+												<h3>3.2 &middot; The Append-Only Event Log</h3>
+												<p>While the graph defines the desired target state, the physical progression of the swarm is captured entirely within an immutable, append-only Event Log. Every state change, node transition, resource allocation, and quality control check is captured as a discrete event.</p>
+												<p>Rather than synchronizing full graph instances across a noisy or latent network, workers exchange compressed, sequential event logs. Every agent within the swarm independently processes this event stream to reconstruct an identical localized &ldquo;materialized view&rdquo; of the global mission state. This approach ensures strong eventual consistency without requiring a master node or a locking distributed consensus mechanism.</p>
+											</div>
+
+											<div id="sec-3-3" class="paper-subsection">
+												<h3>3.3 &middot; Topological Data Flow</h3>
+												<p>The system operates through three primary interfaces:</p>
+												<p><strong>Top-Down Intent (Patches):</strong> The high-level coordinator (Foreman) interacts with the system exclusively by issuing Graph Patches. These patches represent small, delta-encoded structural changes (adding, modifying, or invalidating nodes) compiled against a specific base revision ID.</p>
+												<p><strong>Horizontal Synchronization (Beacons):</strong> Individual workers broadcast lightweight, cryptographic worker beacons to their immediate physical neighbors. These beacons do not contain internal task logic; they only broadcast the worker&rsquo;s current graph revision index and a short history of recent unique event IDs.</p>
+												<p><strong>State Reconstruction:</strong> When an agent receives a beacon indicating a discrepancy in graph revisions or event history, it requests only the missing delta-log segments from its peers. Once the local log is updated, the agent evaluates its local DAG to determine its next valid physical action.</p>
 											</div>
 										</section>
 
 										<!--
-											TO ADD A NEW SECTION (e.g. "3 · System Architecture"):
+											TO ADD A NEW SECTION (e.g. "4 · Methods"):
 											  1) Paste a new <section id="…" class="paper-section"> … </section> block here.
 											  2) Add a matching <li><a href="#…">…</a></li> to the .paper-toc list above.
 											The scroll-spy (assets/js/whitepaper.js) picks up any .paper-section / .paper-subsection
