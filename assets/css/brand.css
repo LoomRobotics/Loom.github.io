@@ -358,6 +358,9 @@
 .paper-toc {
 	position: sticky;
 	top: 2rem;
+	max-height: calc(100vh - 4rem);
+	overflow-y: auto;
+	padding-right: 0.5rem;
 	font-family: "Space Grotesk", "Helvetica Neue", Arial, sans-serif;
 }
 
@@ -469,6 +472,23 @@
 	text-align: center;
 	max-width: 34rem;
 	margin: 0 auto 0 auto;
+}
+
+/* --- Code / schema blocks (YAML) --- */
+.paper-code {
+	display: block;
+	background: var(--charcoal);
+	border: solid 1px var(--graphite-line);
+	border-left: solid 2px var(--steel);
+	color: var(--offwhite);
+	font-family: "SFMono-Regular", "Consolas", "Liberation Mono", Menlo, monospace;
+	font-size: 0.8rem;
+	line-height: 1.65;
+	padding: 1.1rem 1.25rem;
+	margin: 1rem 0 1.5rem 0;
+	overflow-x: auto;
+	white-space: pre;
+	-webkit-text-size-adjust: 100%;
 }
 
 /* --- Numbered contribution blocks --- */

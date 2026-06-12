@@ -74,6 +74,67 @@
 														<li><a href="#sec-3-3">3.3 &middot; Topological data flow</a></li>
 													</ol>
 												</li>
+												<li>
+													<a href="#node-edge-schema">4 &middot; Node &amp; Edge Schema</a>
+													<ol>
+														<li><a href="#sec-4-1">4.1 &middot; Node schema</a></li>
+														<li><a href="#sec-4-2">4.2 &middot; Edge schema &amp; types</a></li>
+													</ol>
+												</li>
+												<li>
+													<a href="#revision-layer">5 &middot; Revision Layer</a>
+													<ol>
+														<li><a href="#sec-5-1">5.1 &middot; Delta revisions</a></li>
+														<li><a href="#sec-5-2">5.2 &middot; Graph patch schema</a></li>
+														<li><a href="#sec-5-3">5.3 &middot; Propagation &amp; convergence</a></li>
+													</ol>
+												</li>
+												<li>
+													<a href="#event-schema">6 &middot; Event Schema</a>
+													<ol>
+														<li><a href="#sec-6-1">6.1 &middot; Swarm pheromones</a></li>
+														<li><a href="#sec-6-2">6.2 &middot; Reservation table</a></li>
+													</ol>
+												</li>
+												<li>
+													<a href="#verification">7 &middot; Verification &amp; QC</a>
+													<ol>
+														<li><a href="#sec-7-1">7.1 &middot; Build-Verify-Continue</a></li>
+														<li><a href="#sec-7-2">7.2 &middot; Verification schema</a></li>
+														<li><a href="#sec-7-3">7.3 &middot; Closed-loop errors</a></li>
+													</ol>
+												</li>
+												<li>
+													<a href="#resource-management">8 &middot; Resource Management</a>
+													<ol>
+														<li><a href="#sec-8-1">8.1 &middot; Resource tracking</a></li>
+														<li><a href="#sec-8-2">8.2 &middot; Resource gating</a></li>
+														<li><a href="#sec-8-3">8.3 &middot; Logistics</a></li>
+													</ol>
+												</li>
+												<li>
+													<a href="#human-in-the-loop">9 &middot; Human-in-the-Loop</a>
+													<ol>
+														<li><a href="#sec-9-1">9.1 &middot; Machine-readable intent</a></li>
+														<li><a href="#sec-9-2">9.2 &middot; Oversight interface</a></li>
+													</ol>
+												</li>
+												<li>
+													<a href="#worker-beacon">10 &middot; Worker Beacon</a>
+													<ol>
+														<li><a href="#sec-10-1">10.1 &middot; Beacon schema</a></li>
+														<li><a href="#sec-10-2">10.2 &middot; Anti-entropy</a></li>
+														<li><a href="#sec-10-3">10.3 &middot; Materialized view</a></li>
+													</ol>
+												</li>
+												<li>
+													<a href="#conclusion">11 &middot; Vision &amp; Conclusion</a>
+													<ol>
+														<li><a href="#sec-11-1">11.1 &middot; Collective memory</a></li>
+														<li><a href="#sec-11-2">11.2 &middot; Future applications</a></li>
+														<li><a href="#sec-11-3">11.3 &middot; Conclusion</a></li>
+													</ol>
+												</li>
 											</ol>
 										</nav>
 									</aside>
@@ -187,7 +248,7 @@
 											<div id="sec-3-2" class="paper-subsection">
 												<h3>3.2 &middot; The Append-Only Event Log</h3>
 												<p>While the graph defines the desired target state, the physical progression of the swarm is captured entirely within an immutable, append-only Event Log. Every state change, node transition, resource allocation, and quality control check is captured as a discrete event.</p>
-												<p>Rather than synchronizing full graph instances across a noisy or latent network, workers exchange compressed, sequential event logs. Every agent within the swarm independently processes this event stream to reconstruct an identical localized &ldquo;materialized view&rdquo; of the global mission state. This approach ensures strong eventual consistency without requiring a master node or a locking distributed consensus mechanism.</p>
+												<p>Rather than synchronizing full graph instances across a noisy or latent network, workers exchange compressed, sequential event logs. Every agent within the swarm independently processes this event stream to reconstruct an identical localized &ldquo;materialized view&rdquo; of the global assembly state. This approach ensures strong eventual consistency without requiring a master node or a locking distributed consensus mechanism.</p>
 											</div>
 
 											<div id="sec-3-3" class="paper-subsection">
@@ -199,8 +260,282 @@
 											</div>
 										</section>
 
+										<section id="node-edge-schema" class="paper-section">
+											<h2>4 &middot; Node &amp; Edge Schema Specification</h2>
+											<p>To achieve structural convergence without a master node, the swarm relies on highly structured, strictly typed schemas. These schemas ensure that every agent can independently parse the structural graph and compute the exact state of any assembly operation.</p>
+
+											<div id="sec-4-1" class="paper-subsection">
+												<h3>4.1 &middot; Node Schema Definition</h3>
+												<p>Every vertex within the Mission Graph is an explicit, version-controlled declaration of a physical task. The primary structural novelty of the node schema is the absolute decoupling of operational intent from its physical execution state.</p>
+												<pre class="paper-code">Node:
+  id: "N421"
+  type: "ASSEMBLY_OPERATION"
+  desired_state:
+    brick_type: "3001"
+    color: "RED"
+    pose:
+      x: 120
+      y: 40
+      z: 18
+      rotation: 90
+  current_state:
+    status: "COMPLETE"
+  revision: 13
+  priority: "NORMAL"
+  verification_required: true
+  notes:
+    structural_class: "PRIMARY"
+    comments:
+      - "Structural wall section"
+  created_by: "FOREMAN"
+  timestamp: 882234</pre>
+												<p><strong>Desired_state vs current_state allocation:</strong> The core objective function of an active worker agent is to reduce the delta between these two objects. By isolating the target hardware/geometry profile from the live execution telemetry (PENDING, RESERVED, COMPLETE, FAILED), the graph remains a pure declaration of intent, while execution remains fluid and reactive.</p>
+												<p><strong>Version and origin tracking:</strong> The revision keys allow workers to instantly identify if they are evaluating stale architectural metadata, preventing conflicting build actions if a patch is concurrently propagating through the network.</p>
+											</div>
+
+											<div id="sec-4-2" class="paper-subsection">
+												<h3>4.2 &middot; Edge Schema &amp; Dependency Types</h3>
+												<p>Edges represent directional constraints between individual nodes. Rather than defining a simple sequence, edges enforce structural, spatial, and logistical realities.</p>
+												<pre class="paper-code">Edge:
+  source: "N421"
+  target: "N422"
+  relationship: "PRECEDES"</pre>
+												<p>The architecture natively evaluates five explicit relational typologies:</p>
+												<p><strong>PRECEDES:</strong> A strict logical block. Node <em>B</em> cannot enter an active queue until Node <em>A</em>&rsquo;s current_state.status resolves to COMPLETE.</p>
+												<p><strong>SUPPORTS:</strong> A physical structural dependency. Implies load-bearing relationships (e.g., lower wall section supporting a roof layer). If a supporting node is structurally invalidated during execution, all child nodes inheriting this edge are immediately safety-gated.</p>
+												<p><strong>VERIFIES:</strong> A quality control link. Maps an inspection task directly to an assembly task.</p>
+												<p><strong>TRANSPORTS_TO:</strong> A logistical routing constraint mapping material flow to spatial staging locations.</p>
+												<p><strong>DEPENDS_ON:</strong> General system or material availability gating.</p>
+												<p>By combining these explicit edge relationships, the swarm can dynamically compute its own valid parallel processing paths without needing constant centralized control or a master scheduler.</p>
+											</div>
+										</section>
+
+										<section id="revision-layer" class="paper-section">
+											<h2>5 &middot; Revision Layer &amp; Graph Patching</h2>
+											<p>In a dynamic construction environment, architectural intents change. Structural defects, material shortages, or human intervention require real-time adaptations to the build plan. The Revision Layer is the mechanism that allows the LEGOSwarm to adapt to these changes smoothly, eliminating the need to re-transmit an entire structural model when a modification occurs.</p>
+
+											<div id="sec-5-1" class="paper-subsection">
+												<h3>5.1 &middot; Delta-Encoded Graph Revisions</h3>
+												<p>Instead of treating a design change as a completely new structural graph, mutations are isolated as transaction objects called Revisions. A revision explicitly targets a specific structural node or set of nodes, defining a state mutation compiled against a known historical base.</p>
+												<pre class="paper-code">Revision:
+  revision_id: "R1837"
+  author: "FOREMAN"
+  target_node: "N421"
+  operation: "MODIFY"
+  changes:
+    color:
+      old: "WHITE"
+      new: "RED"
+  timestamp: 882500</pre>
+												<p>By decoupling the change into a discrete delta package, the system ensures that workers do not need to pause operations to clear their entire memory buffer. Agents simply apply the delta directly to their localized, in-memory Directed Acyclic Graph (DAG). This approach protects the unchanged segments of the dependency tree, keeping ongoing, unaffected assembly tasks running smoothly across the swarm.</p>
+											</div>
+
+											<div id="sec-5-2" class="paper-subsection">
+												<h3>5.2 &middot; The Graph Patch Schema</h3>
+												<p>When a human operator or high-level design intelligence (the Foreman) alters the construction blueprint, the update is broadcast through the network via a Graph Patch. The patch serves as a lightweight wrapper that bundles multiple atomic topological mutations together.</p>
+												<pre class="paper-code">Patch:
+  patch_id: "P1837"
+  base_revision: 12
+  target_revision: 13
+  operations:
+    - modify_node:
+        node: "N421"
+        color: "RED"
+    - add_node:
+        node: "N850"
+    - remove_node:
+        node: "N123"</pre>
+											</div>
+
+											<div id="sec-5-3" class="paper-subsection">
+												<h3>5.3 &middot; Network Propagation and Convergence</h3>
+												<p>When a Graph Patch is injected into the network, it propagates asynchronously across the swarm. Because network packets are highly compressed&mdash;containing only the specific array of operations rather than geometric coordinates for the entire structure&mdash;transmission times drop significantly.</p>
+												<p>If an agent receives a patch whose base_revision is higher than its current local revision index, it recognizes a state gap. The agent then queries its immediate physical neighbors for the missing historical events, stepping through them sequentially until its local DAG matches the updated global revision. This approach keeps the network light while ensuring the entire swarm eventually converges on the same plan.</p>
+											</div>
+										</section>
+
+										<section id="event-schema" class="paper-section">
+											<h2>6 &middot; Event Schema &amp; Decentralized Coordination</h2>
+											<p>While graph patches propagate top-down structural modifications, the day-to-day, minute-by-minute operations of the swarm are driven entirely from the bottom up. Agents interact, coordinate, and avoid spatial conflicts by broadcasting and reacting to localized, micro-encoded information packets known as Events.</p>
+
+											<div id="sec-6-1" class="paper-subsection">
+												<h3>6.1 &middot; The Swarm &ldquo;Pheromones&rdquo;</h3>
+												<p>In biological swarms, ants or bees coordinate complex tasks by depositing chemical trails (pheromones) in their physical environment. In the WEAVE architecture, the event stream serves as a digital equivalent.</p>
+												<p>Instead of routing messages to a central server, an agent that completes a task, runs out of material, or encounters a physical blockage immediately generates an event object and appends it to its local log. This event is then pushed out to any peer agents within direct radio or optical line-of-sight.</p>
+												<pre class="paper-code">Event:
+  event_id: "E882901"
+  node_id: "N421"
+  actor: "Robot17"
+  event_type: "NODE_COMPLETE"
+  timestamp: 882901</pre>
+												<p>The system natively relies on a standardized dictionary of primitive event typologies to coordinate work:</p>
+												<p><strong>NODE_CREATED:</strong> Informs neighboring agents that a new operational dependency has been added to the local task stack.</p>
+												<p><strong>NODE_RESERVED:</strong> Signals that an agent has claimed a specific operation, shifting its state and gating other workers.</p>
+												<p><strong>NODE_COMPLETE:</strong> Signals the successful physical execution of a node&rsquo;s desired_state, allowing downstream dependencies to clear.</p>
+												<p><strong>NODE_FAILED / NODE_INVALIDATED:</strong> Alerts nearby agents of a structural or mechanical failure, triggering local rollback or safety logic.</p>
+												<p><strong>RESOURCE_SHORTAGE:</strong> Broadcasts logistics updates regarding local material scarcity.</p>
+											</div>
+
+											<div id="sec-6-2" class="paper-subsection">
+												<h3>6.2 &middot; The Decentralized Reservation Table</h3>
+												<p>To prevent multiple robots from attempting to pick up the same physical component or build on the exact same coordinate space simultaneously, the architecture implements a decentralized Reservation Table.</p>
+												<p>When an agent identifies an open node in its local DAG (where all PRECEDES or SUPPORTS parent edges are marked COMPLETE), it transmits a NODE_RESERVED event containing a strict expiration timestamp.</p>
+												<pre class="paper-code">Reservation:
+  node_id: "N421"
+  reserved_by: "Robot17"
+  expiration: 883000</pre>
+												<p>Upon hearing this event, all neighboring peers update their local materialized views of the reservation table. They will bypass node N421 in their own task selection loops until the reservation is cleared by a NODE_COMPLETE event, or until the system clock passes the expiration timestamp.</p>
+												<p>If Robot17 experiences a critical hardware failure, loses power, or drops communication mid-task, it does not stall the swarm. The reservation naturally expires, the node&rsquo;s status reverts to available, and another active worker seamlessly takes its place. This approach ensures robust fault tolerance without requiring master-node oversight or distributed database locks.</p>
+											</div>
+										</section>
+
+										<section id="verification" class="paper-section">
+											<h2>7 &middot; Verification &amp; Quality Control Layers</h2>
+											<p>In autonomous physical construction, assuming that an action was executed perfectly simply because a motor turned is a common failure mode. Physical materials warp, tolerances drift, and positioning errors compound. To achieve reliable structures, the LEGOSwarm architecture treats inspection as a first-class operation, tightly integrated into the dependency graph via the Verification Layer.</p>
+
+											<div id="sec-7-1" class="paper-subsection">
+												<h3>7.1 &middot; The Build-Verify-Continue Pipeline</h3>
+												<p>The architecture enforces a strict Build &rarr; Verify &rarr; Continue workflow loop. An assembly node does not simply mark itself complete and immediately unlock downstream tasks. Instead, the completion of an assembly task triggers the activation of a linked verification task.</p>
+												<p>When a worker (e.g., Robot17) completes a brick placement for node N421, it appends a NODE_COMPLETE event to the log. However, any downstream node connected via a VERIFIES or SUPPORTS edge remains gated. The system requires an explicit verification pass before those structural dependencies resolve.</p>
+											</div>
+
+											<div id="sec-7-2" class="paper-subsection">
+												<h3>7.2 &middot; Verification Schema &amp; Cross-Checking</h3>
+												<p>Verification tasks are typically picked up by different physical agents than the one that performed the build. For example, a specialized inspection robot equipped with high-accuracy spatial sensors (like depth cameras or laser scanners) will claim the verification node.</p>
+												<pre class="paper-code">Verification:
+  node_id: "N421"
+  verified_by: "Robot22"
+  result: "PASS"
+  confidence: 0.97</pre>
+												<p><strong>result (PASS / FAIL):</strong> If the agent records a PASS, the event is logged, the dependency clears, and the next assembly layer becomes available for reservation. If it records a FAIL, a conflict event is generated, immediately freezing downstream operations in that localized sector.</p>
+												<p><strong>confidence metric:</strong> This value (ranging from 0.0 to 1.0) represents the inspector&rsquo;s sensor certainty. If a pass occurs with low confidence (e.g., 0.72), neighboring agents can flag the node for a secondary inspection run by a third agent, establishing a decentralized consensus on physical quality control.</p>
+											</div>
+
+											<div id="sec-7-3" class="paper-subsection">
+												<h3>7.3 &middot; Closed-Loop Error Handling</h3>
+												<p>When a verification fails, the architecture prevents a cascading failure through localized isolation. The failing verification event instantly updates the node&rsquo;s current_state.status to FAILED or INVALIDATED.</p>
+												<p>Because nearby workers reconstruct their local task queues by constantly reading the event stream, they instantly see the failure. Any agent currently holding a reservation for a downstream node (like a roof placement matching a failed wall section) will automatically drop its reservation. The swarm then dynamically generates a new corrective assembly node or rolls back the local state until the physical defect is corrected.</p>
+											</div>
+										</section>
+
+										<section id="resource-management" class="paper-section">
+											<h2>8 &middot; Resource Management &amp; Constraints</h2>
+											<p>A decentralized swarm cannot operate effectively in isolation from its physical constraints. For long-term autonomous deployment&mdash;such as planetary habitat construction or remote infrastructure development&mdash;the availability, reservation, and tracking of raw materials and power must be managed directly within the decentralized data model. The Resource Layer builds these logistical parameters directly into the graph topology.</p>
+
+											<div id="sec-8-1" class="paper-subsection">
+												<h3>8.1 &middot; Resource Tracking Schema</h3>
+												<p>Materials are treated as finite, distributed global pools. Rather than a central inventory database, the status of physical assets is recorded as structured objects that can be queried and modified via the standard event log.</p>
+												<pre class="paper-code">Resource:
+  id: "Brick3001_Red"
+  available: 42
+  reserved: 3
+  shortage: false</pre>
+												<p><strong>Available vs reserved:</strong> This allocation mirrors the separation of concerns found in the node schema. When an agent reserves a task, it concurrently claims the required components. The items move from available to reserved status instantly, preventing two agents from planning to utilize the same physical raw materials.</p>
+												<p><strong>Shortage flag:</strong> When localized stock counts drop below a critical threshold calculated against pending downstream nodes, the system flags a shortage.</p>
+											</div>
+
+											<div id="sec-8-2" class="paper-subsection">
+												<h3>8.2 &middot; Graph-Level Resource Gating</h3>
+												<p>Nodes declare their material requirements explicitly within their schema using a RequiredResources array. This creates a hard constraint that must be resolved before the node can transition into an executable state.</p>
+												<pre class="paper-code">RequiredResources:
+  - "Brick3001_Red"</pre>
+												<p>When an active agent evaluates the local Directed Acyclic Graph (DAG) for its next task, it checks both topological dependencies (parent edges resolved to COMPLETE) and material dependencies. If a node is topologically unlocked but the matching Resource.available count is zero, the agent cannot reserve the node.</p>
+												<p>Instead, the agent remains idle or automatically shifts its operational mode to logistics&mdash;seeking out material caches to replenish the local workspace.</p>
+											</div>
+
+											<div id="sec-8-3" class="paper-subsection">
+												<h3>8.3 &middot; Decentralized Logistics and Pheromone-Driven Supply Chains</h3>
+												<p>When a resource shortage is flagged, the matching RESOURCE_SHORTAGE event acts as a high-priority digital pheromone. This event propagates across the network, signaling to free agents or specialized transport units that a specific sector requires material injection.</p>
+												<p>Because the system manages resource states via the event log, agents do not need a central controller to tell them where to deliver materials. They inspect the pending RequiredResources across the unfulfilled segments of the graph, cross-reference them with localized RESOURCE_SHORTAGE events, and autonomously route supplies directly to the sectors experiencing the highest operational friction. This mechanism balances the supply chain across the construction site completely from the bottom up.</p>
+											</div>
+										</section>
+
+										<section id="human-in-the-loop" class="paper-section">
+											<h2>9 &middot; Human-in-the-Loop &amp; Node Notes</h2>
+											<p>While the ultimate goal of the LEGOSwarm framework is full autonomy, complex real-world deployment requires a reliable interface for human oversight, design intent, and edge-case override. The Node Notes layer acts as the primary translation interface between high-level human engineering decisions and low-level machine execution, treating human guidance not as casual annotations, but as first-class, machine-readable data.</p>
+
+											<div id="sec-9-1" class="paper-subsection">
+												<h3>9.1 &middot; Machine-Readable Intent</h3>
+												<p>In traditional version control or task management systems, &ldquo;comments&rdquo; or &ldquo;notes&rdquo; are unstructured strings meant solely for human eyes. In this architecture, notes are highly structured, strictly typed metadata objects that directly influence worker behavior and local task compilation.</p>
+												<pre class="paper-code">Notes:
+  structural_class: "PRIMARY"
+  inspection_required: true
+  preferred_substitution:
+    - "Brick3001_Blue"
+  comments:
+    - "Exterior wall facing high wind loads"</pre>
+												<p><strong>Dynamic behavior gating:</strong> If a node&rsquo;s notes declare a structural_class: PRIMARY, an agent&rsquo;s local task allocator automatically escalates its priority and forces a higher confidence threshold on the subsequent verification task.</p>
+												<p><strong>Fallback logic:</strong> The preferred_substitution array provides immediate, localized flexibility. If a worker encounters a RESOURCE_SHORTAGE event for Brick3001_Red while attempting to execute node N421, it does not need to message a human supervisor or stall. The local agent reads the structured note, verifies the availability of Brick3001_Blue, and autonomously updates its execution parameters within the bounds of pre-approved human design intent.</p>
+											</div>
+
+											<div id="sec-9-2" class="paper-subsection">
+												<h3>9.2 &middot; The Oversight Interface</h3>
+												<p>Because human intent is baked directly into the node as a first-class object, the Foreman can seamlessly modify execution rules on the fly without changing the underlying geometric or structural data.</p>
+												<p>For instance, if weather conditions deteriorate on-site, a human supervisor can push a graph patch updating a section of nodes to inspection_required: true. As this patch ripples through the swarm, workers immediately adjust their local state machines, routing additional inspection agents to that sector and altering the physical assembly pipeline in real time. This approach ensures that human expertise remains an active, integrated component of the swarm&rsquo;s collective memory.</p>
+											</div>
+										</section>
+
+										<section id="worker-beacon" class="paper-section">
+											<h2>10 &middot; Worker Beacon &amp; Network Synchronization</h2>
+											<p>In a decentralized physical environment, keeping everyone on the same page over a wireless network is a major challenge. Bandwidth is limited, and messages frequently drop. The LEGOSwarm framework handles this by making worker communication incredibly simple. Agents don&rsquo;t broadcast their internal logic, task queues, or full copies of the graph. Instead, they pass minimal, high-efficiency data packets called Worker Beacons.</p>
+
+											<div id="sec-10-1" class="paper-subsection">
+												<h3>10.1 &middot; The Minimalist Beacon Schema</h3>
+												<p>A worker beacon is designed to act like a brief heartbeat. It contains just enough data for neighboring agents to spot discrepancies in their local state models and trigger a targeted update if something is missing.</p>
+												<pre class="paper-code">Beacon:
+  sender: "Robot17"
+  graph_revision: 13
+  recent_events:
+    - "E882901"
+    - "E882902"
+    - "E882903"
+  optional_telemetry:
+    need: "Brick3001_Red"
+    waiting_on: "N418"
+    confidence: 0.91</pre>
+												<p>By keeping the core beacon limited to the sender ID, the current graph_revision index, and an array of recent unique event hashes, the system keeps the data footprint tiny. Optional telemetry fields provide a way for agents to signal immediate local needs or physical stall points without cluttering the global event log.</p>
+											</div>
+
+											<div id="sec-10-2" class="paper-subsection">
+												<h3>10.2 &middot; Anti-Entropy State Reconciliation</h3>
+												<p>When an agent hears a neighbor&rsquo;s beacon, it compares the incoming data with its local memory using a simple check:</p>
+												<p><strong>Revision matching:</strong> If the beacon&rsquo;s graph_revision matches the local index, the agent moves on to check the events. If the incoming revision is newer, the agent realizes its structural graph is out of date and requests the missing graph patches directly from that neighbor.</p>
+												<p><strong>Event log reconciliation:</strong> The agent looks at the recent_events array. If it spots an event ID it hasn&rsquo;t processed yet, it pulls just that specific log segment from the broadcasting peer.</p>
+												<p>Because the system relies on an append-only log structure, catching up is easy. Agents don&rsquo;t need to negotiate complex state changes; they simply pull the missing historical events and run them sequentially to update their local model.</p>
+											</div>
+
+											<div id="sec-10-3" class="paper-subsection">
+												<h3>10.3 &middot; Reconstructing the Materialized View</h3>
+												<p>Every worker independently builds its own Materialized View of the project from the exact same underlying event stream. The agent takes the base blueprint (the Mission Graph), applies any incoming graph patches, and plays back the event log to figure out exactly what is happening across the site right now.</p>
+												<p>This approach removes the need to store or transmit a massive global state database. Everything an agent needs to know to make its next decision&mdash;which tasks are open, who has reserved what, and where materials are running low&mdash;is reconstructed on the fly from the event log.</p>
+											</div>
+										</section>
+
+										<section id="conclusion" class="paper-section">
+											<h2>11 &middot; Long-Term Vision &amp; Conclusion</h2>
+
+											<div id="sec-11-1" class="paper-subsection">
+												<h3>11.1 &middot; The Graph as Collective Memory</h3>
+												<p>The ultimate realization of the <strong>WEAVE</strong> framework shifts the concept of a robotic swarm from a collection of coordinated individuals to a singular, distributed organism. In this model, the Assembly Graph functions as the organism&rsquo;s DNA&mdash;an immutable blueprint of what it must become. The append-only Event Log serves as its nervous system, propagating impulses and state mutations across the collective.</p>
+												<p>Because every agent independently reconstructs the global state from the same underlying event stream, the swarm develops a &ldquo;collective memory.&rdquo; No single robot holds the master plan, yet every robot knows exactly where the project stands. If half the swarm is instantly destroyed or disconnected, the remaining agents do not stall or lose orientation; they read the last known state of the log, evaluate open dependencies in the DAG, and continue construction without interruption.</p>
+											</div>
+
+											<div id="sec-11-2" class="paper-subsection">
+												<h3>11.2 &middot; Future Applications: Beyond Terrestrial Construction</h3>
+												<p>While this paper focuses on structural brick assembly, the underlying data topology is inherently generic. Any physical or digital process that can be modeled as a series of dependent state reductions can leverage this architecture.</p>
+												<p><strong>Planetary colonization:</strong> In high-latency, high-radiation environments like Mars or the Moon, central servers are single points of failure. LEGOSwarm allows autonomous machinery to harvest resources, prepare landing pads, and assemble habitats entirely from the bottom up before human arrival.</p>
+												<p><strong>Disaster recovery:</strong> Autonomous drone swarms deployed to unstable environments (e.g., collapsed infrastructure) can map paths, clear debris, and drop supplies safely by logging localized topological patches as pathways open or close.</p>
+												<p><strong>De-orbiting and space logistics:</strong> Satellites operating in orbital swarms can coordinate the capture and recycling of space debris, managing shared fueling and transport resources without risking communication blackouts with ground control.</p>
+											</div>
+
+											<div id="sec-11-3" class="paper-subsection">
+												<h3>11.3 &middot; Conclusion</h3>
+												<p>The <strong>WEAVE</strong> framework proves that complex, highly precise physical construction does not require complex or centralized coordination. By decoupling structural intent (the Graph) from historical execution (the Event Log), and enforcing a strict Build-Verify-Continue pipeline, the system achieves fault tolerance, structural reliability, and network efficiency. As robotics continue to move from structured factory floors to unpredictable, real-world environments, event-driven, graph-based data structures will provide the foundation for true collective autonomy.</p>
+											</div>
+										</section>
+
 										<!--
-											TO ADD A NEW SECTION (e.g. "4 · Methods"):
+											TO ADD A NEW SECTION (e.g. "12 · Appendix"):
 											  1) Paste a new <section id="…" class="paper-section"> … </section> block here.
 											  2) Add a matching <li><a href="#…">…</a></li> to the .paper-toc list above.
 											The scroll-spy (assets/js/whitepaper.js) picks up any .paper-section / .paper-subsection
