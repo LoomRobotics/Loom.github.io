@@ -36,18 +36,57 @@
 							<header class="major">
 								<span class="eyebrow">Development Log</span>
 								<h1>Engineering journal</h1>
-								<p>A running record of the work behind WEAVE. This log is the long-term archive of how the platform gets built.</p>
+								<p>A running record of the work behind WEAVE — our Workload Execution and Autonomous Verification Engine. Mostly software and simulation for now, hardware as it comes. Newest first.</p>
 							</header>
 						</section>
-
 						<section class="posts">
+							<article>
+								<header>
+									<span class="status-pill">June 28, 2026</span>
+									<h2>Giving the robot a status light</h2>
+								</header>
+								<span class="image fit"><img src="images/pic04.jpg" alt="" /></span>
+								<p>The worker can now show what it&rsquo;s doing with a light on top: white when idle, blue while driving, green while carrying a part, red on a fault. It runs as its own process, separate from the robot&rsquo;s brain, so if the display crashes the robot keeps building. The physical LED ring isn&rsquo;t wired up yet &mdash; for now it runs against a stand-in until the parts arrive.</p>
+							</article>
+							<article>
+								<header>
+									<span class="status-pill">June 23, 2026</span>
+									<h2>Building from the camera alone</h2>
+								</header>
+								<span class="image fit"><img src="images/pic03.jpg" alt="" /></span>
+								<p>The worker now builds the full three-part plate using only its onboard depth camera, with no access to the simulator&rsquo;s true positions &mdash; the one shortcut that wouldn&rsquo;t survive a real table. The last bug was a part that kept sliding off the table; giving the parts real weight let them settle like actual bricks. Every earlier demo still passes.</p>
+							</article>
+							<article>
+								<header>
+									<span class="status-pill">June 17, 2026</span>
+									<h2>Lose robots, keep building</h2>
+								</header>
+								<span class="image fit"><img src="images/pic01.jpg" alt="" /></span>
+								<p>We tested what happens when robots fail partway through a build. A harness kills up to a third of the swarm at the worst possible moment, and the build still finishes every time: a dead robot&rsquo;s claim expires, its unfinished job reopens, and another robot takes it over &mdash; with no coordinator involved. Recovery takes about as long as the claim timeout, and total build time degrades gradually instead of collapsing. Confirmed both in the harness and live in simulation.</p>
+							</article>
+							<article>
+								<header>
+									<span class="status-pill">June 13, 2026</span>
+									<h2>Robots that form teams</h2>
+								</header>
+								<span class="image fit"><img src="images/pic08.jpg" alt="" /></span>
+								<p>Some jobs are too big for one robot &mdash; out of reach for a single arm, or a piece that needs flipping. A worker that hits one now calls for help, nearby idle robots offer, and the closest is picked &mdash; still with no central coordinator. In simulation, two robots built an oversized part together, one carrying and one steadying it, placed within a couple millimeters.</p>
+							</article>
+							<article>
+								<header>
+									<span class="status-pill">June 12, 2026</span>
+									<h2>First clean two-worker build</h2>
+								</header>
+								<span class="image fit"><img src="images/pic07.jpg" alt="" /></span>
+								<p>Two robots now build the three-part plate together, each part placed on the first try. The fix came from the run logs: the robot was treating a slightly-short parking spot as a failure and re-driving from scratch, even when its arm could already reach. It now accepts a close-enough position and places &mdash; but a genuinely stuck robot still reports a failure, so real problems aren&rsquo;t masked.</p>
+							</article>
 							<article>
 								<header>
 									<span class="status-pill">June 8, 2026</span>
 									<h2>A worker that really builds</h2>
 								</header>
-								<span class="image fit"><img src="images/pic01.jpg" alt="" /></span>
-								<p>The first end-to-end run worked, but it wasn&rsquo;t pretty &mdash; the robot tipped, shoved parts around, and rarely finished cleanly. This update is about making it reliable, and the biggest culprit was hiding in plain sight: the worker was navigating by wheel odometry, which quietly drifts, so it kept driving to almost-the-right place and just missing. We switched it to navigate against ground-truth position &mdash; a stand-in for the localization a real robot will eventually run on its own &mdash; and the accuracy snapped into place. From there it was honest engineering: giving the drive base enough torque to actually turn, holding each part rigidly to the gripper through the carry instead of letting it flash or fling across the arena, and spacing the supply parts and build targets so the robot never trips over its own work. The result is a worker that drives out to parts scattered around the arena, carries each one cleanly, and lays them down in a tidy row &mdash; placing within a few millimeters of target, on its own, from start to finish.</p>
+								<span class="image fit"><img src="images/pic05.jpg" alt="" /></span>
+								<p>The first end-to-end run worked but was messy &mdash; the robot tipped, shoved parts, and rarely finished cleanly. The main culprit was navigating by wheel odometry, which drifts; switching to a clean position reference fixed the aim. After that it was ordinary tuning: more torque to turn, a firm grip during the carry, and parts spaced so the robot doesn&rsquo;t trip over its own work. It now drives out, carries each part, and lays them in a tidy row within a few millimeters of target.</p>
 							</article>
 							<article>
 								<header>
@@ -55,47 +94,47 @@
 									<h2>First build, in simulation</h2>
 								</header>
 								<span class="image fit"><img src="images/pic09.jpg" alt="" /></span>
-								<p>The full pipeline ran end-to-end for the first time. In a Gazebo physics simulation, a single worker reads its next job from the shared build plan, drives to the part, picks it, places it, and then checks its own work against ground truth before declaring the step done. It is not clean yet — early runs tipped the robot over and shoved parts around on retries, and we are still tuning the arm and grasp for a reliably repeatable &ldquo;complete.&rdquo; But the loop is closed: intent in, verified placement out, with no human in the loop.</p>
+								<p>The full pipeline ran end-to-end for the first time. In simulation, one robot reads its next job, drives to the part, picks it, places it, and checks its own work. It&rsquo;s not clean yet &mdash; the base tips and retries shove parts around &mdash; but the loop is closed, with no human in it.</p>
 							</article>
 							<article>
 								<header>
 									<span class="status-pill">June 3, 2026</span>
 									<h2>Teaching one robot to build</h2>
 								</header>
-								<span class="image fit"><img src="images/pic05.jpg" alt="" /></span>
-								<p>Before a swarm can build anything, one robot has to. We built the worker engine inside WEAVE (Workload Execution and Autonomous Verification Engine) — the layer that turns a single job into motion. Jobs compile down through reusable &ldquo;recipes&rdquo; into behavior trees, with recovery and verification built in at every step: a placement is never marked complete until it has been independently verified, otherwise the job is handed back to the swarm. A deliberate seam separates the robot&rsquo;s decision-making — deterministic, and fully testable on a laptop — from the physical acting, so the same logic drives a stub, a simulator, or real hardware unchanged.</p>
+								<span class="image fit"><img src="images/pic06.jpg" alt="" /></span>
+								<p>This is the worker&rsquo;s execution engine &mdash; the part that turns a single job into motion. Each job expands into a small tree of steps with recovery and a verification check built in: a placement isn&rsquo;t marked done until it&rsquo;s confirmed, otherwise the job goes back to the swarm. The decision-making is kept separate from the hardware, so the same code runs against a test stub, a simulator, or a real robot.</p>
 							</article>
 							<article>
 								<header>
 									<span class="status-pill">June 2, 2026</span>
 									<h2>A swarm with no boss</h2>
 								</header>
-								<span class="image fit"><img src="images/pic07.jpg" alt="" /></span>
-								<p>Most multi-robot systems lean on a central scheduler handing out assignments. WEAVE has none. Every robot carries its own live copy of the build plan, and the copies stay in agreement purely by exchanging small messages — no dispatcher, no broker, no polling. Robots claim work with short-lived &ldquo;leases&rdquo; that expire on their own, so if a robot vanishes mid-task its work automatically reopens for someone else, with no central health-monitor noticing. We found a way to make the whole swarm agree on who-does-what at a cost of only a couple of messages per job; the comparison against a traditional centralized baseline is one of the experiments we are running.</p>
+								<span class="image fit"><img src="images/pic02.jpg" alt="" /></span>
+								<p>Most multi-robot systems rely on a central scheduler handing out jobs. WEAVE doesn&rsquo;t have one. Every robot keeps its own copy of the build plan, and they stay in sync by passing a couple of small messages per job &mdash; no dispatcher, no polling. Work is claimed with short leases that expire on their own, so if a robot drops out its job reopens for someone else automatically.</p>
 							</article>
 							<article>
 								<header>
 									<span class="status-pill">May 30, 2026</span>
 									<h2>The blueprint is the brain</h2>
 								</header>
-								<span class="image fit"><img src="images/pic02.jpg" alt="" /></span>
-								<p>WEAVE starts by turning a real LEGO instruction booklet into something a swarm can reason about. A vision-language model reads the booklet page by page, and each assembly step becomes a node in a dependency graph — what part, where it goes, and what must exist before it. Parts are grounded against a real catalog so the plan refers to canonical components, not guesses. The result is a single living graph that is simultaneously the blueprint, the task list, and the progress tracker — the shared source of truth every robot works from.</p>
+								<span class="image fit"><img src="images/pic03.jpg" alt="" /></span>
+								<p>WEAVE starts by turning a LEGO instruction booklet into something the robots can read. A vision model works through the booklet page by page and turns each step into a node in a dependency graph: which part, where it goes, and what has to exist first. Parts are matched against a real catalog so the plan names exact components. That graph is the shared plan every robot builds from.</p>
 							</article>
 							<article>
 								<header>
 									<span class="status-pill">May 26, 2026</span>
 									<h2>Bring-up &amp; first 3D-printed parts</h2>
 								</header>
-								<span class="image fit"><img src="images/pic06.jpg" alt="" /></span>
-								<p>Starting code is in place and we are experimenting with the 3D printer to fabricate the first worker chassis and gripper iterations. Early effort is focused on the mechanical platform and the perception scaffolding needed for part detection.</p>
+								<span class="image fit"><img src="images/pic01.jpg" alt="" /></span>
+								<p>First hardware steps. The starting code is in place and the first worker chassis and gripper are coming off the 3D printer. Early focus is the mechanical platform and the perception scaffolding for part detection.</p>
 							</article>
 							<article>
 								<header>
 									<span class="status-pill next">Planned</span>
-									<h2>Multi-robot decentralized build</h2>
+									<h2>From simulation to real robots</h2>
 								</header>
 								<span class="image fit"><img src="images/pic08.jpg" alt="" /></span>
-								<p>Scaling from one worker to many: several robots pulling and claiming jobs from their own replicated build plans and assembling concurrently, with congestion-aware navigation and coalitions for jobs too large for a single arm. We will measure how the swarm holds up as robot count and structure complexity increase, against a centralized baseline.</p>
+								<p>Everything so far runs in simulation. Next is putting the same software on physical worker robots &mdash; one to start, then a few &mdash; and seeing how the coordination holds up off the simulator.</p>
 							</article>
 						</section>
 
