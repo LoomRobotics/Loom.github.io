@@ -4,7 +4,7 @@
 		<title>Loom Robotics — Decentralized Robotic Construction</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<meta name="description" content="Loom Robotics develops decentralized robotic construction systems using coordinated autonomous worker robots. LEGOSwarm is our modular research platform for swarm assembly." />
+		<meta name="description" content="Loom Robotics develops decentralized robotic construction systems using coordinated autonomous worker robots, orchestrated by the WEAVE engine." />
 		<link rel="icon" type="image/png" href="images/logo-mark.png" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<link rel="stylesheet" href="assets/css/brand.css" />
@@ -31,10 +31,7 @@
 					<noscript>
 						<nav id="nav"><ul class="links">
 							<li><a href="index.html">Loom Robotics</a></li>
-							<li><a href="technical.html">Paper</a></li>
-							<li><a href="about.html">LEGOSwarm</a></li>
-							<li><a href="architecture.html">Architecture</a></li>
-							<li><a href="gallery.html">Media</a></li>
+							<li><a href="technical.html">WEAVE</a></li>
 							<li><a href="devlog.html">Dev Log</a></li>
 						</ul></nav>
 					</noscript>
@@ -50,9 +47,9 @@
 									construction.</h2>
 									<p>Our flagship system "WEAVE" enables fault tolerant swarm orchestration.</p>
 								</header>
-								<a href="about.html" class="image main"><img src="images/pic01.jpg" alt="" /></a>
+								<a href="technical.html" class="image main"><img src="images/pic01.jpg" alt="" /></a>
 								<ul class="actions special">
-									<li><a href="about.html" class="button large">Research Project</a></li>
+									<li><a href="technical.html" class="button large">Read the WEAVE paper</a></li>
 								</ul>
 							</article>
 
@@ -91,55 +88,42 @@
 								<p class="text-steel"><em>Placeholder imagery — robot renders and hardware photos to follow.</em></p>
 							</section>
 
-						<!-- Architecture layers (Tier 3) -->
+						<!-- Interactive Architecture Explorer (embedded — graph from graph.data.js via explorer.js) -->
 							<section class="post">
 								<header class="major">
 									<span class="eyebrow">System Architecture</span>
-									<h2>Five coordinated layers</h2>
-								</header>
-								<ul class="layers">
-									<li><span class="layer-id">Layer 1</span><span class="layer-name">Foreman</span><span class="layer-desc">Build planning, instruction parsing, task decomposition.</span></li>
-									<li><span class="layer-id">Layer 2</span><span class="layer-name">Assembly Graph</span><span class="layer-desc">Task allocation, conflict resolution, decentralized communication.</span></li>
-									<li><span class="layer-id">Layer 3</span><span class="layer-name">Event Log</span><span class="layer-desc">Navigation, manipulation, path planning, obstacle avoidance.</span></li>
-									<li><span class="layer-id">Layer 4</span><span class="layer-name">Workers</span><span class="layer-desc">Cameras, actuators, grippers, power systems, sensors, networking.</span></li>
-									<li><span class="layer-id">Layer 5</span><span class="layer-name">Simulation &amp; Training</span><span class="layer-desc">Digital twins, synthetic datasets, reinforcement-learning environments.</span></li>
-								</ul>
-								<ul class="actions special">
-									<li><a href="technical.html" class="button">Read about WEAVE</a></li>
-								</ul>
-							</section>
-
-						<!-- Architecture explorer preview (Tier 4 — Level-1 animated mini-graph) -->
-							<section class="post">
-								<header class="major">
-									<span class="eyebrow">System Map</span>
 									<h2>Interactive Architecture Explorer</h2>
-									<p>Zoomable systems map for exploring how a single instruction propagates from the Foreman through the swarm.</p>
+									<p>A zoomable map of how a single instruction propagates from the Foreman through the swarm and down to physical brick placement — the visual companion to the WEAVE paper. Hover a subsystem for a summary; click it for detail.</p>
 								</header>
-								<div class="arch-mini" aria-hidden="true">
-									<svg viewBox="0 0 640 160" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Animated preview: data flowing through Mission, Swarm, Autonomy, and Hardware layers">
-										<!-- spine edges -->
-										<line class="mini-edge" x1="148" y1="80" x2="192" y2="80" />
-										<line class="mini-edge" x1="308" y1="80" x2="352" y2="80" />
-										<line class="mini-edge" x1="468" y1="80" x2="512" y2="80" />
-										<!-- nodes -->
-										<rect class="mini-node" x="32"  y="56" width="116" height="48" rx="6" />
-										<rect class="mini-node" x="192" y="56" width="116" height="48" rx="6" />
-										<rect class="mini-node" x="352" y="56" width="116" height="48" rx="6" />
-										<rect class="mini-node is-physical" x="512" y="56" width="116" height="48" rx="6" />
-										<!-- labels -->
-										<text class="mini-label" x="90"  y="84" text-anchor="middle">Mission</text>
-										<text class="mini-label" x="250" y="84" text-anchor="middle">Swarm</text>
-										<text class="mini-label" x="410" y="84" text-anchor="middle">Autonomy</text>
-										<text class="mini-label" x="570" y="84" text-anchor="middle">Hardware</text>
-										<!-- travelling data pulses -->
-										<circle class="mini-pulse p1" r="4" />
-										<circle class="mini-pulse p2" r="4" />
-										<circle class="mini-pulse p3" r="4" />
-									</svg>
+
+								<!-- Explorer (graph rendered by assets/js/explorer.js from graph.data.js) -->
+								<div class="arch-stage">
+									<div id="arch-explorer" role="application" aria-label="Interactive architecture graph"></div>
+
+									<div id="arch-controls" aria-label="Graph controls">
+										<button type="button" data-action="zoom-in" title="Zoom in" aria-label="Zoom in">+</button>
+										<button type="button" data-action="zoom-out" title="Zoom out" aria-label="Zoom out">&minus;</button>
+										<button type="button" data-action="fit" title="Fit to screen" aria-label="Fit to screen">&#9633;</button>
+										<button type="button" class="reset" data-action="reset" title="Reset view" aria-label="Reset view">Reset</button>
+									</div>
+
+									<ul id="arch-legend" aria-label="Layer legend"></ul>
+
+									<aside id="arch-panel" aria-label="Subsystem detail">
+										<div class="arch-panel-head">
+											<h2 id="arch-panel-title">Details</h2>
+											<button type="button" class="close" data-action="close" aria-label="Close panel">&times;</button>
+										</div>
+										<div id="arch-panel-body"></div>
+									</aside>
 								</div>
+
+								<noscript>
+									<p>The interactive graph requires JavaScript. For the full breakdown of the architecture, read the <a href="technical.html">WEAVE paper</a>.</p>
+								</noscript>
+
 								<ul class="actions special">
-									<li><a href="architecture.html" class="button primary">Explore Architecture</a></li>
+									<li><a href="technical.html" class="button primary">Read the WEAVE paper</a></li>
 								</ul>
 							</section>
 
@@ -171,26 +155,6 @@
 										<li><a href="devlog.html" class="button">Read Entry</a></li>
 									</ul>
 								</article>
-							</section>
-
-							<!-- Media gallery preview -->
-							<section class="post">
-								<header class="major">
-									<span class="eyebrow">Media</span>
-									<h2>Renders, hardware &amp; simulation</h2>
-								</header>
-								<div class="media-grid">
-									<a href="gallery.html" class="media-tile"><span class="media-placeholder">Robot renders</span><span class="media-label">Renders</span></a>
-									<a href="gallery.html" class="media-tile"><span class="media-placeholder">Gripper / CAD</span><span class="media-label">CAD &amp; design</span></a>
-									<a href="gallery.html" class="media-tile"><span class="media-placeholder">Hardware photos</span><span class="media-label">Hardware</span></a>
-									<a href="gallery.html" class="media-tile"><span class="media-placeholder">Node diagrams</span><span class="media-label">Architecture</span></a>
-									<a href="gallery.html" class="media-tile"><span class="media-placeholder">Simulation clips</span><span class="media-label">Simulation</span></a>
-									<a href="gallery.html" class="media-tile"><span class="media-placeholder">Design sheets</span><span class="media-label">Industrial design</span></a>
-								</div>
-								<p class="text-steel"><em>Placeholder tiles &mdash; real renders, CAD, and footage to follow.</em></p>
-								<ul class="actions special">
-									<li><a href="gallery.html" class="button">View Media Gallery</a></li>
-								</ul>
 							</section>
 
 							<!-- Roadmap -->
@@ -233,6 +197,10 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<!-- Architecture Explorer: data → vendored engine → our wrapper -->
+			<script src="assets/js/graph.data.js"></script>
+			<script src="assets/js/vendor/cytoscape.min.js"></script>
+			<script src="assets/js/explorer.js"></script>
 
 	</body>
 </html>

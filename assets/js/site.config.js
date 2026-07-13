@@ -21,9 +21,6 @@ window.LOOM = {
 	nav: [
 		{ label: "Loom Robotics",      href: "index.html" },
 		{ label: "WEAVE",              href: "technical.html" },
-		{ label: "LEGOSwarm",          href: "about.html" },
-		{ label: "Architecture",       href: "architecture.html" },
-		{ label: "Media",              href: "gallery.html" },
 		{ label: "Dev Log",            href: "devlog.html" }
 	],
 
