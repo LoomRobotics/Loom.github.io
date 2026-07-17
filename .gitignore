@@ -8,6 +8,11 @@ desktop.ini
 .claude/
 *.md.bak
 
+# Journey app (site/) — installed and built, never committed
+site/node_modules/
+site/dist/
+site/dist-vite/
+
 # Not required to run the site (not served / not compiled):
 
 # Dev + planning docs

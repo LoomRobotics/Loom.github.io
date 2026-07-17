@@ -1,0 +1,27 @@
+{
+  "name": "loom-journey",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Immersive scroll-driven journey for loom-robotics.com (builds to /next/ until cutover)",
+  "scripts": {
+    "dev": "vite",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --passWithNoTests",
+    "build": "npm run typecheck && vite build && node tools/assemble-dist.mjs",
+    "clean": "node -e \"const fs=require('fs');for(const d of['dist','dist-vite'])fs.rmSync(d,{recursive:true,force:true})\""
+  },
+  "dependencies": {
+    "gsap": "3.15.0",
+    "lenis": "1.3.25",
+    "postprocessing": "6.39.2",
+    "three": "0.185.1"
+  },
+  "devDependencies": {
+    "@types/node": "22.20.1",
+    "@types/three": "0.185.1",
+    "typescript": "5.9.3",
+    "vite": "8.1.5",
+    "vitest": "4.1.10"
+  }
+}

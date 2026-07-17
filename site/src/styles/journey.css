@@ -1,0 +1,109 @@
+/* Journey page styles. Consumes the shared brand tokens from /assets/css/brand.css
+   (charcoal/graphite/offwhite/orange/steel); fallbacks keep dev usable if the
+   legacy sheet is unreachable. */
+
+:root {
+  --j-charcoal: var(--charcoal, #15191e);
+  --j-graphite: var(--graphite, #252b33);
+  --j-line: var(--graphite-line, #323a44);
+  --j-offwhite: var(--offwhite, #f3f4f5);
+  --j-orange: var(--orange, #ff6a13);
+  --j-steel: var(--steel, #5b7a99);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--j-charcoal);
+  color: var(--j-offwhite);
+  font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+  font-weight: 300;
+}
+
+/* ---- Boot / load shell ---------------------------------------------- */
+
+#boot {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.75rem;
+  padding: 2rem;
+  text-align: center;
+}
+
+#boot-mark {
+  max-width: min(280px, 60vw);
+  height: auto;
+  opacity: 0.92;
+}
+
+#boot-rule {
+  width: min(280px, 60vw);
+  height: 2px;
+  background: var(--j-line);
+  overflow: hidden;
+}
+
+#boot-rule > span {
+  display: block;
+  height: 100%;
+  width: 40%;
+  background: var(--j-orange);
+  animation: boot-sweep 2.2s ease-in-out infinite;
+}
+
+@keyframes boot-sweep {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(250%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #boot-rule > span {
+    animation: none;
+    width: 100%;
+  }
+}
+
+#boot-status {
+  margin: 0;
+  font-family: "Space Grotesk", "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--j-steel);
+}
+
+#boot-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+#boot-links a {
+  font-family: "Space Grotesk", "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--j-offwhite);
+  text-decoration: none;
+  border-bottom: 1px solid var(--j-line);
+  padding-bottom: 0.2rem;
+}
+
+#boot-links a:hover,
+#boot-links a:focus-visible {
+  color: var(--j-orange);
+  border-bottom-color: var(--j-orange);
+}
