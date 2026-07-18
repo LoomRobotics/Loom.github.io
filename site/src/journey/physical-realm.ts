@@ -9,15 +9,17 @@ import type { TierReport } from "../perf/tier";
 
 /** The continuous physical world for Acts 2 (swarm) → 3 (hero) → 6 (place).
  * Hero worker home = origin (Act 3 camera framing); the car build sits at
- * BUILD_POS; the swarm loops the arena around both. */
+ * BUILD_POS, centered in front of the hero; the swarm lanes circle both.
+ * Robots render at 0.7× to soften the robot-vs-LEGO scale contrast. */
 
-export const BUILD_POS = new THREE.Vector3(-0.55, 0, -0.35);
-const BUILD_YAW = 0.5;
+export const BUILD_POS = new THREE.Vector3(0.55, 0, 0);
+const BUILD_YAW = -0.6;
+const ROBOT_SCALE = 0.7;
 
 /** Structure progress before the hero placement (~40% of 61). */
 const BASE_PROGRESS = 24;
 
-const SWARM_COUNT: Record<TierReport["tier"], number> = { high: 12, mid: 8, low: 5 };
+const SWARM_COUNT: Record<TierReport["tier"], number> = { high: 8, mid: 7, low: 6 };
 
 export class PhysicalRealm {
   readonly worker: WorkerRig;
@@ -35,6 +37,7 @@ export class PhysicalRealm {
     scene.add(this.structure.group);
 
     this.worker = createWorkerGreybox();
+    this.worker.root.scale.setScalar(ROBOT_SCALE);
     scene.add(this.worker.root);
 
     this.swarm = new Swarm(SWARM_COUNT[tier.tier]);
@@ -70,6 +73,8 @@ export class PhysicalRealm {
       this.placeChoreo(t, dt);
     } else {
       // Reset the hero to home whenever we're on the rails before Act 6.
+      // The build stays hidden until the place beat — it enters with its
+      // own catch-up assembly as the camera dives in.
       const before = beat === "swarm" || beat === "worker";
       if (before) {
         this.worker.root.position.set(0, 0, 0);
@@ -77,7 +82,7 @@ export class PhysicalRealm {
         this.worker.setArmExtend(0);
         this.worker.setRingColor(0xffffff);
         this.heroBrick.visible = false;
-        this.structure.setProgress(BASE_PROGRESS);
+        this.structure.setProgress(0);
         this.timelapseDone = 0;
       } else if (this.timelapseDone > 0) {
         // outro: hold the finished build
@@ -86,14 +91,15 @@ export class PhysicalRealm {
     }
   }
 
-  /** Act 6: drive in with the claimed brick → arm gesture → snap → verify →
-   * wave-ordered timelapse completes the car. */
+  /** Act 6: the build assembles as the camera dives in, the hero drives up
+   * with the claimed brick → arm gesture → snap → verify → wave-ordered
+   * timelapse completes the car. */
   private placeChoreo(t: number, dt: number) {
     const w = this.worker;
 
-    // Path from home toward the build zone (stops short, facing it).
+    // Short approach: the hero rolls forward to arm's reach of the build.
     const driveEnd = 0.34;
-    const target = BUILD_POS.clone().add(new THREE.Vector3(0.34, 0, 0.22));
+    const target = new THREE.Vector3(0.3, 0, 0.07);
     const k = Math.min(t / driveEnd, 1);
     const ease = k * k * (3 - 2 * k);
     w.root.position.lerpVectors(new THREE.Vector3(0, 0, 0), target, ease);
@@ -102,19 +108,21 @@ export class PhysicalRealm {
     if (k < 1) w.spinWheels(dt * 9);
     w.setRingColor(k < 1 ? 0x4d9fff : 0x39d98a); // navigating → carrying/placing
 
-    this.heroBrick.visible = t < 0.56;
+    this.heroBrick.visible = t >= 0.06 && t < 0.56;
 
     // Arm gesture window
     const gesture = THREE.MathUtils.smoothstep(t, 0.36, 0.52) - THREE.MathUtils.smoothstep(t, 0.6, 0.72);
     w.setArmExtend(gesture);
 
-    // Snap: the hero brick becomes structure progress BASE+1
+    // Catch-up assembly: the in-progress build materializes (0 → BASE) as
+    // the camera arrives, then the hero snaps brick BASE+1 at 0.56, then the
+    // timelapse (0.62 → 0.95) completes the car in real placement order.
+    const catchup = THREE.MathUtils.smoothstep(t, 0.02, 0.32) * BASE_PROGRESS;
     const snapped = t >= 0.56;
-    // Timelapse from 0.62 → 0.95 completes the remaining bricks
-    const lapse = THREE.MathUtils.smoothstep(t, 0.62, 0.95);
+    const lapse = THREE.MathUtils.smoothstep(t, 0.6, 0.78);
     const progress = snapped
       ? BASE_PROGRESS + 1 + lapse * (this.structure.total - BASE_PROGRESS - 1)
-      : BASE_PROGRESS;
+      : catchup;
     this.structure.setProgress(progress);
     this.timelapseDone = lapse;
 

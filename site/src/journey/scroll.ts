@@ -112,6 +112,18 @@ export function createScrollRig(container: HTMLElement, table: BeatTable): Scrol
     });
   }
 
+  // Layout can settle (or change) without a window `resize` — e.g. embedded
+  // panes and mobile URL bars. Re-measure the trigger when the document
+  // actually changes size, or ScrollTrigger keeps stale start/end positions.
+  let lastH = document.body.scrollHeight;
+  const ro = new ResizeObserver(() => {
+    if (document.body.scrollHeight !== lastH || st.end - st.start <= 1) {
+      lastH = document.body.scrollHeight;
+      ScrollTrigger.refresh();
+    }
+  });
+  ro.observe(document.body);
+
   // Idle watcher: after IDLE_MS without movement, magnetize to a hold.
   const watcher = () => {
     if (state.snapping || inputStopped) {
@@ -145,6 +157,7 @@ export function createScrollRig(container: HTMLElement, table: BeatTable): Scrol
       lenis.start();
     },
     destroy() {
+      ro.disconnect();
       gsap.ticker.remove(watcher);
       gsap.ticker.remove(tick);
       st.kill();

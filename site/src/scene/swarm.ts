@@ -62,32 +62,42 @@ export class Swarm {
   private faulted = false;
 
   constructor(count: number) {
-    // Three closed loops at different radii, flowing around the build zone.
-    const loops = [1.1, 1.6, 2.15].map((r, li) => {
+    // Traffic lanes: three non-intersecting closed loops (tight radial
+    // jitter keeps them apart and clear of the build zone and the hero).
+    // Everyone on a lane shares its speed and is evenly spaced — no
+    // overtaking, no overlaps: coordination you can see.
+    const radii = [1.15, 1.65, 2.15];
+    const loops = radii.map((r, li) => {
       const pts: THREE.Vector3[] = [];
       for (let i = 0; i < 8; i++) {
         const a = (i / 8) * Math.PI * 2 + li * 0.4;
-        const jitter = 0.85 + 0.3 * Math.sin(i * 2.3 + li);
+        const jitter = 1 + 0.045 * Math.sin(i * 2.3 + li);
         pts.push(new THREE.Vector3(Math.cos(a) * r * jitter, 0, Math.sin(a) * r * jitter));
       }
       return new THREE.CatmullRomCurve3(pts, true, "catmullrom", 0.6);
     });
-    for (let i = 0; i < count; i++) {
-      const { root, ring, wheels } = makeLodWorker(i % 3 === 0);
-      const curve = loops[i % loops.length]!;
-      const w: SwarmWorker = {
-        root,
-        ring,
-        wheels,
-        curve,
-        speed: 0.018 + (i % 4) * 0.004,
-        phase: i / count,
-        u: i / count,
-      };
-      ring.emissive.copy(i % 3 === 0 ? RING_GREEN : RING_BLUE);
-      this.workers.push(w);
-      this.group.add(root);
-    }
+    const laneSpeed = [0.024, 0.019, 0.015];
+    const laneMembers: number[][] = loops.map(() => []);
+    for (let i = 0; i < count; i++) laneMembers[i % loops.length]!.push(i);
+    laneMembers.forEach((members, li) => {
+      members.forEach((i, slot) => {
+        const { root, ring, wheels } = makeLodWorker(i % 3 === 0);
+        root.scale.setScalar(0.7);
+        const phase = slot / members.length + li * 0.13;
+        const w: SwarmWorker = {
+          root,
+          ring,
+          wheels,
+          curve: loops[li]!,
+          speed: laneSpeed[li]!,
+          phase,
+          u: phase,
+        };
+        ring.emissive.copy(i % 3 === 0 ? RING_GREEN : RING_BLUE);
+        this.workers.push(w);
+        this.group.add(root);
+      });
+    });
   }
 
   /** faultActive: the vignette window (one worker halts, ring red). */
