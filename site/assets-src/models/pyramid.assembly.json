@@ -1,0 +1,414 @@
+{
+  "ldu_mm": 0.4,
+  "name": "pyramid",
+  "part_count": 13,
+  "parts": [
+    {
+      "catalog_name": "Brick 2 x 4",
+      "color_code": 1,
+      "color_id": 1,
+      "ldraw_id": "3001",
+      "match": "identity",
+      "part_num": "3001",
+      "rot": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "step_index": 0,
+      "target_pose": {
+        "x": -0.016,
+        "y": 0.024,
+        "yaw": 0.0,
+        "z": 0.0096
+      },
+      "trans": [
+        -40.0,
+        -24.0,
+        60.0
+      ]
+    },
+    {
+      "catalog_name": "Brick 2 x 4",
+      "color_code": 1,
+      "color_id": 1,
+      "ldraw_id": "3001",
+      "match": "identity",
+      "part_num": "3001",
+      "rot": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "step_index": 0,
+      "target_pose": {
+        "x": 0.016,
+        "y": 0.024,
+        "yaw": 0.0,
+        "z": 0.0096
+      },
+      "trans": [
+        40.0,
+        -24.0,
+        60.0
+      ]
+    },
+    {
+      "catalog_name": "Brick 2 x 4",
+      "color_code": 1,
+      "color_id": 1,
+      "ldraw_id": "3001",
+      "match": "identity",
+      "part_num": "3001",
+      "rot": [
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0,
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "step_index": 0,
+      "target_pose": {
+        "x": 0.024,
+        "y": 0.0,
+        "yaw": 1.570796,
+        "z": 0.0096
+      },
+      "trans": [
+        60.0,
+        -24.0,
+        0.0
+      ]
+    },
+    {
+      "catalog_name": "Brick 2 x 4",
+      "color_code": 1,
+      "color_id": 1,
+      "ldraw_id": "3001",
+      "match": "identity",
+      "part_num": "3001",
+      "rot": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "step_index": 0,
+      "target_pose": {
+        "x": 0.016,
+        "y": -0.024,
+        "yaw": 0.0,
+        "z": 0.0096
+      },
+      "trans": [
+        40.0,
+        -24.0,
+        -60.0
+      ]
+    },
+    {
+      "catalog_name": "Brick 2 x 4",
+      "color_code": 1,
+      "color_id": 1,
+      "ldraw_id": "3001",
+      "match": "identity",
+      "part_num": "3001",
+      "rot": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "step_index": 0,
+      "target_pose": {
+        "x": -0.016,
+        "y": -0.024,
+        "yaw": 0.0,
+        "z": 0.0096
+      },
+      "trans": [
+        -40.0,
+        -24.0,
+        -60.0
+      ]
+    },
+    {
+      "catalog_name": "Brick 2 x 4",
+      "color_code": 1,
+      "color_id": 1,
+      "ldraw_id": "3001",
+      "match": "identity",
+      "part_num": "3001",
+      "rot": [
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0,
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "step_index": 0,
+      "target_pose": {
+        "x": -0.024,
+        "y": 0.0,
+        "yaw": 1.570796,
+        "z": 0.0096
+      },
+      "trans": [
+        -60.0,
+        -24.0,
+        0.0
+      ]
+    },
+    {
+      "catalog_name": "Brick 2 x 4",
+      "color_code": 4,
+      "color_id": 4,
+      "ldraw_id": "3001",
+      "match": "identity",
+      "part_num": "3001",
+      "rot": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "step_index": 1,
+      "target_pose": {
+        "x": -0.008,
+        "y": 0.016,
+        "yaw": 0.0,
+        "z": 0.0192
+      },
+      "trans": [
+        -20.0,
+        -48.0,
+        40.0
+      ]
+    },
+    {
+      "catalog_name": "Brick 2 x 4",
+      "color_code": 4,
+      "color_id": 4,
+      "ldraw_id": "3001",
+      "match": "identity",
+      "part_num": "3001",
+      "rot": [
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0,
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "step_index": 1,
+      "target_pose": {
+        "x": 0.016,
+        "y": 0.008,
+        "yaw": 1.570796,
+        "z": 0.0192
+      },
+      "trans": [
+        40.0,
+        -48.0,
+        20.0
+      ]
+    },
+    {
+      "catalog_name": "Brick 2 x 4",
+      "color_code": 4,
+      "color_id": 4,
+      "ldraw_id": "3001",
+      "match": "identity",
+      "part_num": "3001",
+      "rot": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "step_index": 1,
+      "target_pose": {
+        "x": 0.008,
+        "y": -0.016,
+        "yaw": 0.0,
+        "z": 0.0192
+      },
+      "trans": [
+        20.0,
+        -48.0,
+        -40.0
+      ]
+    },
+    {
+      "catalog_name": "Brick 2 x 4",
+      "color_code": 4,
+      "color_id": 4,
+      "ldraw_id": "3001",
+      "match": "identity",
+      "part_num": "3001",
+      "rot": [
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0,
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "step_index": 1,
+      "target_pose": {
+        "x": -0.016,
+        "y": -0.008,
+        "yaw": 1.570796,
+        "z": 0.0192
+      },
+      "trans": [
+        -40.0,
+        -48.0,
+        -20.0
+      ]
+    },
+    {
+      "catalog_name": "Brick 2 x 4",
+      "color_code": 14,
+      "color_id": 14,
+      "ldraw_id": "3001",
+      "match": "identity",
+      "part_num": "3001",
+      "rot": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "step_index": 2,
+      "target_pose": {
+        "x": 0.0,
+        "y": 0.008,
+        "yaw": 0.0,
+        "z": 0.0288
+      },
+      "trans": [
+        0.0,
+        -72.0,
+        20.0
+      ]
+    },
+    {
+      "catalog_name": "Brick 2 x 4",
+      "color_code": 14,
+      "color_id": 14,
+      "ldraw_id": "3001",
+      "match": "identity",
+      "part_num": "3001",
+      "rot": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "step_index": 2,
+      "target_pose": {
+        "x": 0.0,
+        "y": -0.008,
+        "yaw": 0.0,
+        "z": 0.0288
+      },
+      "trans": [
+        0.0,
+        -72.0,
+        -20.0
+      ]
+    },
+    {
+      "catalog_name": "Brick 2 x 2",
+      "color_code": 0,
+      "color_id": 64,
+      "ldraw_id": "3003",
+      "match": "identity",
+      "part_num": "3003",
+      "rot": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "step_index": 3,
+      "target_pose": {
+        "x": 0.0,
+        "y": 0.0,
+        "yaw": 0.0,
+        "z": 0.0384
+      },
+      "trans": [
+        0.0,
+        -96.0,
+        0.0
+      ]
+    }
+  ],
+  "source_ldraw_sha256": "01000eacf364464c954a70e8163055f8ebaaa8ae869b88ed330fdc4b28cbabcc",
+  "source_model": "pyramid.ldr",
+  "step_count": 4,
+  "units": "ldu"
+}

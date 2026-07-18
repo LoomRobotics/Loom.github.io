@@ -32,6 +32,21 @@ function serveLegacyAssets(): Plugin {
     name: "loom-serve-legacy-assets",
     apply: "serve",
     configureServer(server) {
+      // Dev-only verification endpoint: the page POSTs base64 frames here so
+      // captures land on disk without huge strings crossing tool boundaries.
+      server.middlewares.use("/__capture", (req, res) => {
+        const name = (new URL(req.url ?? "/", "http://x").searchParams.get("name") ?? "capture")
+          .replace(/[^a-z0-9_-]/gi, "");
+        let body = "";
+        req.on("data", (c) => (body += c));
+        req.on("end", async () => {
+          const { mkdirSync, writeFileSync } = await import("node:fs");
+          const dir = resolve(import.meta.dirname, "captures");
+          mkdirSync(dir, { recursive: true });
+          writeFileSync(join(dir, `${name}.jpg`), Buffer.from(body, "base64"));
+          res.end("ok");
+        });
+      });
       server.middlewares.use((req, res, next) => {
         const url = (req.url ?? "").split("?")[0] ?? "";
         if (!url.startsWith("/assets/") && !url.startsWith("/images/")) return next();

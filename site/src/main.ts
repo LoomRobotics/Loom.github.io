@@ -22,8 +22,8 @@ if (!report.webgl) {
 } else {
   holdShell("Loading journey…");
   import("./journey/engine")
-    .then(({ mountJourney }) => {
-      mountJourney(report);
+    .then(({ mountJourney }) => mountJourney(report))
+    .then(() => {
       const end = document.getElementById("journey-end");
       if (end) end.hidden = false;
       boot?.classList.add("boot-done");

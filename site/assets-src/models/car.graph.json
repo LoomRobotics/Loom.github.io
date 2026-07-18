@@ -1,0 +1,2643 @@
+{
+  "edge_source": "geometry",
+  "edges": [
+    {
+      "hard": true,
+      "id": "dep_s1_i5",
+      "load_bearing": true,
+      "sources": [
+        "s0_i0"
+      ],
+      "target": "s1_i5",
+      "type": "support"
+    },
+    {
+      "hard": true,
+      "id": "dep_s1_i6",
+      "load_bearing": true,
+      "sources": [
+        "s0_i0"
+      ],
+      "target": "s1_i6",
+      "type": "support"
+    },
+    {
+      "hard": true,
+      "id": "dep_s1_i7",
+      "load_bearing": true,
+      "sources": [
+        "s0_i0",
+        "s0_i1",
+        "s0_i2"
+      ],
+      "target": "s1_i7",
+      "type": "support"
+    },
+    {
+      "hard": true,
+      "id": "dep_s1_i8",
+      "load_bearing": true,
+      "sources": [
+        "s0_i2"
+      ],
+      "target": "s1_i8",
+      "type": "support"
+    },
+    {
+      "hard": true,
+      "id": "dep_s1_i9",
+      "load_bearing": true,
+      "sources": [
+        "s0_i2"
+      ],
+      "target": "s1_i9",
+      "type": "support"
+    },
+    {
+      "hard": true,
+      "id": "dep_s1_i10",
+      "load_bearing": true,
+      "sources": [
+        "s0_i2"
+      ],
+      "target": "s1_i10",
+      "type": "support"
+    },
+    {
+      "hard": true,
+      "id": "dep_s1_i11",
+      "load_bearing": true,
+      "sources": [
+        "s0_i2"
+      ],
+      "target": "s1_i11",
+      "type": "support"
+    },
+    {
+      "hard": true,
+      "id": "dep_s1_i12",
+      "load_bearing": true,
+      "sources": [
+        "s0_i2",
+        "s0_i3"
+      ],
+      "target": "s1_i12",
+      "type": "support"
+    },
+    {
+      "hard": true,
+      "id": "dep_s1_i13",
+      "load_bearing": true,
+      "sources": [
+        "s0_i4"
+      ],
+      "target": "s1_i13",
+      "type": "support"
+    },
+    {
+      "hard": true,
+      "id": "dep_s1_i14",
+      "load_bearing": true,
+      "sources": [
+        "s0_i2"
+      ],
+      "target": "s1_i14",
+      "type": "support"
+    },
+    {
+      "hard": true,
+      "id": "dep_s2_i15",
+      "load_bearing": true,
+      "sources": [
+        "s1_i13"
+      ],
+      "target": "s2_i15",
+      "type": "support"
+    },
+    {
+      "hard": true,
+      "id": "dep_s2_i16",
+      "load_bearing": true,
+      "sources": [
+        "s1_i13"
+      ],
+      "target": "s2_i16",
+      "type": "support"
+    },
+    {
+      "hard": true,
+      "id": "dep_s2_i17",
+      "load_bearing": true,
+      "sources": [
+        "s1_i7"
+      ],
+      "target": "s2_i17",
+      "type": "support"
+    },
+    {
+      "hard": true,
+      "id": "dep_s3_i18",
+      "load_bearing": true,
+      "sources": [
+        "s1_i7"
+      ],
+      "target": "s3_i18",
+      "type": "support"
+    },
+    {
+      "hard": true,
+      "id": "dep_s3_i19",
+      "load_bearing": true,
+      "sources": [
+        "s1_i12"
+      ],
+      "target": "s3_i19",
+      "type": "support"
+    },
+    {
+      "hard": true,
+      "id": "dep_s3_i20",
+      "load_bearing": true,
+      "sources": [
+        "s2_i15"
+      ],
+      "target": "s3_i20",
+      "type": "support"
+    },
+    {
+      "hard": true,
+      "id": "dep_s3_i21",
+      "load_bearing": true,
+      "sources": [
+        "s2_i16"
+      ],
+      "target": "s3_i21",
+      "type": "support"
+    },
+    {
+      "hard": true,
+      "id": "dep_s4_i22",
+      "load_bearing": true,
+      "sources": [
+        "s1_i7"
+      ],
+      "target": "s4_i22",
+      "type": "support"
+    },
+    {
+      "hard": true,
+      "id": "dep_s4_i24",
+      "load_bearing": true,
+      "sources": [
+        "s1_i5"
+      ],
+      "target": "s4_i24",
+      "type": "support"
+    },
+    {
+      "hard": true,
+      "id": "dep_s4_i25",
+      "load_bearing": true,
+      "sources": [
+        "s1_i6"
+      ],
+      "target": "s4_i25",
+      "type": "support"
+    },
+    {
+      "hard": true,
+      "id": "dep_s4_i28",
+      "load_bearing": true,
+      "sources": [
+        "s3_i18"
+      ],
+      "target": "s4_i28",
+      "type": "support"
+    },
+    {
+      "hard": true,
+      "id": "dep_s4_i29",
+      "load_bearing": true,
+      "sources": [
+        "s3_i18"
+      ],
+      "target": "s4_i29",
+      "type": "support"
+    },
+    {
+      "hard": true,
+      "id": "dep_s4_i30",
+      "load_bearing": true,
+      "sources": [
+        "s1_i8"
+      ],
+      "target": "s4_i30",
+      "type": "support"
+    },
+    {
+      "hard": true,
+      "id": "dep_s4_i31",
+      "load_bearing": true,
+      "sources": [
+        "s1_i9"
+      ],
+      "target": "s4_i31",
+      "type": "support"
+    },
+    {
+      "hard": true,
+      "id": "dep_s4_i32",
+      "load_bearing": true,
+      "sources": [
+        "s1_i10"
+      ],
+      "target": "s4_i32",
+      "type": "support"
+    },
+    {
+      "hard": true,
+      "id": "dep_s4_i33",
+      "load_bearing": true,
+      "sources": [
+        "s1_i11"
+      ],
+      "target": "s4_i33",
+      "type": "support"
+    },
+    {
+      "hard": true,
+      "id": "dep_s4_i34",
+      "load_bearing": true,
+      "sources": [
+        "s3_i19",
+        "s3_i20"
+      ],
+      "target": "s4_i34",
+      "type": "support"
+    },
+    {
+      "hard": true,
+      "id": "dep_s4_i35",
+      "load_bearing": true,
+      "sources": [
+        "s3_i19",
+        "s3_i21"
+      ],
+      "target": "s4_i35",
+      "type": "support"
+    },
+    {
+      "hard": true,
+      "id": "dep_s4_i36",
+      "load_bearing": true,
+      "sources": [
+        "s1_i13"
+      ],
+      "target": "s4_i36",
+      "type": "support"
+    },
+    {
+      "hard": true,
+      "id": "dep_s5_i37",
+      "load_bearing": true,
+      "sources": [
+        "s4_i23"
+      ],
+      "target": "s5_i37",
+      "type": "support"
+    },
+    {
+      "hard": true,
+      "id": "dep_s5_i38",
+      "load_bearing": true,
+      "sources": [
+        "s4_i24",
+        "s4_i28"
+      ],
+      "target": "s5_i38",
+      "type": "support"
+    },
+    {
+      "hard": true,
+      "id": "dep_s5_i39",
+      "load_bearing": true,
+      "sources": [
+        "s4_i25",
+        "s4_i29"
+      ],
+      "target": "s5_i39",
+      "type": "support"
+    },
+    {
+      "hard": true,
+      "id": "dep_s5_i40",
+      "load_bearing": true,
+      "sources": [
+        "s3_i18"
+      ],
+      "target": "s5_i40",
+      "type": "support"
+    },
+    {
+      "hard": true,
+      "id": "dep_s5_i41",
+      "load_bearing": true,
+      "sources": [
+        "s4_i28",
+        "s4_i30"
+      ],
+      "target": "s5_i41",
+      "type": "support"
+    },
+    {
+      "hard": true,
+      "id": "dep_s5_i42",
+      "load_bearing": true,
+      "sources": [
+        "s4_i29",
+        "s4_i31"
+      ],
+      "target": "s5_i42",
+      "type": "support"
+    },
+    {
+      "hard": true,
+      "id": "dep_s5_i43",
+      "load_bearing": true,
+      "sources": [
+        "s4_i32",
+        "s4_i34"
+      ],
+      "target": "s5_i43",
+      "type": "support"
+    },
+    {
+      "hard": true,
+      "id": "dep_s5_i44",
+      "load_bearing": true,
+      "sources": [
+        "s4_i33",
+        "s4_i35"
+      ],
+      "target": "s5_i44",
+      "type": "support"
+    },
+    {
+      "hard": true,
+      "id": "dep_s5_i45",
+      "load_bearing": true,
+      "sources": [
+        "s4_i34"
+      ],
+      "target": "s5_i45",
+      "type": "support"
+    },
+    {
+      "hard": true,
+      "id": "dep_s5_i46",
+      "load_bearing": true,
+      "sources": [
+        "s4_i35"
+      ],
+      "target": "s5_i46",
+      "type": "support"
+    },
+    {
+      "hard": true,
+      "id": "dep_s5_i47",
+      "load_bearing": true,
+      "sources": [
+        "s4_i34",
+        "s4_i35",
+        "s4_i36"
+      ],
+      "target": "s5_i47",
+      "type": "support"
+    },
+    {
+      "hard": true,
+      "id": "dep_s6_i48",
+      "load_bearing": true,
+      "sources": [
+        "s5_i40",
+        "s5_i41",
+        "s5_i42"
+      ],
+      "target": "s6_i48",
+      "type": "support"
+    },
+    {
+      "hard": true,
+      "id": "dep_s6_i49",
+      "load_bearing": true,
+      "sources": [
+        "s5_i43",
+        "s5_i44"
+      ],
+      "target": "s6_i49",
+      "type": "support"
+    },
+    {
+      "hard": true,
+      "id": "dep_s6_i50",
+      "load_bearing": true,
+      "sources": [
+        "s5_i45",
+        "s5_i46",
+        "s5_i47"
+      ],
+      "target": "s6_i50",
+      "type": "support"
+    },
+    {
+      "hard": true,
+      "id": "dep_s7_i51",
+      "load_bearing": true,
+      "sources": [
+        "s6_i48"
+      ],
+      "target": "s7_i51",
+      "type": "support"
+    },
+    {
+      "hard": true,
+      "id": "dep_s7_i52",
+      "load_bearing": true,
+      "sources": [
+        "s6_i50"
+      ],
+      "target": "s7_i52",
+      "type": "support"
+    },
+    {
+      "hard": false,
+      "id": "seq_s1_i5",
+      "load_bearing": false,
+      "sources": [
+        "s0_i0",
+        "s0_i1",
+        "s0_i2",
+        "s0_i3",
+        "s0_i4"
+      ],
+      "target": "s1_i5",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s1_i6",
+      "load_bearing": false,
+      "sources": [
+        "s0_i0",
+        "s0_i1",
+        "s0_i2",
+        "s0_i3",
+        "s0_i4"
+      ],
+      "target": "s1_i6",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s1_i7",
+      "load_bearing": false,
+      "sources": [
+        "s0_i0",
+        "s0_i1",
+        "s0_i2",
+        "s0_i3",
+        "s0_i4"
+      ],
+      "target": "s1_i7",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s1_i8",
+      "load_bearing": false,
+      "sources": [
+        "s0_i0",
+        "s0_i1",
+        "s0_i2",
+        "s0_i3",
+        "s0_i4"
+      ],
+      "target": "s1_i8",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s1_i9",
+      "load_bearing": false,
+      "sources": [
+        "s0_i0",
+        "s0_i1",
+        "s0_i2",
+        "s0_i3",
+        "s0_i4"
+      ],
+      "target": "s1_i9",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s1_i10",
+      "load_bearing": false,
+      "sources": [
+        "s0_i0",
+        "s0_i1",
+        "s0_i2",
+        "s0_i3",
+        "s0_i4"
+      ],
+      "target": "s1_i10",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s1_i11",
+      "load_bearing": false,
+      "sources": [
+        "s0_i0",
+        "s0_i1",
+        "s0_i2",
+        "s0_i3",
+        "s0_i4"
+      ],
+      "target": "s1_i11",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s1_i12",
+      "load_bearing": false,
+      "sources": [
+        "s0_i0",
+        "s0_i1",
+        "s0_i2",
+        "s0_i3",
+        "s0_i4"
+      ],
+      "target": "s1_i12",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s1_i13",
+      "load_bearing": false,
+      "sources": [
+        "s0_i0",
+        "s0_i1",
+        "s0_i2",
+        "s0_i3",
+        "s0_i4"
+      ],
+      "target": "s1_i13",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s1_i14",
+      "load_bearing": false,
+      "sources": [
+        "s0_i0",
+        "s0_i1",
+        "s0_i2",
+        "s0_i3",
+        "s0_i4"
+      ],
+      "target": "s1_i14",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s2_i15",
+      "load_bearing": false,
+      "sources": [
+        "s1_i5",
+        "s1_i6",
+        "s1_i7",
+        "s1_i8",
+        "s1_i9",
+        "s1_i10",
+        "s1_i11",
+        "s1_i12",
+        "s1_i13",
+        "s1_i14"
+      ],
+      "target": "s2_i15",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s2_i16",
+      "load_bearing": false,
+      "sources": [
+        "s1_i5",
+        "s1_i6",
+        "s1_i7",
+        "s1_i8",
+        "s1_i9",
+        "s1_i10",
+        "s1_i11",
+        "s1_i12",
+        "s1_i13",
+        "s1_i14"
+      ],
+      "target": "s2_i16",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s2_i17",
+      "load_bearing": false,
+      "sources": [
+        "s1_i5",
+        "s1_i6",
+        "s1_i7",
+        "s1_i8",
+        "s1_i9",
+        "s1_i10",
+        "s1_i11",
+        "s1_i12",
+        "s1_i13",
+        "s1_i14"
+      ],
+      "target": "s2_i17",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s3_i18",
+      "load_bearing": false,
+      "sources": [
+        "s2_i15",
+        "s2_i16",
+        "s2_i17"
+      ],
+      "target": "s3_i18",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s3_i19",
+      "load_bearing": false,
+      "sources": [
+        "s2_i15",
+        "s2_i16",
+        "s2_i17"
+      ],
+      "target": "s3_i19",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s3_i20",
+      "load_bearing": false,
+      "sources": [
+        "s2_i15",
+        "s2_i16",
+        "s2_i17"
+      ],
+      "target": "s3_i20",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s3_i21",
+      "load_bearing": false,
+      "sources": [
+        "s2_i15",
+        "s2_i16",
+        "s2_i17"
+      ],
+      "target": "s3_i21",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s4_i22",
+      "load_bearing": false,
+      "sources": [
+        "s3_i18",
+        "s3_i19",
+        "s3_i20",
+        "s3_i21"
+      ],
+      "target": "s4_i22",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s4_i23",
+      "load_bearing": false,
+      "sources": [
+        "s3_i18",
+        "s3_i19",
+        "s3_i20",
+        "s3_i21"
+      ],
+      "target": "s4_i23",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s4_i24",
+      "load_bearing": false,
+      "sources": [
+        "s3_i18",
+        "s3_i19",
+        "s3_i20",
+        "s3_i21"
+      ],
+      "target": "s4_i24",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s4_i25",
+      "load_bearing": false,
+      "sources": [
+        "s3_i18",
+        "s3_i19",
+        "s3_i20",
+        "s3_i21"
+      ],
+      "target": "s4_i25",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s4_i26",
+      "load_bearing": false,
+      "sources": [
+        "s3_i18",
+        "s3_i19",
+        "s3_i20",
+        "s3_i21"
+      ],
+      "target": "s4_i26",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s4_i27",
+      "load_bearing": false,
+      "sources": [
+        "s3_i18",
+        "s3_i19",
+        "s3_i20",
+        "s3_i21"
+      ],
+      "target": "s4_i27",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s4_i28",
+      "load_bearing": false,
+      "sources": [
+        "s3_i18",
+        "s3_i19",
+        "s3_i20",
+        "s3_i21"
+      ],
+      "target": "s4_i28",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s4_i29",
+      "load_bearing": false,
+      "sources": [
+        "s3_i18",
+        "s3_i19",
+        "s3_i20",
+        "s3_i21"
+      ],
+      "target": "s4_i29",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s4_i30",
+      "load_bearing": false,
+      "sources": [
+        "s3_i18",
+        "s3_i19",
+        "s3_i20",
+        "s3_i21"
+      ],
+      "target": "s4_i30",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s4_i31",
+      "load_bearing": false,
+      "sources": [
+        "s3_i18",
+        "s3_i19",
+        "s3_i20",
+        "s3_i21"
+      ],
+      "target": "s4_i31",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s4_i32",
+      "load_bearing": false,
+      "sources": [
+        "s3_i18",
+        "s3_i19",
+        "s3_i20",
+        "s3_i21"
+      ],
+      "target": "s4_i32",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s4_i33",
+      "load_bearing": false,
+      "sources": [
+        "s3_i18",
+        "s3_i19",
+        "s3_i20",
+        "s3_i21"
+      ],
+      "target": "s4_i33",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s4_i34",
+      "load_bearing": false,
+      "sources": [
+        "s3_i18",
+        "s3_i19",
+        "s3_i20",
+        "s3_i21"
+      ],
+      "target": "s4_i34",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s4_i35",
+      "load_bearing": false,
+      "sources": [
+        "s3_i18",
+        "s3_i19",
+        "s3_i20",
+        "s3_i21"
+      ],
+      "target": "s4_i35",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s4_i36",
+      "load_bearing": false,
+      "sources": [
+        "s3_i18",
+        "s3_i19",
+        "s3_i20",
+        "s3_i21"
+      ],
+      "target": "s4_i36",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s5_i37",
+      "load_bearing": false,
+      "sources": [
+        "s4_i22",
+        "s4_i23",
+        "s4_i24",
+        "s4_i25",
+        "s4_i26",
+        "s4_i27",
+        "s4_i28",
+        "s4_i29",
+        "s4_i30",
+        "s4_i31",
+        "s4_i32",
+        "s4_i33",
+        "s4_i34",
+        "s4_i35",
+        "s4_i36"
+      ],
+      "target": "s5_i37",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s5_i38",
+      "load_bearing": false,
+      "sources": [
+        "s4_i22",
+        "s4_i23",
+        "s4_i24",
+        "s4_i25",
+        "s4_i26",
+        "s4_i27",
+        "s4_i28",
+        "s4_i29",
+        "s4_i30",
+        "s4_i31",
+        "s4_i32",
+        "s4_i33",
+        "s4_i34",
+        "s4_i35",
+        "s4_i36"
+      ],
+      "target": "s5_i38",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s5_i39",
+      "load_bearing": false,
+      "sources": [
+        "s4_i22",
+        "s4_i23",
+        "s4_i24",
+        "s4_i25",
+        "s4_i26",
+        "s4_i27",
+        "s4_i28",
+        "s4_i29",
+        "s4_i30",
+        "s4_i31",
+        "s4_i32",
+        "s4_i33",
+        "s4_i34",
+        "s4_i35",
+        "s4_i36"
+      ],
+      "target": "s5_i39",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s5_i40",
+      "load_bearing": false,
+      "sources": [
+        "s4_i22",
+        "s4_i23",
+        "s4_i24",
+        "s4_i25",
+        "s4_i26",
+        "s4_i27",
+        "s4_i28",
+        "s4_i29",
+        "s4_i30",
+        "s4_i31",
+        "s4_i32",
+        "s4_i33",
+        "s4_i34",
+        "s4_i35",
+        "s4_i36"
+      ],
+      "target": "s5_i40",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s5_i41",
+      "load_bearing": false,
+      "sources": [
+        "s4_i22",
+        "s4_i23",
+        "s4_i24",
+        "s4_i25",
+        "s4_i26",
+        "s4_i27",
+        "s4_i28",
+        "s4_i29",
+        "s4_i30",
+        "s4_i31",
+        "s4_i32",
+        "s4_i33",
+        "s4_i34",
+        "s4_i35",
+        "s4_i36"
+      ],
+      "target": "s5_i41",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s5_i42",
+      "load_bearing": false,
+      "sources": [
+        "s4_i22",
+        "s4_i23",
+        "s4_i24",
+        "s4_i25",
+        "s4_i26",
+        "s4_i27",
+        "s4_i28",
+        "s4_i29",
+        "s4_i30",
+        "s4_i31",
+        "s4_i32",
+        "s4_i33",
+        "s4_i34",
+        "s4_i35",
+        "s4_i36"
+      ],
+      "target": "s5_i42",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s5_i43",
+      "load_bearing": false,
+      "sources": [
+        "s4_i22",
+        "s4_i23",
+        "s4_i24",
+        "s4_i25",
+        "s4_i26",
+        "s4_i27",
+        "s4_i28",
+        "s4_i29",
+        "s4_i30",
+        "s4_i31",
+        "s4_i32",
+        "s4_i33",
+        "s4_i34",
+        "s4_i35",
+        "s4_i36"
+      ],
+      "target": "s5_i43",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s5_i44",
+      "load_bearing": false,
+      "sources": [
+        "s4_i22",
+        "s4_i23",
+        "s4_i24",
+        "s4_i25",
+        "s4_i26",
+        "s4_i27",
+        "s4_i28",
+        "s4_i29",
+        "s4_i30",
+        "s4_i31",
+        "s4_i32",
+        "s4_i33",
+        "s4_i34",
+        "s4_i35",
+        "s4_i36"
+      ],
+      "target": "s5_i44",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s5_i45",
+      "load_bearing": false,
+      "sources": [
+        "s4_i22",
+        "s4_i23",
+        "s4_i24",
+        "s4_i25",
+        "s4_i26",
+        "s4_i27",
+        "s4_i28",
+        "s4_i29",
+        "s4_i30",
+        "s4_i31",
+        "s4_i32",
+        "s4_i33",
+        "s4_i34",
+        "s4_i35",
+        "s4_i36"
+      ],
+      "target": "s5_i45",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s5_i46",
+      "load_bearing": false,
+      "sources": [
+        "s4_i22",
+        "s4_i23",
+        "s4_i24",
+        "s4_i25",
+        "s4_i26",
+        "s4_i27",
+        "s4_i28",
+        "s4_i29",
+        "s4_i30",
+        "s4_i31",
+        "s4_i32",
+        "s4_i33",
+        "s4_i34",
+        "s4_i35",
+        "s4_i36"
+      ],
+      "target": "s5_i46",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s5_i47",
+      "load_bearing": false,
+      "sources": [
+        "s4_i22",
+        "s4_i23",
+        "s4_i24",
+        "s4_i25",
+        "s4_i26",
+        "s4_i27",
+        "s4_i28",
+        "s4_i29",
+        "s4_i30",
+        "s4_i31",
+        "s4_i32",
+        "s4_i33",
+        "s4_i34",
+        "s4_i35",
+        "s4_i36"
+      ],
+      "target": "s5_i47",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s6_i48",
+      "load_bearing": false,
+      "sources": [
+        "s5_i37",
+        "s5_i38",
+        "s5_i39",
+        "s5_i40",
+        "s5_i41",
+        "s5_i42",
+        "s5_i43",
+        "s5_i44",
+        "s5_i45",
+        "s5_i46",
+        "s5_i47"
+      ],
+      "target": "s6_i48",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s6_i49",
+      "load_bearing": false,
+      "sources": [
+        "s5_i37",
+        "s5_i38",
+        "s5_i39",
+        "s5_i40",
+        "s5_i41",
+        "s5_i42",
+        "s5_i43",
+        "s5_i44",
+        "s5_i45",
+        "s5_i46",
+        "s5_i47"
+      ],
+      "target": "s6_i49",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s6_i50",
+      "load_bearing": false,
+      "sources": [
+        "s5_i37",
+        "s5_i38",
+        "s5_i39",
+        "s5_i40",
+        "s5_i41",
+        "s5_i42",
+        "s5_i43",
+        "s5_i44",
+        "s5_i45",
+        "s5_i46",
+        "s5_i47"
+      ],
+      "target": "s6_i50",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s7_i51",
+      "load_bearing": false,
+      "sources": [
+        "s6_i48",
+        "s6_i49",
+        "s6_i50"
+      ],
+      "target": "s7_i51",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s7_i52",
+      "load_bearing": false,
+      "sources": [
+        "s6_i48",
+        "s6_i49",
+        "s6_i50"
+      ],
+      "target": "s7_i52",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s7_i53",
+      "load_bearing": false,
+      "sources": [
+        "s6_i48",
+        "s6_i49",
+        "s6_i50"
+      ],
+      "target": "s7_i53",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s7_i54",
+      "load_bearing": false,
+      "sources": [
+        "s6_i48",
+        "s6_i49",
+        "s6_i50"
+      ],
+      "target": "s7_i54",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s7_i55",
+      "load_bearing": false,
+      "sources": [
+        "s6_i48",
+        "s6_i49",
+        "s6_i50"
+      ],
+      "target": "s7_i55",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s7_i56",
+      "load_bearing": false,
+      "sources": [
+        "s6_i48",
+        "s6_i49",
+        "s6_i50"
+      ],
+      "target": "s7_i56",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s7_i57",
+      "load_bearing": false,
+      "sources": [
+        "s6_i48",
+        "s6_i49",
+        "s6_i50"
+      ],
+      "target": "s7_i57",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s7_i58",
+      "load_bearing": false,
+      "sources": [
+        "s6_i48",
+        "s6_i49",
+        "s6_i50"
+      ],
+      "target": "s7_i58",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s7_i59",
+      "load_bearing": false,
+      "sources": [
+        "s6_i48",
+        "s6_i49",
+        "s6_i50"
+      ],
+      "target": "s7_i59",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s7_i60",
+      "load_bearing": false,
+      "sources": [
+        "s6_i48",
+        "s6_i49",
+        "s6_i50"
+      ],
+      "target": "s7_i60",
+      "type": "sequencing"
+    }
+  ],
+  "name": "car",
+  "nodes": [
+    {
+      "catalog_name": "Hinge Vehicle Roof Holder 1 x 4",
+      "color": "0",
+      "color_id": 64,
+      "id": "s0_i0",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "4315",
+      "part_num": "4315",
+      "required_orientation": "yaw_0",
+      "size": "1x4",
+      "step_index": 0,
+      "step_number": 1,
+      "target_pose": {
+        "x": 0.0,
+        "y": -0.036,
+        "yaw": 0.0,
+        "z": -0.0
+      }
+    },
+    {
+      "catalog_name": "Plate Special 2 x 2 with Wheel Holders",
+      "color": "7",
+      "color_id": null,
+      "id": "s0_i1",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "4600",
+      "part_num": "4600",
+      "required_orientation": "yaw_0",
+      "size": "2x3",
+      "step_index": 0,
+      "step_number": 1,
+      "target_pose": {
+        "x": 0.0,
+        "y": -0.024,
+        "yaw": 0.0,
+        "z": -0.0
+      }
+    },
+    {
+      "catalog_name": "Plate 4 x 4",
+      "color": "0",
+      "color_id": 64,
+      "id": "s0_i2",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3031",
+      "part_num": "3031",
+      "required_orientation": "yaw_0",
+      "size": "4x4",
+      "step_index": 0,
+      "step_number": 1,
+      "target_pose": {
+        "x": 0.0,
+        "y": 0.0,
+        "yaw": 0.0,
+        "z": -0.0
+      }
+    },
+    {
+      "catalog_name": "Plate Special 2 x 2 with Wheel Holders",
+      "color": "7",
+      "color_id": null,
+      "id": "s0_i3",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "4600",
+      "part_num": "4600",
+      "required_orientation": "yaw_0",
+      "size": "2x3",
+      "step_index": 0,
+      "step_number": 1,
+      "target_pose": {
+        "x": 0.0,
+        "y": 0.024,
+        "yaw": 0.0,
+        "z": -0.0
+      }
+    },
+    {
+      "catalog_name": "Hinge Vehicle Roof Holder 1 x 4",
+      "color": "0",
+      "color_id": 64,
+      "id": "s0_i4",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "4315",
+      "part_num": "4315",
+      "required_orientation": "yaw_180",
+      "size": "1x4",
+      "step_index": 0,
+      "step_number": 1,
+      "target_pose": {
+        "x": 0.0,
+        "y": 0.036,
+        "yaw": 3.141593,
+        "z": -0.0
+      }
+    },
+    {
+      "catalog_name": "Plate 1 x 1",
+      "color": "46",
+      "color_id": 46,
+      "id": "s1_i5",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3024",
+      "part_num": "3024",
+      "required_orientation": "yaw_0",
+      "size": "1x1",
+      "step_index": 1,
+      "step_number": 2,
+      "target_pose": {
+        "x": 0.012,
+        "y": -0.036,
+        "yaw": 0.0,
+        "z": 0.0032
+      }
+    },
+    {
+      "catalog_name": "Plate 1 x 1",
+      "color": "46",
+      "color_id": 46,
+      "id": "s1_i6",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3024",
+      "part_num": "3024",
+      "required_orientation": "yaw_0",
+      "size": "1x1",
+      "step_index": 1,
+      "step_number": 2,
+      "target_pose": {
+        "x": -0.012,
+        "y": -0.036,
+        "yaw": 0.0,
+        "z": 0.0032
+      }
+    },
+    {
+      "catalog_name": "Plate 2 x 4",
+      "color": "4",
+      "color_id": 4,
+      "id": "s1_i7",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3020",
+      "part_num": "3020",
+      "required_orientation": "yaw_90",
+      "size": "2x4",
+      "step_index": 1,
+      "step_number": 2,
+      "target_pose": {
+        "x": 0.0,
+        "y": -0.024,
+        "yaw": 1.570796,
+        "z": 0.0032
+      }
+    },
+    {
+      "catalog_name": "Plate 1 x 3",
+      "color": "4",
+      "color_id": 4,
+      "id": "s1_i8",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3623",
+      "part_num": "3623",
+      "required_orientation": "yaw_90",
+      "size": "1x3",
+      "step_index": 1,
+      "step_number": 2,
+      "target_pose": {
+        "x": 0.012,
+        "y": -0.004,
+        "yaw": 1.570796,
+        "z": 0.0032
+      }
+    },
+    {
+      "catalog_name": "Plate 1 x 3",
+      "color": "4",
+      "color_id": 4,
+      "id": "s1_i9",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3623",
+      "part_num": "3623",
+      "required_orientation": "yaw_90",
+      "size": "1x3",
+      "step_index": 1,
+      "step_number": 2,
+      "target_pose": {
+        "x": -0.012,
+        "y": -0.004,
+        "yaw": 1.570796,
+        "z": 0.0032
+      }
+    },
+    {
+      "catalog_name": "Plate 1 x 1",
+      "color": "4",
+      "color_id": 4,
+      "id": "s1_i10",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3024",
+      "part_num": "3024",
+      "required_orientation": "yaw_0",
+      "size": "1x1",
+      "step_index": 1,
+      "step_number": 2,
+      "target_pose": {
+        "x": 0.012,
+        "y": 0.012,
+        "yaw": 0.0,
+        "z": 0.0032
+      }
+    },
+    {
+      "catalog_name": "Plate 1 x 1",
+      "color": "4",
+      "color_id": 4,
+      "id": "s1_i11",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3024",
+      "part_num": "3024",
+      "required_orientation": "yaw_0",
+      "size": "1x1",
+      "step_index": 1,
+      "step_number": 2,
+      "target_pose": {
+        "x": -0.012,
+        "y": 0.012,
+        "yaw": 0.0,
+        "z": 0.0032
+      }
+    },
+    {
+      "catalog_name": "Plate 2 x 3",
+      "color": "4",
+      "color_id": 4,
+      "id": "s1_i12",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3021",
+      "part_num": "3021",
+      "required_orientation": "yaw_90",
+      "size": "2x3",
+      "step_index": 1,
+      "step_number": 2,
+      "target_pose": {
+        "x": 0.0,
+        "y": 0.02,
+        "yaw": 1.570796,
+        "z": 0.0032
+      }
+    },
+    {
+      "catalog_name": "Plate 1 x 4",
+      "color": "4",
+      "color_id": 4,
+      "id": "s1_i13",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3710",
+      "part_num": "3710",
+      "required_orientation": "yaw_0",
+      "size": "1x4",
+      "step_index": 1,
+      "step_number": 2,
+      "target_pose": {
+        "x": 0.0,
+        "y": 0.036,
+        "yaw": 0.0,
+        "z": 0.0032
+      }
+    },
+    {
+      "catalog_name": "Seat / Chair 2 x 2",
+      "color": "1",
+      "color_id": 1,
+      "id": "s1_i14",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "4079",
+      "part_num": "4079",
+      "required_orientation": "yaw_0",
+      "size": "2x2",
+      "step_index": 1,
+      "step_number": 2,
+      "target_pose": {
+        "x": 0.0,
+        "y": 0.0,
+        "yaw": 0.0,
+        "z": 0.0032
+      }
+    },
+    {
+      "catalog_name": "Plate 1 x 1",
+      "color": "46",
+      "color_id": 46,
+      "id": "s2_i15",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3024",
+      "part_num": "3024",
+      "required_orientation": "yaw_0",
+      "size": "1x1",
+      "step_index": 2,
+      "step_number": 3,
+      "target_pose": {
+        "x": 0.012,
+        "y": 0.036,
+        "yaw": 0.0,
+        "z": 0.0064
+      }
+    },
+    {
+      "catalog_name": "Plate 1 x 1",
+      "color": "46",
+      "color_id": 46,
+      "id": "s2_i16",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3024",
+      "part_num": "3024",
+      "required_orientation": "yaw_0",
+      "size": "1x1",
+      "step_index": 2,
+      "step_number": 3,
+      "target_pose": {
+        "x": -0.012,
+        "y": 0.036,
+        "yaw": 0.0,
+        "z": 0.0064
+      }
+    },
+    {
+      "catalog_name": "Steering Stand 1 x 2 with Black Steering Wheel",
+      "color": "4",
+      "color_id": 4,
+      "id": "s2_i17",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3829c01",
+      "part_num": "3829c01",
+      "required_orientation": "yaw_0",
+      "size": "1x2",
+      "step_index": 2,
+      "step_number": 3,
+      "target_pose": {
+        "x": 0.0,
+        "y": -0.012,
+        "yaw": 0.0,
+        "z": 0.0064
+      }
+    },
+    {
+      "catalog_name": "Wheel Arch, Mudguard 2 x 4 Studded",
+      "color": "4",
+      "color_id": 4,
+      "id": "s3_i18",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3788",
+      "part_num": "3788",
+      "required_orientation": "yaw_0",
+      "size": "2x4",
+      "step_index": 3,
+      "step_number": 4,
+      "target_pose": {
+        "x": 0.0,
+        "y": -0.024,
+        "yaw": 0.0,
+        "z": 0.0096
+      }
+    },
+    {
+      "catalog_name": "Wheel Arch, Mudguard 2 x 4 Studded",
+      "color": "4",
+      "color_id": 4,
+      "id": "s3_i19",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3788",
+      "part_num": "3788",
+      "required_orientation": "yaw_0",
+      "size": "2x4",
+      "step_index": 3,
+      "step_number": 4,
+      "target_pose": {
+        "x": 0.0,
+        "y": 0.024,
+        "yaw": 0.0,
+        "z": 0.0096
+      }
+    },
+    {
+      "catalog_name": "Plate 1 x 1",
+      "color": "36",
+      "color_id": 4,
+      "id": "s3_i20",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3024",
+      "part_num": "3024",
+      "required_orientation": "yaw_0",
+      "size": "1x1",
+      "step_index": 3,
+      "step_number": 4,
+      "target_pose": {
+        "x": 0.012,
+        "y": 0.036,
+        "yaw": 0.0,
+        "z": 0.0096
+      }
+    },
+    {
+      "catalog_name": "Plate 1 x 1",
+      "color": "36",
+      "color_id": 4,
+      "id": "s3_i21",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3024",
+      "part_num": "3024",
+      "required_orientation": "yaw_0",
+      "size": "1x1",
+      "step_index": 3,
+      "step_number": 4,
+      "target_pose": {
+        "x": -0.012,
+        "y": 0.036,
+        "yaw": 0.0,
+        "z": 0.0096
+      }
+    },
+    {
+      "catalog_name": "Hinge Brick 1 x 2 Base",
+      "color": "7",
+      "color_id": null,
+      "id": "s4_i22",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3937",
+      "part_num": "3937",
+      "required_orientation": "yaw_0",
+      "size": "1x2",
+      "step_index": 4,
+      "step_number": 5,
+      "target_pose": {
+        "x": 0.0,
+        "y": -0.036,
+        "yaw": 0.0,
+        "z": 0.0128
+      }
+    },
+    {
+      "catalog_name": "Hinge Brick 1 x 2 Top Plate Thin",
+      "color": "7",
+      "color_id": null,
+      "id": "s4_i23",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3938",
+      "part_num": "3938",
+      "required_orientation": "yaw_0",
+      "size": "1x2",
+      "step_index": 4,
+      "step_number": 5,
+      "target_pose": {
+        "x": 0.0,
+        "y": -0.036,
+        "yaw": 0.0,
+        "z": 0.0128
+      }
+    },
+    {
+      "catalog_name": "Brick Special 1 x 1 with Headlight",
+      "color": "4",
+      "color_id": 4,
+      "id": "s4_i24",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "4070",
+      "part_num": "4070",
+      "required_orientation": "yaw_0",
+      "size": "1x1",
+      "step_index": 4,
+      "step_number": 5,
+      "target_pose": {
+        "x": 0.012,
+        "y": -0.036,
+        "yaw": 0.0,
+        "z": 0.0128
+      }
+    },
+    {
+      "catalog_name": "Brick Special 1 x 1 with Headlight",
+      "color": "4",
+      "color_id": 4,
+      "id": "s4_i25",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "4070",
+      "part_num": "4070",
+      "required_orientation": "yaw_0",
+      "size": "1x1",
+      "step_index": 4,
+      "step_number": 5,
+      "target_pose": {
+        "x": -0.012,
+        "y": -0.036,
+        "yaw": 0.0,
+        "z": 0.0128
+      }
+    },
+    {
+      "catalog_name": "Plate Round 1 x 1 with Solid Stud",
+      "color": "46",
+      "color_id": 46,
+      "id": "s4_i26",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "6141",
+      "part_num": "6141",
+      "required_orientation": "yaw_0",
+      "size": "1x1",
+      "step_index": 4,
+      "step_number": 5,
+      "target_pose": {
+        "x": 0.012,
+        "y": -0.0416,
+        "yaw": 0.0,
+        "z": 0.0088
+      }
+    },
+    {
+      "catalog_name": "Plate Round 1 x 1 with Solid Stud",
+      "color": "46",
+      "color_id": 46,
+      "id": "s4_i27",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "6141",
+      "part_num": "6141",
+      "required_orientation": "yaw_0",
+      "size": "1x1",
+      "step_index": 4,
+      "step_number": 5,
+      "target_pose": {
+        "x": -0.012,
+        "y": -0.0416,
+        "yaw": 0.0,
+        "z": 0.0088
+      }
+    },
+    {
+      "catalog_name": "Plate 1 x 2",
+      "color": "4",
+      "color_id": 4,
+      "id": "s4_i28",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3023",
+      "part_num": "3023",
+      "required_orientation": "yaw_90",
+      "size": "1x2",
+      "step_index": 4,
+      "step_number": 5,
+      "target_pose": {
+        "x": 0.012,
+        "y": -0.024,
+        "yaw": 1.570796,
+        "z": 0.0128
+      }
+    },
+    {
+      "catalog_name": "Plate 1 x 2",
+      "color": "4",
+      "color_id": 4,
+      "id": "s4_i29",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3023",
+      "part_num": "3023",
+      "required_orientation": "yaw_90",
+      "size": "1x2",
+      "step_index": 4,
+      "step_number": 5,
+      "target_pose": {
+        "x": -0.012,
+        "y": -0.024,
+        "yaw": 1.570796,
+        "z": 0.0128
+      }
+    },
+    {
+      "catalog_name": "Door 1 x 3 x 1 Left",
+      "color": "4",
+      "color_id": 4,
+      "id": "s4_i30",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3822",
+      "part_num": "3822",
+      "required_orientation": "yaw_0",
+      "size": "1x3",
+      "step_index": 4,
+      "step_number": 5,
+      "target_pose": {
+        "x": 0.012,
+        "y": -0.012,
+        "yaw": 0.0,
+        "z": 0.0128
+      }
+    },
+    {
+      "catalog_name": "Door 1 x 3 x 1 Right",
+      "color": "4",
+      "color_id": 4,
+      "id": "s4_i31",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3821",
+      "part_num": "3821",
+      "required_orientation": "yaw_0",
+      "size": "1x3",
+      "step_index": 4,
+      "step_number": 5,
+      "target_pose": {
+        "x": -0.012,
+        "y": -0.012,
+        "yaw": 0.0,
+        "z": 0.0128
+      }
+    },
+    {
+      "catalog_name": "Brick 1 x 1",
+      "color": "4",
+      "color_id": 4,
+      "id": "s4_i32",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3005",
+      "part_num": "3005",
+      "required_orientation": "yaw_0",
+      "size": "1x1",
+      "step_index": 4,
+      "step_number": 5,
+      "target_pose": {
+        "x": 0.012,
+        "y": 0.012,
+        "yaw": 0.0,
+        "z": 0.0128
+      }
+    },
+    {
+      "catalog_name": "Brick 1 x 1",
+      "color": "4",
+      "color_id": 4,
+      "id": "s4_i33",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3005",
+      "part_num": "3005",
+      "required_orientation": "yaw_0",
+      "size": "1x1",
+      "step_index": 4,
+      "step_number": 5,
+      "target_pose": {
+        "x": -0.012,
+        "y": 0.012,
+        "yaw": 0.0,
+        "z": 0.0128
+      }
+    },
+    {
+      "catalog_name": "Plate 1 x 3",
+      "color": "4",
+      "color_id": 4,
+      "id": "s4_i34",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3623",
+      "part_num": "3623",
+      "required_orientation": "yaw_90",
+      "size": "1x3",
+      "step_index": 4,
+      "step_number": 5,
+      "target_pose": {
+        "x": 0.012,
+        "y": 0.028,
+        "yaw": 1.570796,
+        "z": 0.0128
+      }
+    },
+    {
+      "catalog_name": "Plate 1 x 3",
+      "color": "4",
+      "color_id": 4,
+      "id": "s4_i35",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3623",
+      "part_num": "3623",
+      "required_orientation": "yaw_90",
+      "size": "1x3",
+      "step_index": 4,
+      "step_number": 5,
+      "target_pose": {
+        "x": -0.012,
+        "y": 0.028,
+        "yaw": 1.570796,
+        "z": 0.0128
+      }
+    },
+    {
+      "catalog_name": "Brick 1 x 2",
+      "color": "4",
+      "color_id": 4,
+      "id": "s4_i36",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3004",
+      "part_num": "3004",
+      "required_orientation": "yaw_0",
+      "size": "1x2",
+      "step_index": 4,
+      "step_number": 5,
+      "target_pose": {
+        "x": 0.0,
+        "y": 0.036,
+        "yaw": 0.0,
+        "z": 0.0128
+      }
+    },
+    {
+      "catalog_name": "Tile 2 x 2 with Groove",
+      "color": "4",
+      "color_id": 4,
+      "id": "s5_i37",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3068b",
+      "part_num": "3068b",
+      "required_orientation": "yaw_0",
+      "size": "2x2",
+      "step_index": 5,
+      "step_number": 6,
+      "target_pose": {
+        "x": 0.0,
+        "y": -0.032,
+        "yaw": 0.0,
+        "z": 0.016
+      }
+    },
+    {
+      "catalog_name": "Plate 1 x 2",
+      "color": "4",
+      "color_id": 4,
+      "id": "s5_i38",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3023",
+      "part_num": "3023",
+      "required_orientation": "yaw_90",
+      "size": "1x2",
+      "step_index": 5,
+      "step_number": 6,
+      "target_pose": {
+        "x": 0.012,
+        "y": -0.032,
+        "yaw": 1.570796,
+        "z": 0.016
+      }
+    },
+    {
+      "catalog_name": "Plate 1 x 2",
+      "color": "4",
+      "color_id": 4,
+      "id": "s5_i39",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3023",
+      "part_num": "3023",
+      "required_orientation": "yaw_90",
+      "size": "1x2",
+      "step_index": 5,
+      "step_number": 6,
+      "target_pose": {
+        "x": -0.012,
+        "y": -0.032,
+        "yaw": 1.570796,
+        "z": 0.016
+      }
+    },
+    {
+      "catalog_name": "Brick 1 x 2",
+      "color": "4",
+      "color_id": 4,
+      "id": "s5_i40",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3004",
+      "part_num": "3004",
+      "required_orientation": "yaw_0",
+      "size": "1x2",
+      "step_index": 5,
+      "step_number": 6,
+      "target_pose": {
+        "x": 0.0,
+        "y": -0.02,
+        "yaw": 0.0,
+        "z": 0.016
+      }
+    },
+    {
+      "catalog_name": "Plate 1 x 2",
+      "color": "4",
+      "color_id": 4,
+      "id": "s5_i41",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3023",
+      "part_num": "3023",
+      "required_orientation": "yaw_90",
+      "size": "1x2",
+      "step_index": 5,
+      "step_number": 6,
+      "target_pose": {
+        "x": 0.012,
+        "y": -0.016,
+        "yaw": 1.570796,
+        "z": 0.016
+      }
+    },
+    {
+      "catalog_name": "Plate 1 x 2",
+      "color": "4",
+      "color_id": 4,
+      "id": "s5_i42",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3023",
+      "part_num": "3023",
+      "required_orientation": "yaw_90",
+      "size": "1x2",
+      "step_index": 5,
+      "step_number": 6,
+      "target_pose": {
+        "x": -0.012,
+        "y": -0.016,
+        "yaw": 1.570796,
+        "z": 0.016
+      }
+    },
+    {
+      "catalog_name": "Plate 1 x 2",
+      "color": "0",
+      "color_id": 64,
+      "id": "s5_i43",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3023",
+      "part_num": "3023",
+      "required_orientation": "yaw_90",
+      "size": "1x2",
+      "step_index": 5,
+      "step_number": 6,
+      "target_pose": {
+        "x": 0.012,
+        "y": 0.016,
+        "yaw": 1.570796,
+        "z": 0.016
+      }
+    },
+    {
+      "catalog_name": "Plate 1 x 2",
+      "color": "0",
+      "color_id": 64,
+      "id": "s5_i44",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3023",
+      "part_num": "3023",
+      "required_orientation": "yaw_90",
+      "size": "1x2",
+      "step_index": 5,
+      "step_number": 6,
+      "target_pose": {
+        "x": -0.012,
+        "y": 0.016,
+        "yaw": 1.570796,
+        "z": 0.016
+      }
+    },
+    {
+      "catalog_name": "Plate 1 x 1",
+      "color": "0",
+      "color_id": 64,
+      "id": "s5_i45",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3024",
+      "part_num": "3024",
+      "required_orientation": "yaw_0",
+      "size": "1x1",
+      "step_index": 5,
+      "step_number": 6,
+      "target_pose": {
+        "x": 0.012,
+        "y": 0.028,
+        "yaw": 0.0,
+        "z": 0.016
+      }
+    },
+    {
+      "catalog_name": "Plate 1 x 1",
+      "color": "0",
+      "color_id": 64,
+      "id": "s5_i46",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3024",
+      "part_num": "3024",
+      "required_orientation": "yaw_0",
+      "size": "1x1",
+      "step_index": 5,
+      "step_number": 6,
+      "target_pose": {
+        "x": -0.012,
+        "y": 0.028,
+        "yaw": 0.0,
+        "z": 0.016
+      }
+    },
+    {
+      "catalog_name": "Plate 1 x 4",
+      "color": "0",
+      "color_id": 64,
+      "id": "s5_i47",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3710",
+      "part_num": "3710",
+      "required_orientation": "yaw_0",
+      "size": "1x4",
+      "step_index": 5,
+      "step_number": 6,
+      "target_pose": {
+        "x": 0.0,
+        "y": 0.036,
+        "yaw": 0.0,
+        "z": 0.016
+      }
+    },
+    {
+      "catalog_name": "Windscreen 2 x 4 x 2",
+      "color": "39",
+      "color_id": 43,
+      "id": "s6_i48",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3823",
+      "part_num": "3823",
+      "required_orientation": "yaw_0",
+      "size": "2x4",
+      "step_index": 6,
+      "step_number": 7,
+      "target_pose": {
+        "x": 0.0,
+        "y": -0.012,
+        "yaw": 0.0,
+        "z": 0.0352
+      }
+    },
+    {
+      "catalog_name": "Hinge Vehicle Roof Holder 1 x 4 x 2",
+      "color": "0",
+      "color_id": 64,
+      "id": "s6_i49",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "4214",
+      "part_num": "4214",
+      "required_orientation": "yaw_0",
+      "size": "1x4",
+      "step_index": 6,
+      "step_number": 7,
+      "target_pose": {
+        "x": 0.0,
+        "y": 0.012,
+        "yaw": 0.0,
+        "z": 0.0352
+      }
+    },
+    {
+      "catalog_name": "Windscreen 2 x 4 x 2",
+      "color": "39",
+      "color_id": 43,
+      "id": "s6_i50",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3823",
+      "part_num": "3823",
+      "required_orientation": "yaw_180",
+      "size": "2x4",
+      "step_index": 6,
+      "step_number": 7,
+      "target_pose": {
+        "x": 0.0,
+        "y": 0.028,
+        "yaw": 3.141593,
+        "z": 0.0352
+      }
+    },
+    {
+      "catalog_name": "Hinge Vehicle Roof 4 x 4",
+      "color": "0",
+      "color_id": 64,
+      "id": "s7_i51",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "4213",
+      "part_num": "4213",
+      "required_orientation": "yaw_0",
+      "size": "4x4",
+      "step_index": 7,
+      "step_number": 8,
+      "target_pose": {
+        "x": 0.0,
+        "y": 0.0,
+        "yaw": 0.0,
+        "z": 0.0384
+      }
+    },
+    {
+      "catalog_name": "Plate 2 x 4",
+      "color": "0",
+      "color_id": 64,
+      "id": "s7_i52",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3020",
+      "part_num": "3020",
+      "required_orientation": "yaw_0",
+      "size": "2x4",
+      "step_index": 7,
+      "step_number": 8,
+      "target_pose": {
+        "x": 0.0,
+        "y": 0.024,
+        "yaw": 0.0,
+        "z": 0.0384
+      }
+    },
+    {
+      "catalog_name": "Wheel 8 x 6",
+      "color": "7",
+      "color_id": null,
+      "id": "s7_i53",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "4624",
+      "part_num": "4624",
+      "required_orientation": "yaw_90",
+      "size": "1x1",
+      "step_index": 7,
+      "step_number": 8,
+      "target_pose": {
+        "x": -0.012,
+        "y": 0.024,
+        "yaw": 1.570796,
+        "z": -0.0024
+      }
+    },
+    {
+      "catalog_name": "Wheel 8 x 6",
+      "color": "7",
+      "color_id": null,
+      "id": "s7_i54",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "4624",
+      "part_num": "4624",
+      "required_orientation": "yaw_270",
+      "size": "1x1",
+      "step_index": 7,
+      "step_number": 8,
+      "target_pose": {
+        "x": 0.012,
+        "y": 0.024,
+        "yaw": -1.570796,
+        "z": -0.0024
+      }
+    },
+    {
+      "catalog_name": "Wheel 8 x 6",
+      "color": "7",
+      "color_id": null,
+      "id": "s7_i55",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "4624",
+      "part_num": "4624",
+      "required_orientation": "yaw_90",
+      "size": "1x1",
+      "step_index": 7,
+      "step_number": 8,
+      "target_pose": {
+        "x": -0.012,
+        "y": -0.024,
+        "yaw": 1.570796,
+        "z": -0.0024
+      }
+    },
+    {
+      "catalog_name": "Wheel 8 x 6",
+      "color": "7",
+      "color_id": null,
+      "id": "s7_i56",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "4624",
+      "part_num": "4624",
+      "required_orientation": "yaw_270",
+      "size": "1x1",
+      "step_index": 7,
+      "step_number": 8,
+      "target_pose": {
+        "x": 0.012,
+        "y": -0.024,
+        "yaw": -1.570796,
+        "z": -0.0024
+      }
+    },
+    {
+      "catalog_name": "Tyre 15 x 6 Offset Tread Small",
+      "color": "0",
+      "color_id": 64,
+      "id": "s7_i57",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3641",
+      "part_num": "3641",
+      "required_orientation": "yaw_90",
+      "size": "1x2",
+      "step_index": 7,
+      "step_number": 8,
+      "target_pose": {
+        "x": -0.012,
+        "y": 0.024,
+        "yaw": 1.570796,
+        "z": -0.0024
+      }
+    },
+    {
+      "catalog_name": "Tyre 15 x 6 Offset Tread Small",
+      "color": "0",
+      "color_id": 64,
+      "id": "s7_i58",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3641",
+      "part_num": "3641",
+      "required_orientation": "yaw_270",
+      "size": "1x2",
+      "step_index": 7,
+      "step_number": 8,
+      "target_pose": {
+        "x": 0.012,
+        "y": 0.024,
+        "yaw": -1.570796,
+        "z": -0.0024
+      }
+    },
+    {
+      "catalog_name": "Tyre 15 x 6 Offset Tread Small",
+      "color": "0",
+      "color_id": 64,
+      "id": "s7_i59",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3641",
+      "part_num": "3641",
+      "required_orientation": "yaw_90",
+      "size": "1x2",
+      "step_index": 7,
+      "step_number": 8,
+      "target_pose": {
+        "x": -0.012,
+        "y": -0.024,
+        "yaw": 1.570796,
+        "z": -0.0024
+      }
+    },
+    {
+      "catalog_name": "Tyre 15 x 6 Offset Tread Small",
+      "color": "0",
+      "color_id": 64,
+      "id": "s7_i60",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3641",
+      "part_num": "3641",
+      "required_orientation": "yaw_270",
+      "size": "1x2",
+      "step_index": 7,
+      "step_number": 8,
+      "target_pose": {
+        "x": 0.012,
+        "y": -0.024,
+        "yaw": -1.570796,
+        "z": -0.0024
+      }
+    }
+  ],
+  "precedence": "hard",
+  "source_model": "car.ldr"
+}

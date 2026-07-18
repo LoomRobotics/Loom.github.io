@@ -3,10 +3,12 @@
  * technical, and honest (sim results are labeled sim). */
 
 export interface ActCopy {
-  eyebrow: string;
-  heading: string;
+  eyebrow?: string;
+  heading?: string;
   body: string;
   sim?: boolean;
+  /** "hud" renders as a compact telemetry chip instead of an act-copy block */
+  variant?: "hud";
 }
 
 export interface HotspotSpec {
@@ -18,20 +20,37 @@ export interface HotspotSpec {
 }
 
 export const ACT_COPY: Record<string, ActCopy> = {
-  approach: {
-    eyebrow: "Worker V1",
-    heading: "One worker.",
-    body: "A differential-drive base, a 4-DOF arm, and one camera. Every worker is a peer — it carries its own copy of the build plan and claims its own work.",
+  swarm: {
+    eyebrow: "The swarm",
+    heading: "No central controller.",
+    body: "Every worker carries its own copy of the build plan and pulls its own work — jobs are claimed, never assigned. About three events per job, no polling. Lose a robot, and its lease simply expires.",
+    sim: true,
   },
   worker: {
-    eyebrow: "Hands on",
-    heading: "Drag to inspect.",
-    body: "The base does coarse positioning; the arm does fine placement. Tap a marker to see what each part is for.",
+    eyebrow: "Worker V1",
+    heading: "One worker.",
+    body: "A differential-drive base, a 4-DOF arm, one camera. The base does coarse positioning; the arm does fine placement. Drag to inspect — tap a marker for the details.",
   },
-  pullback: {
-    eyebrow: "Vertical slice",
-    heading: "This is the feel test.",
-    body: "Magnetic scroll, one settle, one free-explore. The full seven-act journey builds on exactly this rig.",
+  place: {
+    eyebrow: "Build → Verify → Continue",
+    heading: "Place, then prove it.",
+    body: "A placement is never complete until it is verified against the plan. Pass, and dependents unlock. Fail, and the job is released for another worker to retry.",
+    sim: true,
+  },
+  verify: {
+    body: "verify · drift 3.2 mm ≤ 5.0 mm — PASS · placement_complete",
+    variant: "hud",
+  },
+  grows: {
+    eyebrow: "The payoff",
+    heading: "The structure grows.",
+    body: "61 bricks across 8 dependency waves, assembled in the real build order from the real assembly graph — zero double-placements.",
+    sim: true,
+  },
+  outro: {
+    eyebrow: "Continue",
+    heading: "This is WEAVE.",
+    body: "A replicated assembly graph, self-expiring leases, and workers that verify their own work. The full story is below.",
   },
 };
 

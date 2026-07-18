@@ -12,6 +12,7 @@ desktop.ini
 site/node_modules/
 site/dist/
 site/dist-vite/
+site/captures/
 
 # Not required to run the site (not served / not compiled):
 

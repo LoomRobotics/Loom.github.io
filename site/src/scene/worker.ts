@@ -20,6 +20,10 @@ export interface WorkerRig {
   /** Emissive-pulse the named contract node's subtree (null clears). */
   setHighlight(name: string | null): void;
   setRingColor(color: THREE.ColorRepresentation): void;
+  /** 0 = folded display pose, 1 = extended placement pose (blended). */
+  setArmExtend(k: number): void;
+  /** Spin the drive wheels (rad advance per call frame). */
+  spinWheels(delta: number): void;
 }
 
 const BASE = { x: 0.22, y: 0.06, z: 0.18 };
@@ -225,12 +229,32 @@ export function createWorkerGreybox(): WorkerRig {
     }
   }
 
+  // Extended placement pose (arm reaches forward-down toward a stud)
+  const PLACE_POSE = { link1: -0.05, j2: 0.75, j3: -0.85, j4: 0.55, yaw: 0.15 };
+  let extendK = 0;
+  const mix = (a: number, b: number) => a + (b - a) * extendK;
+
+  function setArmExtend(k: number) {
+    extendK = Math.min(Math.max(k, 0), 1);
+  }
+
+  function spinWheels(delta: number) {
+    for (const name of ["wheel_L", "wheel_R"]) {
+      // wheel groups are rotated x=PI/2; rolling = local y spin
+      nodes[name]!.rotation.y += delta;
+    }
+  }
+
   function update(elapsed: number) {
     // Ring breathing
     ring.emissiveIntensity = 1.9 + Math.sin(elapsed * 1.4) * 0.45;
-    // Idle arm micro-sway
-    nodes["arm_j3"]!.rotation.z = POSE.j3 + Math.sin(elapsed * 0.7) * 0.02;
-    nodes["arm_j1"]!.rotation.y = POSE.yaw + Math.sin(elapsed * 0.31) * 0.035;
+    // Idle arm micro-sway blended toward the placement pose when extended
+    const sway = (1 - extendK);
+    nodes["arm_link1"]!.rotation.z = mix(POSE.link1, PLACE_POSE.link1);
+    nodes["arm_j2"]!.rotation.z = mix(POSE.j2, PLACE_POSE.j2);
+    nodes["arm_j4"]!.rotation.z = mix(POSE.j4, PLACE_POSE.j4);
+    nodes["arm_j3"]!.rotation.z = mix(POSE.j3, PLACE_POSE.j3) + Math.sin(elapsed * 0.7) * 0.02 * sway;
+    nodes["arm_j1"]!.rotation.y = mix(POSE.yaw, PLACE_POSE.yaw) + Math.sin(elapsed * 0.31) * 0.035 * sway;
     // Highlight pulse
     if (highlightRoot && flashable.size) {
       const pulse = (Math.sin(elapsed * 6) * 0.5 + 0.5) * 0.55;
@@ -245,5 +269,5 @@ export function createWorkerGreybox(): WorkerRig {
     ring.emissive.set(color);
   }
 
-  return { root, nodes, update, setHighlight, setRingColor };
+  return { root, nodes, update, setHighlight, setRingColor, setArmExtend, spinWheels };
 }

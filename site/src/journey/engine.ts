@@ -1,13 +1,15 @@
 import * as THREE from "three";
 import gsap from "gsap";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { BEATS, buildBeatTable, locate, type BeatPosition } from "./beats";
 import { createStage } from "./stage";
 import { CameraDirector } from "./camera-director";
 import { ExploreMode } from "./explore";
 import { Overlays, type PinProjection } from "./overlays";
 import { createScrollRig } from "./scroll";
-import { createWorkerGreybox } from "../scene/worker";
-import { createBlueprintFloor } from "../scene/floor";
+import { PhysicalRealm } from "./physical-realm";
+import { loadBrickAssets } from "../scene/bricks";
+import { Structure } from "../scene/structure";
 import { bindKeys } from "../a11y/keys";
 import type { TierReport } from "../perf/tier";
 
@@ -18,26 +20,25 @@ export interface JourneyHandle {
   destroy(): void;
 }
 
-export function mountJourney(tier: TierReport): JourneyHandle {
+export async function mountJourney(tier: TierReport): Promise<JourneyHandle> {
   const container = document.getElementById("journey");
   const canvas = document.getElementById("stage-canvas") as HTMLCanvasElement | null;
   const ui = document.getElementById("journey-ui");
   if (!container || !canvas || !ui) throw new Error("journey mounts missing");
   container.hidden = false;
 
-  const table = buildBeatTable(BEATS);
+  const assets = await loadBrickAssets();
   const stage = createStage(canvas, tier);
 
-  // ---- Physical realm (Phase 1 scope: floor + one worker) --------------
-  stage.scene.add(createBlueprintFloor());
-  const worker = createWorkerGreybox();
-  stage.scene.add(worker.root);
+  // One-time axis/pose calibration view: renders the full car + pyramid from
+  // the real assembly data under free orbit. `/next/?debug=assembly`
+  if (new URLSearchParams(location.search).get("debug") === "assembly") {
+    return mountAssemblyDebug(stage, assets, canvas);
+  }
 
-  const keyLight = new THREE.DirectionalLight(0xcfe0f0, 2.6);
-  keyLight.position.set(1.6, 2.4, 1.2);
-  const rimLight = new THREE.DirectionalLight(0xff6a13, 0.8);
-  rimLight.position.set(-1.4, 0.5, -1.6);
-  stage.scene.add(keyLight, rimLight);
+  const table = buildBeatTable(BEATS);
+  const realm = new PhysicalRealm(stage.scene, assets, tier);
+  const worker = realm.worker;
 
   const director = new CameraDirector(stage.camera, table.beats);
   const explore = new ExploreMode(stage.camera, canvas);
@@ -140,7 +141,7 @@ export function mountJourney(tier: TierReport): JourneyHandle {
     if (explore.active && !scroll.state.settled) exitExplore();
     director.apply(pos);
     explore.update();
-    worker.update(time);
+    realm.update(pos, time, deltaMs / 1000);
     overlays.update(pos, {
       settled: scroll.state.settled,
       exploring: explore.active,
@@ -161,6 +162,44 @@ export function mountJourney(tier: TierReport): JourneyHandle {
       window.removeEventListener("wheel", onWheel);
       scroll.destroy();
       explore.dispose();
+      stage.dispose();
+    },
+  };
+}
+
+function mountAssemblyDebug(
+  stage: ReturnType<typeof createStage>,
+  assets: Awaited<ReturnType<typeof loadBrickAssets>>,
+  canvas: HTMLCanvasElement
+): JourneyHandle {
+  const car = new Structure(assets.data.car, assets.geometries);
+  car.setProgress(car.total);
+  const pyramid = new Structure(assets.data.pyramid, assets.geometries);
+  pyramid.setProgress(pyramid.total);
+  pyramid.group.position.set(0.35, 0, 0);
+  stage.scene.add(car.group, pyramid.group);
+  stage.scene.add(new THREE.AxesHelper(0.1));
+  const key = new THREE.DirectionalLight(0xcfe0f0, 2.6);
+  key.position.set(1.6, 2.4, 1.2);
+  stage.scene.add(key);
+
+  stage.camera.position.set(0.4, 0.35, 0.5);
+  const controls = new OrbitControls(stage.camera, canvas);
+  controls.target.set(0.1, 0.05, 0);
+
+  if (import.meta.env.DEV) {
+    (window as unknown as Record<string, unknown>).__loom = { camera: stage.camera, gsap, debug: "assembly" };
+  }
+
+  const loop = (_t: number, deltaMs: number) => {
+    controls.update();
+    stage.render(deltaMs / 1000);
+  };
+  gsap.ticker.add(loop);
+  return {
+    destroy() {
+      gsap.ticker.remove(loop);
+      controls.dispose();
       stage.dispose();
     },
   };

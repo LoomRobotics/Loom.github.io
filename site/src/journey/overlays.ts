@@ -37,21 +37,27 @@ export class Overlays {
   constructor(root: HTMLElement, beats: BeatDef[], private readonly cb: OverlayCallbacks) {
     this.root = root;
 
-    // Act copy sections
-    for (const beat of beats) {
-      const copy = ACT_COPY[beat.id];
+    // One section per cue id used by any beat (copy keyed by cue id)
+    const cueIds = [...new Set(beats.flatMap((b) => b.cues.map((c) => c.id)))];
+    for (const id of cueIds) {
+      const copy = ACT_COPY[id];
       if (!copy) continue;
       const el = document.createElement("section");
-      el.className = "act-copy";
-      el.id = `act-${beat.id}`;
-      el.innerHTML = `
-        <span class="eyebrow">${copy.eyebrow}</span>
-        <h2>${copy.heading}</h2>
-        <p>${copy.body}</p>
-        ${copy.sim ? `<span class="sim-chip">simulation</span>` : ""}`;
+      el.id = `act-${id}`;
+      if (copy.variant === "hud") {
+        el.className = "act-hud";
+        el.textContent = copy.body;
+      } else {
+        el.className = "act-copy";
+        el.innerHTML = `
+          ${copy.eyebrow ? `<span class="eyebrow">${copy.eyebrow}</span>` : ""}
+          ${copy.heading ? `<h2>${copy.heading}</h2>` : ""}
+          <p>${copy.body}</p>
+          ${copy.sim ? `<span class="sim-chip">simulation</span>` : ""}`;
+      }
       el.style.opacity = "0";
       root.appendChild(el);
-      this.sections.set(beat.id, el);
+      this.sections.set(id, el);
     }
 
     // Hotspot pins + card
@@ -157,13 +163,11 @@ export class Overlays {
       project: (anchor: string) => PinProjection | null;
     }
   ) {
-    // Copy sections
+    // Copy sections: alpha from the active beat's cue windows
     for (const [id, el] of this.sections) {
       let alpha = 0;
-      if (id === pos.beat.id) {
-        for (const cue of pos.beat.cues) {
-          if (cue.id === id) alpha = Math.max(alpha, Overlays.cueAlpha(pos.localT, cue.from, cue.to));
-        }
+      for (const cue of pos.beat.cues) {
+        if (cue.id === id) alpha = Math.max(alpha, Overlays.cueAlpha(pos.localT, cue.from, cue.to));
       }
       if (opts.exploring) alpha = 0;
       el.style.opacity = alpha.toFixed(3);
@@ -175,7 +179,7 @@ export class Overlays {
     if (pos.index !== this.lastLiveBeat) {
       this.lastLiveBeat = pos.index;
       const copy = ACT_COPY[pos.beat.id];
-      if (copy) this.live.textContent = `${copy.heading} ${copy.body}`;
+      if (copy) this.live.textContent = `${copy.heading ?? ""} ${copy.body}`;
     }
 
     // Hotspot pins: only on the explore beat when settled or exploring

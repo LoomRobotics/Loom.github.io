@@ -176,6 +176,23 @@ body {
   color: #c3c9d0;
 }
 
+.act-hud {
+  position: absolute;
+  right: clamp(1.5rem, 6vw, 5rem);
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0.55rem 0.9rem;
+  font-family: "SFMono-Regular", "Consolas", "Liberation Mono", Menlo, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: #7fe0a8;
+  background: rgba(21, 25, 30, 0.82);
+  border: 1px solid var(--j-line);
+  border-left: 2px solid #39d98a;
+  visibility: hidden;
+  white-space: nowrap;
+}
+
 .sim-chip {
   display: inline-block;
   margin-top: 0.8rem;

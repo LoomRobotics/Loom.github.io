@@ -1,0 +1,461 @@
+{
+  "edge_source": "geometry",
+  "edges": [
+    {
+      "hard": true,
+      "id": "dep_s1_i6",
+      "load_bearing": true,
+      "sources": [
+        "s0_i0",
+        "s0_i1",
+        "s0_i5"
+      ],
+      "target": "s1_i6",
+      "type": "support"
+    },
+    {
+      "hard": true,
+      "id": "dep_s1_i7",
+      "load_bearing": true,
+      "sources": [
+        "s0_i1",
+        "s0_i2"
+      ],
+      "target": "s1_i7",
+      "type": "support"
+    },
+    {
+      "hard": true,
+      "id": "dep_s1_i8",
+      "load_bearing": true,
+      "sources": [
+        "s0_i2",
+        "s0_i3",
+        "s0_i4"
+      ],
+      "target": "s1_i8",
+      "type": "support"
+    },
+    {
+      "hard": true,
+      "id": "dep_s1_i9",
+      "load_bearing": true,
+      "sources": [
+        "s0_i4",
+        "s0_i5"
+      ],
+      "target": "s1_i9",
+      "type": "support"
+    },
+    {
+      "hard": true,
+      "id": "dep_s2_i10",
+      "load_bearing": true,
+      "sources": [
+        "s1_i6",
+        "s1_i7",
+        "s1_i9"
+      ],
+      "target": "s2_i10",
+      "type": "support"
+    },
+    {
+      "hard": true,
+      "id": "dep_s2_i11",
+      "load_bearing": true,
+      "sources": [
+        "s1_i7",
+        "s1_i8",
+        "s1_i9"
+      ],
+      "target": "s2_i11",
+      "type": "support"
+    },
+    {
+      "hard": true,
+      "id": "dep_s3_i12",
+      "load_bearing": true,
+      "sources": [
+        "s2_i10",
+        "s2_i11"
+      ],
+      "target": "s3_i12",
+      "type": "support"
+    },
+    {
+      "hard": false,
+      "id": "seq_s1_i6",
+      "load_bearing": false,
+      "sources": [
+        "s0_i0",
+        "s0_i1",
+        "s0_i2",
+        "s0_i3",
+        "s0_i4",
+        "s0_i5"
+      ],
+      "target": "s1_i6",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s1_i7",
+      "load_bearing": false,
+      "sources": [
+        "s0_i0",
+        "s0_i1",
+        "s0_i2",
+        "s0_i3",
+        "s0_i4",
+        "s0_i5"
+      ],
+      "target": "s1_i7",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s1_i8",
+      "load_bearing": false,
+      "sources": [
+        "s0_i0",
+        "s0_i1",
+        "s0_i2",
+        "s0_i3",
+        "s0_i4",
+        "s0_i5"
+      ],
+      "target": "s1_i8",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s1_i9",
+      "load_bearing": false,
+      "sources": [
+        "s0_i0",
+        "s0_i1",
+        "s0_i2",
+        "s0_i3",
+        "s0_i4",
+        "s0_i5"
+      ],
+      "target": "s1_i9",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s2_i10",
+      "load_bearing": false,
+      "sources": [
+        "s1_i6",
+        "s1_i7",
+        "s1_i8",
+        "s1_i9"
+      ],
+      "target": "s2_i10",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s2_i11",
+      "load_bearing": false,
+      "sources": [
+        "s1_i6",
+        "s1_i7",
+        "s1_i8",
+        "s1_i9"
+      ],
+      "target": "s2_i11",
+      "type": "sequencing"
+    },
+    {
+      "hard": false,
+      "id": "seq_s3_i12",
+      "load_bearing": false,
+      "sources": [
+        "s2_i10",
+        "s2_i11"
+      ],
+      "target": "s3_i12",
+      "type": "sequencing"
+    }
+  ],
+  "name": "pyramid",
+  "nodes": [
+    {
+      "catalog_name": "Brick 2 x 4",
+      "color": "1",
+      "color_id": 1,
+      "id": "s0_i0",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3001",
+      "part_num": "3001",
+      "required_orientation": "yaw_0",
+      "size": "2x4",
+      "step_index": 0,
+      "step_number": 1,
+      "target_pose": {
+        "x": -0.016,
+        "y": 0.024,
+        "yaw": 0.0,
+        "z": 0.0096
+      }
+    },
+    {
+      "catalog_name": "Brick 2 x 4",
+      "color": "1",
+      "color_id": 1,
+      "id": "s0_i1",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3001",
+      "part_num": "3001",
+      "required_orientation": "yaw_0",
+      "size": "2x4",
+      "step_index": 0,
+      "step_number": 1,
+      "target_pose": {
+        "x": 0.016,
+        "y": 0.024,
+        "yaw": 0.0,
+        "z": 0.0096
+      }
+    },
+    {
+      "catalog_name": "Brick 2 x 4",
+      "color": "1",
+      "color_id": 1,
+      "id": "s0_i2",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3001",
+      "part_num": "3001",
+      "required_orientation": "yaw_90",
+      "size": "2x4",
+      "step_index": 0,
+      "step_number": 1,
+      "target_pose": {
+        "x": 0.024,
+        "y": 0.0,
+        "yaw": 1.570796,
+        "z": 0.0096
+      }
+    },
+    {
+      "catalog_name": "Brick 2 x 4",
+      "color": "1",
+      "color_id": 1,
+      "id": "s0_i3",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3001",
+      "part_num": "3001",
+      "required_orientation": "yaw_0",
+      "size": "2x4",
+      "step_index": 0,
+      "step_number": 1,
+      "target_pose": {
+        "x": 0.016,
+        "y": -0.024,
+        "yaw": 0.0,
+        "z": 0.0096
+      }
+    },
+    {
+      "catalog_name": "Brick 2 x 4",
+      "color": "1",
+      "color_id": 1,
+      "id": "s0_i4",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3001",
+      "part_num": "3001",
+      "required_orientation": "yaw_0",
+      "size": "2x4",
+      "step_index": 0,
+      "step_number": 1,
+      "target_pose": {
+        "x": -0.016,
+        "y": -0.024,
+        "yaw": 0.0,
+        "z": 0.0096
+      }
+    },
+    {
+      "catalog_name": "Brick 2 x 4",
+      "color": "1",
+      "color_id": 1,
+      "id": "s0_i5",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3001",
+      "part_num": "3001",
+      "required_orientation": "yaw_90",
+      "size": "2x4",
+      "step_index": 0,
+      "step_number": 1,
+      "target_pose": {
+        "x": -0.024,
+        "y": 0.0,
+        "yaw": 1.570796,
+        "z": 0.0096
+      }
+    },
+    {
+      "catalog_name": "Brick 2 x 4",
+      "color": "4",
+      "color_id": 4,
+      "id": "s1_i6",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3001",
+      "part_num": "3001",
+      "required_orientation": "yaw_0",
+      "size": "2x4",
+      "step_index": 1,
+      "step_number": 2,
+      "target_pose": {
+        "x": -0.008,
+        "y": 0.016,
+        "yaw": 0.0,
+        "z": 0.0192
+      }
+    },
+    {
+      "catalog_name": "Brick 2 x 4",
+      "color": "4",
+      "color_id": 4,
+      "id": "s1_i7",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3001",
+      "part_num": "3001",
+      "required_orientation": "yaw_90",
+      "size": "2x4",
+      "step_index": 1,
+      "step_number": 2,
+      "target_pose": {
+        "x": 0.016,
+        "y": 0.008,
+        "yaw": 1.570796,
+        "z": 0.0192
+      }
+    },
+    {
+      "catalog_name": "Brick 2 x 4",
+      "color": "4",
+      "color_id": 4,
+      "id": "s1_i8",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3001",
+      "part_num": "3001",
+      "required_orientation": "yaw_0",
+      "size": "2x4",
+      "step_index": 1,
+      "step_number": 2,
+      "target_pose": {
+        "x": 0.008,
+        "y": -0.016,
+        "yaw": 0.0,
+        "z": 0.0192
+      }
+    },
+    {
+      "catalog_name": "Brick 2 x 4",
+      "color": "4",
+      "color_id": 4,
+      "id": "s1_i9",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3001",
+      "part_num": "3001",
+      "required_orientation": "yaw_90",
+      "size": "2x4",
+      "step_index": 1,
+      "step_number": 2,
+      "target_pose": {
+        "x": -0.016,
+        "y": -0.008,
+        "yaw": 1.570796,
+        "z": 0.0192
+      }
+    },
+    {
+      "catalog_name": "Brick 2 x 4",
+      "color": "14",
+      "color_id": 14,
+      "id": "s2_i10",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3001",
+      "part_num": "3001",
+      "required_orientation": "yaw_0",
+      "size": "2x4",
+      "step_index": 2,
+      "step_number": 3,
+      "target_pose": {
+        "x": 0.0,
+        "y": 0.008,
+        "yaw": 0.0,
+        "z": 0.0288
+      }
+    },
+    {
+      "catalog_name": "Brick 2 x 4",
+      "color": "14",
+      "color_id": 14,
+      "id": "s2_i11",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3001",
+      "part_num": "3001",
+      "required_orientation": "yaw_0",
+      "size": "2x4",
+      "step_index": 2,
+      "step_number": 3,
+      "target_pose": {
+        "x": 0.0,
+        "y": -0.008,
+        "yaw": 0.0,
+        "z": 0.0288
+      }
+    },
+    {
+      "catalog_name": "Brick 2 x 2",
+      "color": "0",
+      "color_id": 64,
+      "id": "s3_i12",
+      "job_type": "PLACE",
+      "match": "identity",
+      "node_type": "brick",
+      "part": "3003",
+      "part_num": "3003",
+      "required_orientation": "yaw_0",
+      "size": "2x2",
+      "step_index": 3,
+      "step_number": 4,
+      "target_pose": {
+        "x": 0.0,
+        "y": 0.0,
+        "yaw": 0.0,
+        "z": 0.0384
+      }
+    }
+  ],
+  "precedence": "hard",
+  "source_model": "pyramid.ldr"
+}
