@@ -48,12 +48,18 @@ export class Overlays {
         el.className = "act-hud";
         el.textContent = copy.body;
       } else {
-        el.className = "act-copy";
+        el.className = copy.variant === "center" ? "act-copy center" : "act-copy";
+        const ctas = copy.ctas
+          ? `<nav class="act-ctas">${copy.ctas
+              .map((c) => `<a href="${c.href}"${c.primary ? ' class="primary"' : ""}>${c.label}</a>`)
+              .join("")}</nav>`
+          : "";
         el.innerHTML = `
           ${copy.eyebrow ? `<span class="eyebrow">${copy.eyebrow}</span>` : ""}
           ${copy.heading ? `<h2>${copy.heading}</h2>` : ""}
           <p>${copy.body}</p>
-          ${copy.sim ? `<span class="sim-chip">simulation</span>` : ""}`;
+          ${copy.sim ? `<span class="sim-chip">simulation</span>` : ""}
+          ${ctas}`;
       }
       el.style.opacity = "0";
       root.appendChild(el);

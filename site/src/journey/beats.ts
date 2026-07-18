@@ -37,9 +37,21 @@ export interface BeatDef {
   cues: OverlayCue[];
 }
 
-/** Phase 2 beats — the physical spine: Act 2 (swarm) → Act 3 (hero worker)
- * → Act 6 (place & verify) → outro. Acts 1/4/5/7 land in later phases. */
+/** The journey beats: Act 1 (brand) → Act 2 (swarm) → Act 3 (hero worker)
+ * → Act 6 (place & verify) → Act 7 (close). The software acts (perception,
+ * graph) slot in after `place` in later phases, growing out of its close-up. */
 export const BEATS: BeatDef[] = [
+  {
+    id: "brand",
+    lengthUnits: 0.7,
+    holdAt: 0.35,
+    camera: [
+      { t: 0, pos: [0, 1.22, 1.7], look: [0, 1.18, 0.8], fov: 40 },
+      { t: 0.35, pos: [0, 1.2, 1.55], look: [0, 1.16, 0.8], fov: 42 },
+      { t: 1, pos: [2.8, 1.9, 3.2], look: [0, 0, 0], fov: 46 },
+    ],
+    cues: [{ id: "brand", from: 0.02, to: 0.62 }],
+  },
   {
     id: "swarm",
     lengthUnits: 1.4,
@@ -87,15 +99,15 @@ export const BEATS: BeatDef[] = [
     ],
   },
   {
-    id: "outro",
-    lengthUnits: 0.9,
-    holdAt: 0.65,
+    id: "close",
+    lengthUnits: 1.0,
+    holdAt: 0.6,
     camera: [
       { t: 0, pos: [0.73, 0.19, 0.37], look: [0.55, 0.055, 0], fov: 37 },
-      { t: 0.65, pos: [0.95, 0.38, 0.72], look: [0.52, 0.06, 0.03], fov: 40 },
-      { t: 1, pos: [1.1, 0.5, 0.92], look: [0.5, 0.07, 0.05], fov: 42 },
+      { t: 0.6, pos: [0.92, 0.34, 0.62], look: [0.52, 0.06, 0.02], fov: 40 },
+      { t: 1, pos: [1.05, 0.44, 0.8], look: [0.5, 0.07, 0.04], fov: 42 },
     ],
-    cues: [{ id: "outro", from: 0.3, to: 1 }],
+    cues: [{ id: "close", from: 0.25, to: 1 }],
   },
 ];
 

@@ -7,8 +7,9 @@ export interface ActCopy {
   heading?: string;
   body: string;
   sim?: boolean;
-  /** "hud" renders as a compact telemetry chip instead of an act-copy block */
-  variant?: "hud";
+  /** "hud" = compact telemetry chip; "center" = centered hero block */
+  variant?: "hud" | "center";
+  ctas?: Array<{ label: string; href: string; primary?: boolean }>;
 }
 
 export interface HotspotSpec {
@@ -20,6 +21,12 @@ export interface HotspotSpec {
 }
 
 export const ACT_COPY: Record<string, ActCopy> = {
+  brand: {
+    eyebrow: "Loom Robotics",
+    heading: "Decentralized robotic construction.",
+    body: "WEAVE — the Workload Execution and Autonomous Verification Engine. A swarm that builds from a replicated assembly graph, with no one in charge.",
+    variant: "center",
+  },
   swarm: {
     eyebrow: "The swarm",
     heading: "No central controller.",
@@ -47,10 +54,14 @@ export const ACT_COPY: Record<string, ActCopy> = {
     body: "61 bricks across 8 dependency waves, assembled in the real build order from the real assembly graph — zero double-placements.",
     sim: true,
   },
-  outro: {
-    eyebrow: "Continue",
-    heading: "This is WEAVE.",
-    body: "A replicated assembly graph, self-expiring leases, and workers that verify their own work. The full story is below.",
+  close: {
+    eyebrow: "This is WEAVE",
+    heading: "No single robot holds the master plan.",
+    body: "Yet every robot knows exactly where the project stands. Everything above is our simulation, rendered live — hardware bring-up is underway.",
+    ctas: [
+      { label: "Read the WEAVE paper", href: "/technical.html", primary: true },
+      { label: "Dev Log", href: "/devlog.html" },
+    ],
   },
 };
 
@@ -66,6 +77,24 @@ export const HOTSPOTS: HotspotSpec[] = [
     anchor: "hotspot_arm",
     title: "4-DOF arm + compliant gripper",
     body: "Reach 0.24 m. The mobile base provides coarse positioning while the arm handles fine placement; the force-limited gripper keeps insertion forces gentle.",
+  },
+  {
+    id: "drive",
+    anchor: "hotspot_drive",
+    title: "Differential drive",
+    body: "Two Pololu 25D gearmotors with 48 CPR quadrature encoders and a rear caster. Wheel-velocity PID runs on real-time firmware, not the Linux brain.",
+  },
+  {
+    id: "compute",
+    anchor: "hotspot_compute",
+    title: "Two-tier compute",
+    body: "A Raspberry Pi 5 (8 GB) runs the ROS 2 peer stack — perception, planning, the swarm protocol. A Pico 2 W handles motors and encoders in real time, with a watchdog that halts the wheels if the Pi ever goes quiet.",
+  },
+  {
+    id: "ring",
+    anchor: "hotspot_ring",
+    title: "Status ring",
+    body: "A 24-LED ring is the robot's face: white idle, blue navigating, green carrying, red fault. You can read the swarm's state from across the room.",
   },
 ];
 

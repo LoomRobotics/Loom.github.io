@@ -176,6 +176,48 @@ body {
   color: #c3c9d0;
 }
 
+.act-copy.center {
+  left: 50%;
+  bottom: auto;
+  top: 62%;
+  transform: translateX(-50%);
+  max-width: 34rem;
+  text-align: center;
+}
+
+.act-copy.center h2 {
+  font-size: clamp(1.9rem, 4.2vw, 3rem);
+}
+
+.act-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: 1.3rem;
+  pointer-events: auto;
+}
+
+.act-ctas a {
+  padding: 0.6rem 1.2rem;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--j-offwhite);
+  text-decoration: none;
+  border: 1px solid var(--j-line);
+}
+
+.act-ctas a.primary {
+  border-color: var(--j-orange);
+  color: var(--j-orange);
+}
+
+.act-ctas a:hover {
+  border-color: var(--j-orange);
+}
+
 .act-hud {
   position: absolute;
   right: clamp(1.5rem, 6vw, 5rem);
@@ -385,15 +427,117 @@ button.explore-hint,
   border: 0;
 }
 
-/* ---- Journey end (calm landing) --------------------------------------- */
+/* ---- Static journey (reduced-motion / no-WebGL / SEO) ------------------ */
+
+#static-journey {
+  max-width: 44rem;
+  margin: 0 auto;
+  padding: 5rem 1.5rem 2rem;
+}
+
+.static-panel {
+  padding: 3rem 0;
+  border-bottom: 1px solid var(--j-line);
+}
+
+.static-panel h2 {
+  margin: 0.6rem 0 0.8rem;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 500;
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
+}
+
+.static-panel p {
+  margin: 0;
+  color: #c3c9d0;
+  line-height: 1.7;
+}
+
+/* ---- Journey end (post-journey content) -------------------------------- */
 
 #journey-end {
-  min-height: 60dvh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 4rem 2rem;
   background: var(--j-charcoal);
+  padding: 2rem 1.5rem 4rem;
+}
+
+#journey-end .proof,
+#journey-end .roadmap-dark {
+  max-width: 62rem;
+  margin: 0 auto;
+  padding: 3.5rem 0 1rem;
+}
+
+#journey-end h2 {
+  margin: 0.5rem 0 1.6rem;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 500;
+  font-size: clamp(1.4rem, 2.6vw, 1.9rem);
+}
+
+.proof-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 1rem;
+}
+
+.tile {
+  padding: 1.2rem 1.3rem;
+  background: var(--j-graphite);
+  border: 1px solid var(--j-line);
+  border-top: 2px solid var(--j-orange);
+}
+
+.tile strong {
+  display: block;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--j-offwhite);
+  margin-bottom: 0.4rem;
+}
+
+.tile span {
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: #b6bcc4;
+}
+
+.roadmap-dark ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-left: 2px solid var(--j-line);
+}
+
+.roadmap-dark li {
+  padding: 0.7rem 0 0.7rem 1.2rem;
+  color: #c3c9d0;
+  line-height: 1.6;
+}
+
+.pill {
+  display: inline-block;
+  min-width: 3.2rem;
+  margin-right: 0.6rem;
+  padding: 0.12rem 0.55rem;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-align: center;
+  border-radius: 999px;
+  border: 1px solid var(--j-line);
+}
+
+.pill.done { color: var(--j-steel); border-color: var(--j-steel); }
+.pill.current { color: var(--j-orange); border-color: var(--j-orange); }
+.pill.next { color: #8a919b; }
+
+#journey-end .end-inner {
+  min-height: auto;
+  padding: 4rem 0 2rem;
+  margin: 0 auto;
 }
 
 .end-inner {

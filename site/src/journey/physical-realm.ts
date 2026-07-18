@@ -28,8 +28,45 @@ export class PhysicalRealm {
   private readonly heroBrick: THREE.Mesh;
   private timelapseDone = 0;
 
+  private readonly wordmark: THREE.Mesh;
+  private readonly wordmarkMat: THREE.MeshBasicMaterial;
+  private readonly dust: THREE.Points;
+  private readonly dustMat: THREE.PointsMaterial;
+
   constructor(scene: THREE.Scene, assets: BrickAssets, tier: TierReport) {
     scene.add(createBlueprintFloor());
+
+    // Act 1: the wordmark resolves in the void above the arena, caught by
+    // bloom, dissolving as the pull-back reveals the build floor below.
+    this.wordmarkMat = new THREE.MeshBasicMaterial({
+      map: new THREE.TextureLoader().load(`${import.meta.env.BASE_URL.replace(/\/next\/$/, "/")}images/transp-white.png`),
+      transparent: true,
+      opacity: 0,
+      depthWrite: false,
+      color: 0xf3f4f5,
+    });
+    this.wordmark = new THREE.Mesh(new THREE.PlaneGeometry(0.9, 0.45), this.wordmarkMat);
+    this.wordmark.position.set(0, 1.18, 0.8);
+    scene.add(this.wordmark);
+
+    const dustGeo = new THREE.BufferGeometry();
+    const n = 1200;
+    const pos = new Float32Array(n * 3);
+    for (let i = 0; i < n; i++) {
+      pos[i * 3] = (Math.random() - 0.5) * 6;
+      pos[i * 3 + 1] = Math.random() * 2.2;
+      pos[i * 3 + 2] = (Math.random() - 0.5) * 6;
+    }
+    dustGeo.setAttribute("position", new THREE.BufferAttribute(pos, 3));
+    this.dustMat = new THREE.PointsMaterial({
+      color: 0x5b7a99,
+      size: 0.006,
+      transparent: true,
+      opacity: 0.35,
+      depthWrite: false,
+    });
+    this.dust = new THREE.Points(dustGeo, this.dustMat);
+    scene.add(this.dust);
 
     this.structure = new Structure(assets.data.car, assets.geometries);
     this.structure.group.position.copy(BUILD_POS);
@@ -64,6 +101,17 @@ export class PhysicalRealm {
     const beat = pos.beat.id;
     const t = pos.localT;
 
+    // Act 1: wordmark resolves at the hold, dissolves during the pull-back.
+    if (beat === "brand") {
+      const up = THREE.MathUtils.smoothstep(t, 0, 0.25);
+      const down = 1 - THREE.MathUtils.smoothstep(t, 0.5, 0.8);
+      this.wordmarkMat.opacity = Math.min(up, down);
+    } else {
+      this.wordmarkMat.opacity = Math.max(this.wordmarkMat.opacity - dt * 2, 0);
+    }
+    this.dust.rotation.y = time * 0.008;
+    this.dustMat.opacity = beat === "brand" ? 0.4 : 0.18;
+
     // Swarm runs everywhere; the fault vignette lives in the swarm beat.
     const faultActive = beat === "swarm" && t > 0.45;
     this.swarm.update(time, dt, faultActive);
@@ -75,7 +123,7 @@ export class PhysicalRealm {
       // Reset the hero to home whenever we're on the rails before Act 6.
       // The build stays hidden until the place beat — it enters with its
       // own catch-up assembly as the camera dives in.
-      const before = beat === "swarm" || beat === "worker";
+      const before = beat === "brand" || beat === "swarm" || beat === "worker";
       if (before) {
         this.worker.root.position.set(0, 0, 0);
         this.worker.root.rotation.y = 0;

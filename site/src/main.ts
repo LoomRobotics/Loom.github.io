@@ -15,10 +15,19 @@ function holdShell(message: string) {
   if (status) status.textContent = message;
 }
 
+function showStatic() {
+  const s = document.getElementById("static-journey");
+  const end = document.getElementById("journey-end");
+  if (s) s.hidden = false;
+  if (end) end.hidden = false;
+  boot?.classList.add("boot-done");
+  window.setTimeout(() => boot?.remove(), 800);
+}
+
 if (!report.webgl) {
-  holdShell("WebGL unavailable — the static version will be served here");
+  showStatic();
 } else if (reducedMotion) {
-  holdShell("Reduced motion honored — static version coming in a later phase");
+  showStatic();
 } else {
   holdShell("Loading journey…");
   import("./journey/engine")
