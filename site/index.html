@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="/assets/css/brand.css" />
   </head>
   <body>
+    <a class="skip-link" href="#journey-end">Skip the intro</a>
     <div id="boot">
       <img id="boot-mark" src="/images/transp-white.png" alt="Loom Robotics" width="280" />
       <div id="boot-rule" role="progressbar" aria-label="Loading"><span></span></div>
@@ -29,6 +30,30 @@
         <a href="/devlog.html">Dev Log</a>
       </nav>
     </div>
+
+    <div id="journey" hidden>
+      <div id="journey-stage">
+        <canvas id="stage-canvas" aria-hidden="true"></canvas>
+        <div id="journey-ui"></div>
+      </div>
+    </div>
+
+    <footer id="journey-end" hidden>
+      <div class="end-inner">
+        <span class="eyebrow">Continue</span>
+        <h2>The calm after the ride.</h2>
+        <p>
+          This is the vertical-slice build — the full seven-act journey lands here.
+          The research is real today:
+        </p>
+        <nav aria-label="Primary">
+          <a href="/technical.html">Read the WEAVE paper</a>
+          <a href="/devlog.html">Dev Log</a>
+          <a href="/">Current site</a>
+        </nav>
+      </div>
+    </footer>
+
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

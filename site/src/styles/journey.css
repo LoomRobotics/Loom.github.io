@@ -25,10 +25,13 @@ body {
   font-weight: 300;
 }
 
-/* ---- Boot / load shell ---------------------------------------------- */
+/* ---- Boot / load shell (fixed overlay above the journey) ------------- */
 
 #boot {
-  min-height: 100dvh;
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: var(--j-charcoal);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -36,6 +39,12 @@ body {
   gap: 1.75rem;
   padding: 2rem;
   text-align: center;
+  transition: opacity 0.7s ease;
+}
+
+#boot.boot-done {
+  opacity: 0;
+  pointer-events: none;
 }
 
 #boot-mark {
@@ -106,4 +115,312 @@ body {
 #boot-links a:focus-visible {
   color: var(--j-orange);
   border-bottom-color: var(--j-orange);
+}
+
+/* ---- Journey stage ---------------------------------------------------- */
+
+#journey {
+  position: relative;
+}
+
+#journey-stage {
+  position: sticky;
+  top: 0;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+#stage-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  touch-action: pan-y;
+}
+
+#journey-ui {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* ---- Act copy --------------------------------------------------------- */
+
+.act-copy {
+  position: absolute;
+  left: clamp(1.5rem, 7vw, 6rem);
+  bottom: clamp(4rem, 16vh, 9rem);
+  max-width: 24rem;
+  visibility: hidden;
+}
+
+.act-copy .eyebrow {
+  display: block;
+  margin-bottom: 0.6rem;
+}
+
+.act-copy h2 {
+  margin: 0 0 0.7rem;
+  font-family: "Space Grotesk", "Helvetica Neue", Arial, sans-serif;
+  font-weight: 500;
+  font-size: clamp(1.6rem, 3.4vw, 2.4rem);
+  letter-spacing: 0.01em;
+  color: var(--j-offwhite);
+}
+
+.act-copy p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: #c3c9d0;
+}
+
+.sim-chip {
+  display: inline-block;
+  margin-top: 0.8rem;
+  padding: 0.18rem 0.6rem;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--j-steel);
+  border: 1px solid var(--j-line);
+  border-radius: 999px;
+}
+
+/* ---- Hotspot pins + card ---------------------------------------------- */
+
+.pin {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  border-radius: 50%;
+  border: 2px solid var(--j-offwhite);
+  background: var(--j-orange);
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.pin::after {
+  content: "";
+  position: absolute;
+  inset: -7px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 106, 19, 0.7);
+  animation: pin-pulse 2.4s ease-out infinite;
+}
+
+@keyframes pin-pulse {
+  0% {
+    transform: scale(0.6);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+.hotspot-card {
+  position: absolute;
+  right: clamp(1rem, 4vw, 3rem);
+  bottom: clamp(4.5rem, 14vh, 8rem);
+  width: min(320px, calc(100vw - 2rem));
+  padding: 1.1rem 1.25rem 1.25rem;
+  background: rgba(37, 43, 51, 0.92);
+  border: 1px solid var(--j-line);
+  border-top: 2px solid var(--j-orange);
+  backdrop-filter: blur(6px);
+  pointer-events: auto;
+}
+
+.hotspot-card h3 {
+  margin: 0 0 0.5rem;
+  padding-right: 1.5rem;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  color: var(--j-offwhite);
+}
+
+.hotspot-card p {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: #c3c9d0;
+}
+
+.card-close {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.55rem;
+  border: 0;
+  background: none;
+  color: var(--j-steel);
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.card-close:hover {
+  color: var(--j-orange);
+}
+
+/* ---- Explore affordances ---------------------------------------------- */
+
+.explore-hint,
+.resume-pill {
+  position: absolute;
+  left: 50%;
+  bottom: 1.6rem;
+  transform: translateX(-50%);
+  padding: 0.5rem 1.1rem;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--j-offwhite);
+  background: rgba(21, 25, 30, 0.75);
+  border: 1px solid var(--j-line);
+  border-radius: 999px;
+  pointer-events: auto;
+  white-space: nowrap;
+}
+
+button.explore-hint,
+.resume-pill {
+  cursor: pointer;
+}
+
+.resume-pill {
+  border-color: var(--j-orange);
+  color: var(--j-orange);
+}
+
+/* ---- Beat rail -------------------------------------------------------- */
+
+.beat-rail {
+  position: absolute;
+  right: 1.15rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  pointer-events: auto;
+}
+
+.beat-rail button {
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid var(--j-steel);
+  background: transparent;
+  cursor: pointer;
+  transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+}
+
+.beat-rail button.active {
+  background: var(--j-orange);
+  border-color: var(--j-orange);
+  transform: scale(1.3);
+}
+
+/* ---- Skip link + SR --------------------------------------------------- */
+
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 70;
+  padding: 0.5rem 0.9rem;
+  background: var(--j-graphite);
+  border: 1px solid var(--j-orange);
+  color: var(--j-offwhite);
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transform: translateY(-300%);
+}
+
+.skip-link:focus-visible {
+  transform: none;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---- Journey end (calm landing) --------------------------------------- */
+
+#journey-end {
+  min-height: 60dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  background: var(--j-charcoal);
+}
+
+.end-inner {
+  max-width: 34rem;
+  text-align: center;
+}
+
+.end-inner h2 {
+  margin: 0.6rem 0 0.8rem;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 500;
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
+}
+
+.end-inner p {
+  margin: 0 0 1.6rem;
+  color: #c3c9d0;
+  line-height: 1.65;
+}
+
+.end-inner nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.end-inner a {
+  padding: 0.65rem 1.3rem;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--j-offwhite);
+  text-decoration: none;
+  border: 1px solid var(--j-line);
+}
+
+.end-inner a:first-child {
+  border-color: var(--j-orange);
+  color: var(--j-orange);
+}
+
+.end-inner a:hover {
+  border-color: var(--j-orange);
 }
