@@ -16,8 +16,8 @@ export const BUILD_POS = new THREE.Vector3(0.55, 0, 0);
 const BUILD_YAW = -0.6;
 const ROBOT_SCALE = 0.7;
 
-/** Structure progress before the hero placement (~40% of 61). */
-const BASE_PROGRESS = 24;
+/** Structure progress before the hero placement (~40% of the pyramid's 13). */
+const BASE_PROGRESS = 5;
 
 const SWARM_COUNT: Record<TierReport["tier"], number> = { high: 8, mid: 7, low: 6 };
 
@@ -77,7 +77,7 @@ export class PhysicalRealm {
     this.dust = new THREE.Points(dustGeo, this.dustMat);
     scene.add(this.dust);
 
-    this.structure = new Structure(assets.data.car, assets.geometries);
+    this.structure = new Structure(assets.data.pyramid, assets.geometries);
     this.structure.group.position.copy(BUILD_POS);
     this.structure.group.rotation.y = BUILD_YAW;
     scene.add(this.structure.group);
@@ -155,7 +155,8 @@ export class PhysicalRealm {
     const w = this.worker;
 
     // Short approach: the hero rolls forward to arm's reach of the build.
-    const driveEnd = 0.34;
+    // The whole sequence completes by the hold at localT 0.5.
+    const driveEnd = 0.2;
     const target = new THREE.Vector3(0.3, 0, 0.07);
     const k = Math.min(t / driveEnd, 1);
     const ease = k * k * (3 - 2 * k);
@@ -165,25 +166,26 @@ export class PhysicalRealm {
     if (k < 1) w.spinWheels(dt * 9);
     w.setRingColor(k < 1 ? 0x4d9fff : 0x39d98a); // navigating → carrying/placing
 
-    this.heroBrick.visible = t >= 0.06 && t < 0.56;
+    this.heroBrick.visible = t >= 0.04 && t < 0.34;
 
     // Arm gesture window
-    const gesture = THREE.MathUtils.smoothstep(t, 0.36, 0.52) - THREE.MathUtils.smoothstep(t, 0.6, 0.72);
+    const gesture = THREE.MathUtils.smoothstep(t, 0.22, 0.3) - THREE.MathUtils.smoothstep(t, 0.36, 0.44);
     w.setArmExtend(gesture);
 
     // Catch-up assembly: the in-progress build materializes (0 → BASE) as
-    // the camera arrives, then the hero snaps brick BASE+1 at 0.56, then the
-    // timelapse (0.62 → 0.95) completes the car in real placement order.
-    const catchup = THREE.MathUtils.smoothstep(t, 0.02, 0.32) * BASE_PROGRESS;
-    const snapped = t >= 0.56;
-    const lapse = THREE.MathUtils.smoothstep(t, 0.6, 0.78);
+    // the camera arrives, then the hero snaps brick BASE+1 at 0.34, then the
+    // timelapse (0.36 → 0.48) completes the build in real placement order —
+    // finished exactly as the magnetic hold settles.
+    const catchup = THREE.MathUtils.smoothstep(t, 0.02, 0.18) * BASE_PROGRESS;
+    const snapped = t >= 0.34;
+    const lapse = THREE.MathUtils.smoothstep(t, 0.36, 0.48);
     const progress = snapped
       ? BASE_PROGRESS + 1 + lapse * (this.structure.total - BASE_PROGRESS - 1)
       : catchup;
     this.structure.setProgress(progress);
     this.timelapseDone = lapse;
 
-    if (t >= 0.56 && t < 0.68) w.setRingColor(0x39d98a); // verified green
-    if (t >= 0.68) w.setRingColor(0xffffff); // back to idle white
+    if (t >= 0.34 && t < 0.46) w.setRingColor(0x39d98a); // verified green
+    if (t >= 0.46) w.setRingColor(0xffffff); // back to idle white
   }
 }

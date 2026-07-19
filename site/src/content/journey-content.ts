@@ -51,7 +51,7 @@ export const ACT_COPY: Record<string, ActCopy> = {
   grows: {
     eyebrow: "The payoff",
     heading: "The structure grows.",
-    body: "61 bricks across 8 dependency waves, assembled in the real build order from the real assembly graph — zero double-placements.",
+    body: "Thirteen bricks across four dependency waves, assembled in the real build order from the real assembly graph — zero double-placements.",
     sim: true,
   },
   close: {
