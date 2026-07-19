@@ -38,14 +38,23 @@ export class PhysicalRealm {
 
     // Act 1: the wordmark resolves in the void above the arena, caught by
     // bloom, dissolving as the pull-back reveals the build floor below.
+    const wordmark = new THREE.Mesh(new THREE.PlaneGeometry(1, 1));
     this.wordmarkMat = new THREE.MeshBasicMaterial({
-      map: new THREE.TextureLoader().load(`${import.meta.env.BASE_URL.replace(/\/next\/$/, "/")}images/transp-white.png`),
+      map: new THREE.TextureLoader().load(
+        `${import.meta.env.BASE_URL.replace(/\/next\/$/, "/")}images/transp-white.png`,
+        (tex) => {
+          // Size the plane from the image's true aspect — never stretch the mark.
+          const h = 0.55;
+          wordmark.scale.set((h * tex.image.width) / tex.image.height, h, 1);
+        }
+      ),
       transparent: true,
       opacity: 0,
       depthWrite: false,
       color: 0xf3f4f5,
     });
-    this.wordmark = new THREE.Mesh(new THREE.PlaneGeometry(0.9, 0.45), this.wordmarkMat);
+    wordmark.material = this.wordmarkMat;
+    this.wordmark = wordmark;
     this.wordmark.position.set(0, 1.18, 0.8);
     scene.add(this.wordmark);
 

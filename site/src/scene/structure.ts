@@ -33,6 +33,18 @@ export class Structure {
       if (!byKey.has(key)) byKey.set(key, []);
       byKey.get(key)!.push(n);
     }
+    // LDraw brick origins sit at the top of the body, so a ground-level pose
+    // buries the brick below y=0. Find the model's true lowest vertex and
+    // lift everything so it rests on the floor plane.
+    let minY = Infinity;
+    for (const n of model.nodes) {
+      const geo = geometries.get(n.part);
+      if (!geo) continue;
+      if (!geo.boundingBox) geo.computeBoundingBox();
+      minY = Math.min(minY, n.pos[1] + geo.boundingBox!.min.y);
+    }
+    const lift = Number.isFinite(minY) ? -minY : 0;
+
     for (const [key, nodes] of byKey) {
       const [part, color, alpha] = key.split("|");
       const geo = geometries.get(part!);
@@ -56,7 +68,7 @@ export class Structure {
       nodes.forEach((n, i) => {
         const m = new THREE.Matrix4()
           .makeRotationY(n.yawY)
-          .setPosition(n.pos[0], n.pos[1], n.pos[2]);
+          .setPosition(n.pos[0], n.pos[1] + lift, n.pos[2]);
         matrices.push(m);
         orders.push(n.order);
         mesh.setMatrixAt(i, this.zero);
