@@ -111,15 +111,16 @@ export async function mountJourney(tier: TierReport): Promise<JourneyHandle> {
   });
 
   const tmp = new THREE.Vector3();
+  const toScreen = () => ({
+    x: ((tmp.x + 1) / 2) * canvas.clientWidth,
+    y: ((1 - tmp.y) / 2) * canvas.clientHeight,
+    visible: tmp.z < 1,
+  });
   const project = (anchor: string): PinProjection | null => {
     const obj = worker.nodes[anchor];
     if (!obj) return null;
     obj.getWorldPosition(tmp).project(stage.camera);
-    return {
-      x: ((tmp.x + 1) / 2) * window.innerWidth,
-      y: ((1 - tmp.y) / 2) * window.innerHeight,
-      visible: tmp.z < 1,
-    };
+    return toScreen();
   };
 
   if (import.meta.env.DEV) {
@@ -130,6 +131,7 @@ export async function mountJourney(tier: TierReport): Promise<JourneyHandle> {
       director,
       camera: stage.camera,
       beat: () => pos,
+      realm,
       // Lets verification tooling drive frames when the host pane freezes rAF.
       gsap,
     };
@@ -142,12 +144,29 @@ export async function mountJourney(tier: TierReport): Promise<JourneyHandle> {
     director.apply(pos);
     explore.update();
     realm.update(pos, time, deltaMs / 1000);
+    const graphFade = realm.graph.fade;
+    const graphChips =
+      graphFade > 0.02
+        ? realm.graph.chipData().map((chip) => {
+            tmp.copy(chip.world).project(stage.camera);
+            const s = toScreen();
+            return {
+              id: chip.id,
+              x: s.x,
+              y: s.y,
+              visible: s.visible,
+              state: chip.state,
+              label: chip.label,
+              opacity: graphFade * (chip.state === "blocked" ? 0.45 : 1),
+            };
+          })
+        : undefined;
     overlays.update(pos, {
       settled: scroll.state.settled,
       exploring: explore.active,
       touch: isTouch,
       project,
-      ticker: realm.graph.ticker,
+      graphChips,
     });
     stage.render(deltaMs / 1000);
   };

@@ -1,6 +1,7 @@
 /** Single source of truth for journey copy. All terminology is sourced
- * verbatim from the LEGOSwarm knowledge base — keep the register calm,
- * technical, and honest (sim results are labeled sim). */
+ * verbatim from the LEGOSwarm knowledge base. Keep the register calm,
+ * technical, direct, and honest (sim results are labeled sim). House
+ * style: no em-dashes anywhere on the site. */
 
 export interface ActCopy {
   eyebrow?: string;
@@ -24,19 +25,19 @@ export const ACT_COPY: Record<string, ActCopy> = {
   brand: {
     eyebrow: "Loom Robotics",
     heading: "Decentralized robotic construction.",
-    body: "WEAVE — the Workload Execution and Autonomous Verification Engine. A swarm that builds from a replicated assembly graph, with no one in charge.",
+    body: "WEAVE, the Workload Execution and Autonomous Verification Engine: a swarm that builds from a replicated assembly graph, with no one in charge.",
     variant: "center",
   },
   swarm: {
     eyebrow: "The swarm",
     heading: "No central controller.",
-    body: "Every worker carries its own copy of the build plan and pulls its own work — jobs are claimed, never assigned. About three events per job, no polling. Lose a robot, and its lease simply expires.",
+    body: "Every worker carries its own copy of the build plan and pulls its own work. Jobs are claimed, never assigned. About three events per job, no polling. Lose a robot and its lease simply expires.",
     sim: true,
   },
   worker: {
     eyebrow: "Worker V1",
     heading: "One worker.",
-    body: "A differential-drive base, a 4-DOF arm, one camera. The base does coarse positioning; the arm does fine placement. Drag to inspect — tap a marker for the details.",
+    body: "A differential-drive base, a 4-DOF arm, one camera. The base does coarse positioning; the arm does fine placement. Drag to inspect. Tap a marker for the details.",
   },
   place: {
     eyebrow: "Build → Verify → Continue",
@@ -45,25 +46,25 @@ export const ACT_COPY: Record<string, ActCopy> = {
     sim: true,
   },
   verify: {
-    body: "verify · drift 3.2 mm ≤ 5.0 mm — PASS · placement_complete",
+    body: "verify · drift 3.2 mm ≤ 5.0 mm · PASS · placement_complete",
     variant: "hud",
   },
   grows: {
     eyebrow: "The payoff",
     heading: "The structure grows.",
-    body: "Thirteen bricks across four dependency waves, assembled in the real build order from the real assembly graph — zero double-placements.",
+    body: "Thirteen bricks across four dependency waves, assembled in the real build order from the real assembly graph, with zero double placements.",
     sim: true,
   },
   graph: {
-    eyebrow: "The assembly graph",
-    heading: "The blueprint is the brain.",
-    body: "Every robot carries this graph — replicated, versioned, event-sourced, convergent. Jobs unlock as their supports complete; a claim is three events on the wire; a dead worker's lease simply expires. Drag to orbit the plan.",
+    eyebrow: "Assembly Graph",
+    heading: "A shared blueprint.",
+    body: "Every robot carries this graph: replicated, versioned, event-sourced, convergent. Each brick is a job node. Jobs unlock as their supports complete, a claim is three events on the wire, and a dead worker's lease simply expires. Drag to orbit the plan.",
     sim: true,
   },
   close: {
     eyebrow: "This is WEAVE",
     heading: "No single robot holds the master plan.",
-    body: "Yet every robot knows exactly where the project stands. Everything above is our simulation, rendered live — hardware bring-up is underway.",
+    body: "Yet every robot knows exactly where the project stands. Everything above is our simulation, rendered live. Hardware bring-up is underway.",
     ctas: [
       { label: "Read the WEAVE paper", href: "/technical.html", primary: true },
       { label: "Dev Log", href: "/devlog.html" },
@@ -76,7 +77,7 @@ export const HOTSPOTS: HotspotSpec[] = [
     id: "camera",
     anchor: "hotspot_camera",
     title: "Perception camera",
-    body: "Raspberry Pi Camera Module 3 — Sony IMX708. The worker's only eye: it segments a part, reads depth, and deprojects to a 3-D world point. No motion capture, no ground truth.",
+    body: "Raspberry Pi Camera Module 3 (Sony IMX708). The worker's only eye: it segments a part, reads depth, and deprojects to a 3-D world point. No motion capture, no ground truth.",
   },
   {
     id: "arm",
@@ -94,7 +95,7 @@ export const HOTSPOTS: HotspotSpec[] = [
     id: "compute",
     anchor: "hotspot_compute",
     title: "Two-tier compute",
-    body: "A Raspberry Pi 5 (8 GB) runs the ROS 2 peer stack — perception, planning, the swarm protocol. A Pico 2 W handles motors and encoders in real time, with a watchdog that halts the wheels if the Pi ever goes quiet.",
+    body: "A Raspberry Pi 5 (8 GB) runs the ROS 2 peer stack: perception, planning, the swarm protocol. A Pico 2 W handles motors and encoders in real time, with a watchdog that halts the wheels if the Pi ever goes quiet.",
   },
   {
     id: "ring",

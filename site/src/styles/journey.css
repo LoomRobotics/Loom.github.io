@@ -235,22 +235,45 @@ body {
   white-space: nowrap;
 }
 
-.graph-ticker {
+.graph-chip {
   position: absolute;
-  right: clamp(1rem, 4vw, 3rem);
-  top: 50%;
-  transform: translateY(-50%);
-  padding: 0.8rem 1rem;
+  top: 0;
+  left: 0;
+  padding: 0.14rem 0.4rem;
   font-family: "SFMono-Regular", "Consolas", "Liberation Mono", Menlo, monospace;
-  font-size: 0.66rem;
-  line-height: 1.7;
-  white-space: pre;
-  color: #9fb4c7;
-  background: rgba(21, 25, 30, 0.78);
+  font-size: 0.58rem;
+  line-height: 1.4;
+  white-space: nowrap;
+  color: #8a919b;
+  background: rgba(21, 25, 30, 0.85);
   border: 1px solid var(--j-line);
-  border-left: 2px solid var(--j-steel);
-  max-width: min(24rem, 40vw);
-  overflow: hidden;
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+.graph-chip.available {
+  color: #9fb4c7;
+  border-color: var(--j-steel);
+}
+
+.graph-chip.claimed {
+  color: var(--j-orange);
+  border-color: var(--j-orange);
+  animation: chip-pulse 0.9s ease-in-out infinite alternate;
+}
+
+.graph-chip.complete {
+  color: var(--j-offwhite);
+  border-color: #aab2bc;
+}
+
+@keyframes chip-pulse {
+  from {
+    box-shadow: 0 0 2px rgba(255, 106, 19, 0.3);
+  }
+  to {
+    box-shadow: 0 0 9px rgba(255, 106, 19, 0.75);
+  }
 }
 
 .sim-chip {

@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>Loom Robotics — Decentralized Robotic Construction</title>
+		<title>Loom Robotics · Decentralized Robotic Construction</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<meta name="description" content="Loom Robotics develops decentralized robotic construction systems using coordinated autonomous worker robots, orchestrated by the WEAVE engine." />
@@ -70,7 +70,7 @@
 									</div>
 									<div class="capability">
 										<h3>Generalized Manipulation</h3>
-										<p>A robotic arm and gripper handle common part geometries — grasping, transporting, and placing bricks with verification.</p>
+										<p>A robotic arm and gripper handle common part geometries: grasping, transporting, and placing bricks with verification.</p>
 									</div>
 									<div class="capability">
 										<h3>Visual Sensing</h3>
@@ -85,15 +85,15 @@
 										<p>The system degrades gracefully under partial robot failure, with stigmergic coordination filling the gaps.</p>
 									</div>
 								</div>
-								<p class="text-steel"><em>Placeholder imagery — robot renders and hardware photos to follow.</em></p>
+								<p class="text-steel"><em>Placeholder imagery; robot renders and hardware photos to follow.</em></p>
 							</section>
 
-						<!-- Interactive Architecture Explorer (embedded — graph from graph.data.js via explorer.js) -->
+						<!-- Interactive Architecture Explorer (embedded: graph from graph.data.js via explorer.js) -->
 							<section class="post">
 								<header class="major">
 									<span class="eyebrow">System Architecture</span>
 									<h2>Interactive Architecture Explorer</h2>
-									<p>A zoomable map of how a single instruction propagates from the Foreman through the swarm and down to physical brick placement — the visual companion to the WEAVE paper. Hover a subsystem for a summary; click it for detail.</p>
+									<p>A zoomable map of how a single instruction propagates from the Foreman through the swarm and down to physical brick placement: the visual companion to the WEAVE paper. Hover a subsystem for a summary; click it for detail.</p>
 								</header>
 
 								<!-- Explorer (graph rendered by assets/js/explorer.js from graph.data.js) -->
@@ -139,7 +139,7 @@
 										<h2><a href="devlog.html">Giving the robot a status light</a></h2>
 									</header>
 									<a href="devlog.html" class="image fit"><img src="images/pic04.jpg" alt="" /></a>
-									<p>The worker can now show what it&rsquo;s doing with a light on top &mdash; white idle, blue driving, green carrying, red fault. It runs separately from the robot&rsquo;s brain, so if it crashes the robot keeps building.</p>
+									<p>The worker can now show what it&rsquo;s doing with a light on top: white idle, blue driving, green carrying, red fault. It runs separately from the robot&rsquo;s brain, so if it crashes the robot keeps building.</p>
 									<ul class="actions special">
 										<li><a href="devlog.html" class="button">Read Entry</a></li>
 									</ul>
@@ -150,7 +150,7 @@
 										<h2><a href="devlog.html">Building from the camera alone</a></h2>
 									</header>
 									<a href="devlog.html" class="image fit"><img src="images/pic03.jpg" alt="" /></a>
-									<p>The worker now builds the full three-part plate using only its onboard depth camera, with no access to the simulator&rsquo;s true positions &mdash; the one shortcut that wouldn&rsquo;t survive a real table.</p>
+									<p>The worker now builds the full three-part plate using only its onboard depth camera, with no access to the simulator&rsquo;s true positions, the one shortcut that wouldn&rsquo;t survive a real table.</p>
 									<ul class="actions special">
 										<li><a href="devlog.html" class="button">Read Entry</a></li>
 									</ul>
@@ -164,10 +164,10 @@
 									<h2>Where the platform is headed</h2>
 								</header>
 								<ul class="roadmap">
-									<li class="done"><span class="status-pill done">Done</span><h3>Decentralized coordination</h3><p>A replicated build plan that every robot carries, with no central scheduler — claiming, recovery, and convergence proven in software.</p></li>
-									<li class="done"><span class="status-pill done">Done</span><h3>Single-worker build in simulation</h3><p>One simulated worker driving the full loop in Gazebo: drive, pick, place, and self-verify each step against ground truth — placing within millimeters of target.</p></li>
+									<li class="done"><span class="status-pill done">Done</span><h3>Decentralized coordination</h3><p>A replicated build plan that every robot carries, with no central scheduler: claiming, recovery, and convergence proven in software.</p></li>
+									<li class="done"><span class="status-pill done">Done</span><h3>Single-worker build in simulation</h3><p>One simulated worker driving the full loop in Gazebo: drive, pick, place, and self-verify each step against ground truth, placing within millimeters of target.</p></li>
 									<li class="next"><span class="status-pill next">Next</span><h3>Multi-robot decentralized build</h3><p>Many workers claiming and assembling concurrently, with congestion-aware navigation and coalitions for jobs too large for one arm.</p></li>
-									<li class="next"><span class="status-pill next">Next</span><h3>Perception &amp; part detection</h3><p>Replacing simulation ground truth with real onboard vision — identifying, localizing, and verifying LEGO parts under real lighting.</p></li>
+									<li class="next"><span class="status-pill next">Next</span><h3>Perception &amp; part detection</h3><p>Replacing simulation ground truth with real onboard vision: identifying, localizing, and verifying LEGO parts under real lighting.</p></li>
 									<li class="next"><span class="status-pill next">Planned</span><h3>Hardware bring-up</h3><p>First worker chassis and gripper iterations on the 3D printer, then sim-to-real onto onboard compute.</p></li>
 								</ul>
 							</section>

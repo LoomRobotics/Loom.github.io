@@ -1,8 +1,8 @@
 import "./styles/journey.css";
 import { detectTier } from "./perf/tier";
 
-/** Boot: tier-probe, then mount the WebGL journey — or hold at the static
- * shell for no-WebGL / reduced-motion (full static variant lands in Phase 3). */
+/** Boot: tier-probe, then mount the WebGL journey, or fall back to the
+ * static panels for no-WebGL / reduced-motion. */
 
 const boot = document.getElementById("boot");
 const status = document.getElementById("boot-status");
@@ -40,6 +40,6 @@ if (!report.webgl) {
     })
     .catch((err) => {
       console.error("[loom] journey mount failed", err);
-      holdShell("The journey failed to start — the links below still work");
+      holdShell("The journey failed to start. The links below still work");
     });
 }

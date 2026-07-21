@@ -24,6 +24,8 @@ export class Structure {
   private readonly zero = new THREE.Matrix4().makeScale(0, 0, 0);
   private progress = 0;
   readonly total: number;
+  /** Y offset baked into all matrices so the model rests on the floor. */
+  readonly lift: number;
 
   constructor(model: JModel, geometries: Map<string, THREE.BufferGeometry>) {
     this.total = model.nodes.length;
@@ -44,6 +46,7 @@ export class Structure {
       minY = Math.min(minY, n.pos[1] + geo.boundingBox!.min.y);
     }
     const lift = Number.isFinite(minY) ? -minY : 0;
+    this.lift = lift;
 
     for (const [key, nodes] of byKey) {
       const [part, color, alpha] = key.split("|");

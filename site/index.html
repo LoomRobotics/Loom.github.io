@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Loom Robotics — Decentralized Robotic Construction</title>
+    <title>Loom Robotics · Decentralized Robotic Construction</title>
     <meta
       name="description"
-      content="Loom Robotics develops decentralized robotic construction systems. WEAVE: a swarm of autonomous workers building from a replicated assembly graph — no central controller."
+      content="Loom Robotics develops decentralized robotic construction systems. WEAVE: a swarm of autonomous workers building from a replicated assembly graph with no central controller."
     />
     <link rel="icon" href="/images/logo-mark.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -44,12 +44,12 @@
       <article class="static-panel">
         <span class="eyebrow">Loom Robotics</span>
         <h2>Decentralized robotic construction.</h2>
-        <p>WEAVE — the Workload Execution and Autonomous Verification Engine. A swarm that builds from a replicated assembly graph, with no one in charge.</p>
+        <p>WEAVE, the Workload Execution and Autonomous Verification Engine: a swarm that builds from a replicated assembly graph, with no one in charge.</p>
       </article>
       <article class="static-panel">
         <span class="eyebrow">The swarm</span>
         <h2>No central controller.</h2>
-        <p>Every worker carries its own copy of the build plan and pulls its own work — jobs are claimed, never assigned. About three events per job, no polling. Lose a robot, and its lease simply expires.</p>
+        <p>Every worker carries its own copy of the build plan and pulls its own work. Jobs are claimed, never assigned. About three events per job, no polling. Lose a robot and its lease simply expires.</p>
       </article>
       <article class="static-panel">
         <span class="eyebrow">Worker V1</span>
@@ -62,9 +62,14 @@
         <p>A placement is never complete until it is verified against the plan. Pass, and dependents unlock. Fail, and the job is released for another worker to retry. Thirteen bricks across four dependency waves, assembled in the real build order from the real assembly graph.</p>
       </article>
       <article class="static-panel">
+        <span class="eyebrow">Assembly Graph</span>
+        <h2>A shared blueprint.</h2>
+        <p>Every robot carries this graph: replicated, versioned, event-sourced, convergent. Each brick is a job node. Jobs unlock as their supports complete, a claim is three events on the wire, and a dead worker's lease simply expires.</p>
+      </article>
+      <article class="static-panel">
         <span class="eyebrow">This is WEAVE</span>
         <h2>No single robot holds the master plan.</h2>
-        <p>Yet every robot knows exactly where the project stands. Everything above is our simulation, rendered live — hardware bring-up is underway.</p>
+        <p>Yet every robot knows exactly where the project stands. Everything above is our simulation, rendered live. Hardware bring-up is underway.</p>
       </article>
     </section>
 
@@ -73,11 +78,11 @@
         <span class="eyebrow">Measured, in simulation</span>
         <h2>Proof points</h2>
         <div class="proof-grid">
-          <div class="tile"><strong>&minus;&#8531; robots</strong><span>kill a third of the swarm mid-build — the build still finishes, with no double placements</span></div>
+          <div class="tile"><strong>&minus;&#8531; robots</strong><span>kill a third of the swarm mid-build and the build still finishes, with no double placements</span></div>
           <div class="tile"><strong>&le;5 mm</strong><span>cumulative placement drift, single worker; 2 mm on a two-robot coalition build</span></div>
-          <div class="tile"><strong>~3 events</strong><span>per job on the wire — claim, place, done; no polling, no central scheduler</span></div>
+          <div class="tile"><strong>~3 events</strong><span>per job on the wire: claim, place, done. No polling, no central scheduler</span></div>
           <div class="tile"><strong>70% vs 29%</strong><span>learned detector v5 against the classical baseline, on the worker&rsquo;s own camera imagery</span></div>
-          <div class="tile"><strong>24,293 parts</strong><span>LEGO geometry characterized for the build-plan compiler — in about seven minutes</span></div>
+          <div class="tile"><strong>24,293 parts</strong><span>LEGO geometry characterized for the build-plan compiler, in about seven minutes</span></div>
           <div class="tile"><strong>0 bosses</strong><span>coalitions form by decentralized auction: the nearest idle peer wins the job</span></div>
         </div>
       </section>
@@ -86,10 +91,10 @@
         <span class="eyebrow">Roadmap</span>
         <h2>Where the platform stands</h2>
         <ul>
-          <li><span class="pill done">Done</span> Decentralized coordination — replicated graph, leases, recovery</li>
+          <li><span class="pill done">Done</span> Decentralized coordination: replicated graph, leases, recovery</li>
           <li><span class="pill done">Done</span> Multi-robot builds with coalitions for heavy parts</li>
           <li><span class="pill done">Done</span> Full builds from onboard vision alone (simulation)</li>
-          <li><span class="pill current">Now</span> Worker hardware bring-up — drivetrain on the bench</li>
+          <li><span class="pill current">Now</span> Worker hardware bring-up: drivetrain on the bench</li>
           <li><span class="pill next">Next</span> Sim-to-real: the same software on physical workers</li>
         </ul>
       </section>
@@ -97,7 +102,7 @@
       <div class="end-inner">
         <span class="eyebrow">Go deeper</span>
         <h2>The research is real.</h2>
-        <p>The white paper covers the architecture end to end; the dev log records every step — including the failures.</p>
+        <p>The white paper covers the architecture end to end; the dev log records every step, including the failures.</p>
         <nav aria-label="Primary">
           <a href="/technical.html">Read the WEAVE paper</a>
           <a href="/devlog.html">Dev Log</a>

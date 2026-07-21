@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>WEAVE — Loom Robotics</title>
+		<title>WEAVE · Loom Robotics</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<meta name="description" content="WEAVE: a fault-tolerant robotic swarm orchestration system that enables function through sparse, low-bandwidth data transmissions. The LEGOSwarm research white paper." />
@@ -148,7 +148,7 @@
 
 											<div id="sec-1-1" class="paper-subsection">
 												<h3>1.1 &middot; Motivation</h3>
-												<p>The orchestration of autonomous multi-agent systems for physical construction in unstructured, remote, or extreme environments&mdash;such as space pre-assembly, planetary habitat setup, and disaster-relief operations&mdash;presents a fundamental tension between global task coherence and localized resource constraints. In such environments, traditional coordination systems are bottlenecked by the realities of the physical site, including high-latency communication, frequent network partitions, and unpredictable agent attrition.</p>
+												<p>The orchestration of autonomous multi-agent systems for physical construction in unstructured, remote, or extreme environments, such as space pre-assembly, planetary habitat setup, and disaster-relief operations, presents a fundamental tension between global task coherence and localized resource constraints. In such environments, traditional coordination systems are bottlenecked by the realities of the physical site, including high-latency communication, frequent network partitions, and unpredictable agent attrition.</p>
 											</div>
 
 											<div id="sec-1-2" class="paper-subsection">
@@ -197,7 +197,7 @@
 													<span class="contribution-id">1.3.4</span>
 													<div class="contribution-body">
 														<h4>Structured Machine Intent Objects</h4>
-														<p>We elevate node &ldquo;Notes&rdquo; from unstructured, human-readable strings to first-class, machine-readable intent objects. This enables robots to dynamically discover, interpret, and implement alternative plans&mdash;such as substituting materials on the fly&mdash;without human intervention or centralized rescheduling.</p>
+														<p>We elevate node &ldquo;Notes&rdquo; from unstructured, human-readable strings to first-class, machine-readable intent objects. This enables robots to dynamically discover, interpret, and implement alternative plans, such as substituting materials on the fly, without human intervention or centralized rescheduling.</p>
 													</div>
 												</div>
 											</div>
@@ -224,9 +224,9 @@
 
 											<div id="sec-2-3" class="paper-subsection">
 												<h3>2.3 &middot; Event-Driven Architectures and GitOps in Multi-Agent Systems</h3>
-												<p>The application of event-driven and declarative control loops has recently emerged as a paradigm for managing complex software systems. In industrial automation, the Line Information System Architecture (LISA)&mdash;often referred to as the &ldquo;Tweeting Factory&rdquo;&mdash;replaces centralized orchestration with decentralized choreography, where thousands of heterogeneous devices (PLCs, sensors, and assembly robots) independently observe and react to a stream of immutable published events.</p>
-												<p>In the domain of virtual multi-agent systems, Event Sourcing for Autonomous Agents (ESAA) and runtimes like ActiveGraph demonstrate that an agent&rsquo;s state can be managed by treating an append-only transaction log (activity.jsonl) as the absolute source of truth, from which the current state of a workspace is deterministically projected (roadmap.json). This is closely paired with the GitOps pattern&mdash;popularized by Kubernetes operators&mdash;where controllers continuously monitor actual system states, compare them against declared desired configurations, and run idempotent reconciliation loops to align the two.</p>
-												<p>The primary novelty of LEGOSwarm is the translation of these software-engineering concepts&mdash;specifically event-sourced state projection, transactional boundaries, and GitOps-style reconciliation&mdash;into the physical, three-dimensional spatial coordinates of a robotic construction site.</p>
+												<p>The application of event-driven and declarative control loops has recently emerged as a paradigm for managing complex software systems. In industrial automation, the Line Information System Architecture (LISA), often referred to as the &ldquo;Tweeting Factory&rdquo;, replaces centralized orchestration with decentralized choreography, where thousands of heterogeneous devices (PLCs, sensors, and assembly robots) independently observe and react to a stream of immutable published events.</p>
+												<p>In the domain of virtual multi-agent systems, Event Sourcing for Autonomous Agents (ESAA) and runtimes like ActiveGraph demonstrate that an agent&rsquo;s state can be managed by treating an append-only transaction log (activity.jsonl) as the absolute source of truth, from which the current state of a workspace is deterministically projected (roadmap.json). This is closely paired with the GitOps pattern, popularized by Kubernetes operators, where controllers continuously monitor actual system states, compare them against declared desired configurations, and run idempotent reconciliation loops to align the two.</p>
+												<p>The primary novelty of LEGOSwarm is the translation of these software-engineering concepts (event-sourced state projection, transactional boundaries, and GitOps-style reconciliation) into the physical, three-dimensional spatial coordinates of a robotic construction site.</p>
 											</div>
 										</section>
 
@@ -346,7 +346,7 @@
 
 											<div id="sec-5-3" class="paper-subsection">
 												<h3>5.3 &middot; Network Propagation and Convergence</h3>
-												<p>When a Graph Patch is injected into the network, it propagates asynchronously across the swarm. Because network packets are highly compressed&mdash;containing only the specific array of operations rather than geometric coordinates for the entire structure&mdash;transmission times drop significantly.</p>
+												<p>When a Graph Patch is injected into the network, it propagates asynchronously across the swarm. Because network packets are highly compressed, containing only the specific array of operations rather than geometric coordinates for the entire structure, transmission times drop significantly.</p>
 												<p>If an agent receives a patch whose base_revision is higher than its current local revision index, it recognizes a state gap. The agent then queries its immediate physical neighbors for the missing historical events, stepping through them sequentially until its local DAG matches the updated global revision. This approach keeps the network light while ensuring the entire swarm eventually converges on the same plan.</p>
 											</div>
 										</section>
@@ -417,7 +417,7 @@
 
 										<section id="resource-management" class="paper-section">
 											<h2>8 &middot; Resource Management &amp; Constraints</h2>
-											<p>A decentralized swarm cannot operate effectively in isolation from its physical constraints. For long-term autonomous deployment&mdash;such as planetary habitat construction or remote infrastructure development&mdash;the availability, reservation, and tracking of raw materials and power must be managed directly within the decentralized data model. The Resource Layer builds these logistical parameters directly into the graph topology.</p>
+											<p>A decentralized swarm cannot operate effectively in isolation from its physical constraints. For long-term autonomous deployment, such as planetary habitat construction or remote infrastructure development, the availability, reservation, and tracking of raw materials and power must be managed directly within the decentralized data model. The Resource Layer builds these logistical parameters directly into the graph topology.</p>
 
 											<div id="sec-8-1" class="paper-subsection">
 												<h3>8.1 &middot; Resource Tracking Schema</h3>
@@ -437,7 +437,7 @@
 												<pre class="paper-code">RequiredResources:
   - "Brick3001_Red"</pre>
 												<p>When an active agent evaluates the local Directed Acyclic Graph (DAG) for its next task, it checks both topological dependencies (parent edges resolved to COMPLETE) and material dependencies. If a node is topologically unlocked but the matching Resource.available count is zero, the agent cannot reserve the node.</p>
-												<p>Instead, the agent remains idle or automatically shifts its operational mode to logistics&mdash;seeking out material caches to replenish the local workspace.</p>
+												<p>Instead, the agent remains idle or automatically shifts its operational mode to logistics, seeking out material caches to replenish the local workspace.</p>
 											</div>
 
 											<div id="sec-8-3" class="paper-subsection">
@@ -504,7 +504,7 @@
 											<div id="sec-10-3" class="paper-subsection">
 												<h3>10.3 &middot; Reconstructing the Materialized View</h3>
 												<p>Every worker independently builds its own Materialized View of the project from the exact same underlying event stream. The agent takes the base blueprint (the Mission Graph), applies any incoming graph patches, and plays back the event log to figure out exactly what is happening across the site right now.</p>
-												<p>This approach removes the need to store or transmit a massive global state database. Everything an agent needs to know to make its next decision&mdash;which tasks are open, who has reserved what, and where materials are running low&mdash;is reconstructed on the fly from the event log.</p>
+												<p>This approach removes the need to store or transmit a massive global state database. Everything an agent needs to know to make its next decision (which tasks are open, who has reserved what, and where materials are running low) is reconstructed on the fly from the event log.</p>
 											</div>
 										</section>
 
@@ -513,7 +513,7 @@
 
 											<div id="sec-11-1" class="paper-subsection">
 												<h3>11.1 &middot; The Graph as Collective Memory</h3>
-												<p>The ultimate realization of the <strong>WEAVE</strong> framework shifts the concept of a robotic swarm from a collection of coordinated individuals to a singular, distributed organism. In this model, the Assembly Graph functions as the organism&rsquo;s DNA&mdash;an immutable blueprint of what it must become. The append-only Event Log serves as its nervous system, propagating impulses and state mutations across the collective.</p>
+												<p>The ultimate realization of the <strong>WEAVE</strong> framework shifts the concept of a robotic swarm from a collection of coordinated individuals to a singular, distributed organism. In this model, the Assembly Graph functions as the organism&rsquo;s DNA: an immutable blueprint of what it must become. The append-only Event Log serves as its nervous system, propagating impulses and state mutations across the collective.</p>
 												<p>Because every agent independently reconstructs the global state from the same underlying event stream, the swarm develops a &ldquo;collective memory.&rdquo; No single robot holds the master plan, yet every robot knows exactly where the project stands. If half the swarm is instantly destroyed or disconnected, the remaining agents do not stall or lose orientation; they read the last known state of the log, evaluate open dependencies in the DAG, and continue construction without interruption.</p>
 											</div>
 
@@ -536,7 +536,7 @@
 											  1) Paste a new <section id="…" class="paper-section"> … </section> block here.
 											  2) Add a matching <li><a href="#…">…</a></li> to the .paper-toc list above.
 											The scroll-spy (assets/js/whitepaper.js) picks up any .paper-section / .paper-subsection
-											with an id automatically — no JS changes needed.
+											with an id automatically; no JS changes needed.
 										-->
 
 									</article>

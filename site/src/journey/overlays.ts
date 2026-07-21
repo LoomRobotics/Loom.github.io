@@ -135,13 +135,6 @@ export class Overlays {
     });
     root.appendChild(rail);
 
-    // Event-log ticker (graph beat)
-    this.tickerEl = document.createElement("div");
-    this.tickerEl.className = "graph-ticker";
-    this.tickerEl.setAttribute("aria-hidden", "true");
-    this.tickerEl.hidden = true;
-    root.appendChild(this.tickerEl);
-
     // aria-live mirror
     this.live = document.createElement("div");
     this.live.className = "sr-only";
@@ -149,7 +142,8 @@ export class Overlays {
     root.appendChild(this.live);
   }
 
-  private readonly tickerEl: HTMLElement;
+  /** Graph-node text chips, keyed by node id (created on first use). */
+  private readonly chipPool = new Map<string, HTMLElement>();
 
   private renderCard(spec: HotspotSpec | null) {
     if (!spec) {
@@ -176,15 +170,35 @@ export class Overlays {
       exploring: boolean;
       touch: boolean;
       project: (anchor: string) => PinProjection | null;
-      ticker?: string[];
+      graphChips?: Array<{ id: string; x: number; y: number; visible: boolean; state: string; label: string; opacity: number }>;
     }
   ) {
-    // Event ticker (graph beat)
-    const showTicker = pos.beat.id === "graph" && opts.ticker && opts.ticker.length > 0;
-    this.tickerEl.hidden = !showTicker;
-    if (showTicker) {
-      const text = opts.ticker!.join("\n");
-      if (this.tickerEl.textContent !== text) this.tickerEl.textContent = text;
+    // Graph-node text chips, overlaid on the bricks
+    const chips = opts.graphChips ?? [];
+    const active = new Set<string>();
+    for (const chip of chips) {
+      active.add(chip.id);
+      let el = this.chipPool.get(chip.id);
+      if (!el) {
+        el = document.createElement("div");
+        el.className = "graph-chip";
+        el.setAttribute("aria-hidden", "true");
+        this.root.appendChild(el);
+        this.chipPool.set(chip.id, el);
+      }
+      if (!chip.visible || chip.opacity <= 0.02) {
+        el.hidden = true;
+        continue;
+      }
+      el.hidden = false;
+      if (el.textContent !== chip.label) el.textContent = chip.label;
+      const cls = `graph-chip ${chip.state}`;
+      if (el.className !== cls) el.className = cls;
+      el.style.opacity = chip.opacity.toFixed(2);
+      el.style.transform = `translate(${chip.x.toFixed(1)}px, ${chip.y.toFixed(1)}px) translate(-50%, -100%)`;
+    }
+    for (const [id, el] of this.chipPool) {
+      if (!active.has(id)) el.hidden = true;
     }
     // Copy sections: alpha from the active beat's cue windows
     for (const [id, el] of this.sections) {

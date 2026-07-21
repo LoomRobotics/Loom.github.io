@@ -84,8 +84,8 @@ export class PhysicalRealm {
     this.structure.group.rotation.y = BUILD_YAW;
     scene.add(this.structure.group);
 
-    // Act 5: the pyramid's real assembly graph, hovering over the build.
-    this.graph = new GraphViz(assets.data.pyramid, BUILD_POS);
+    // Act 5: the pyramid's real assembly graph, overlaid on the bricks.
+    this.graph = new GraphViz(assets.data.pyramid, BUILD_POS, BUILD_YAW, this.structure.lift);
     scene.add(this.graph.group);
 
     this.worker = createWorkerGreybox();
