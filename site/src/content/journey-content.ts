@@ -54,6 +54,12 @@ export const ACT_COPY: Record<string, ActCopy> = {
     body: "Thirteen bricks across four dependency waves, assembled in the real build order from the real assembly graph — zero double-placements.",
     sim: true,
   },
+  graph: {
+    eyebrow: "The assembly graph",
+    heading: "The blueprint is the brain.",
+    body: "Every robot carries this graph — replicated, versioned, event-sourced, convergent. Jobs unlock as their supports complete; a claim is three events on the wire; a dead worker's lease simply expires. Drag to orbit the plan.",
+    sim: true,
+  },
   close: {
     eyebrow: "This is WEAVE",
     heading: "No single robot holds the master plan.",

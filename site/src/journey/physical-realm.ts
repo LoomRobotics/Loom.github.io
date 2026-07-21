@@ -3,6 +3,7 @@ import type { BeatPosition } from "./beats";
 import type { BrickAssets } from "../scene/bricks";
 import { Structure } from "../scene/structure";
 import { Swarm } from "../scene/swarm";
+import { GraphViz } from "../scene/graph-viz";
 import { createBlueprintFloor } from "../scene/floor";
 import { createWorkerGreybox, type WorkerRig } from "../scene/worker";
 import type { TierReport } from "../perf/tier";
@@ -23,6 +24,7 @@ const SWARM_COUNT: Record<TierReport["tier"], number> = { high: 8, mid: 7, low: 
 
 export class PhysicalRealm {
   readonly worker: WorkerRig;
+  readonly graph: GraphViz;
   private readonly structure: Structure;
   private readonly swarm: Swarm;
   private readonly heroBrick: THREE.Mesh;
@@ -82,6 +84,10 @@ export class PhysicalRealm {
     this.structure.group.rotation.y = BUILD_YAW;
     scene.add(this.structure.group);
 
+    // Act 5: the pyramid's real assembly graph, hovering over the build.
+    this.graph = new GraphViz(assets.data.pyramid, BUILD_POS);
+    scene.add(this.graph.group);
+
     this.worker = createWorkerGreybox();
     this.worker.root.scale.setScalar(ROBOT_SCALE);
     scene.add(this.worker.root);
@@ -125,6 +131,17 @@ export class PhysicalRealm {
     const faultActive = beat === "swarm" && t > 0.45;
     this.swarm.update(time, dt, faultActive);
     this.worker.update(time);
+
+    // Act 5: the graph ghost materializes over the finished build.
+    const graphFade = beat === "graph" ? 1 : beat === "close" && t < 0.3 ? 0.3 : 0;
+    this.graph.update(time, dt, graphFade);
+
+    if (beat === "graph") {
+      // Hold the finished build under the living graph.
+      this.structure.setProgress(this.structure.total);
+      this.timelapseDone = 1;
+      return;
+    }
 
     if (beat === "place") {
       this.placeChoreo(t, dt);

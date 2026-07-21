@@ -147,6 +147,7 @@ export async function mountJourney(tier: TierReport): Promise<JourneyHandle> {
       exploring: explore.active,
       touch: isTouch,
       project,
+      ticker: realm.graph.ticker,
     });
     stage.render(deltaMs / 1000);
   };

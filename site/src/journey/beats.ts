@@ -105,11 +105,29 @@ export const BEATS: BeatDef[] = [
     ],
   },
   {
-    id: "close",
+    id: "graph",
     lengthUnits: LEN,
     holdAt: HOLD,
     camera: [
       { t: 0, pos: [0.73, 0.18, 0.37], look: [0.55, 0.05, 0], fov: 37 },
+      { t: 0.5, pos: [1.0, 0.55, 0.72], look: [0.55, 0.38, 0], fov: 42 },
+      { t: 1, pos: [1.05, 0.5, 0.8], look: [0.54, 0.3, 0.01], fov: 42 },
+    ],
+    explore: {
+      target: [0.55, 0.38, 0],
+      minDist: 0.35,
+      maxDist: 1.8,
+      minPolar: 0.5,
+      maxPolar: 1.5,
+    },
+    cues: [{ id: "graph", from: 0.22, to: 1 }],
+  },
+  {
+    id: "close",
+    lengthUnits: LEN,
+    holdAt: HOLD,
+    camera: [
+      { t: 0, pos: [1.05, 0.5, 0.8], look: [0.54, 0.3, 0.01], fov: 42 },
       { t: 0.5, pos: [0.92, 0.34, 0.62], look: [0.52, 0.05, 0.02], fov: 40 },
       { t: 1, pos: [1.05, 0.44, 0.8], look: [0.5, 0.06, 0.04], fov: 42 },
     ],

@@ -135,12 +135,21 @@ export class Overlays {
     });
     root.appendChild(rail);
 
+    // Event-log ticker (graph beat)
+    this.tickerEl = document.createElement("div");
+    this.tickerEl.className = "graph-ticker";
+    this.tickerEl.setAttribute("aria-hidden", "true");
+    this.tickerEl.hidden = true;
+    root.appendChild(this.tickerEl);
+
     // aria-live mirror
     this.live = document.createElement("div");
     this.live.className = "sr-only";
     this.live.setAttribute("aria-live", "polite");
     root.appendChild(this.live);
   }
+
+  private readonly tickerEl: HTMLElement;
 
   private renderCard(spec: HotspotSpec | null) {
     if (!spec) {
@@ -167,8 +176,16 @@ export class Overlays {
       exploring: boolean;
       touch: boolean;
       project: (anchor: string) => PinProjection | null;
+      ticker?: string[];
     }
   ) {
+    // Event ticker (graph beat)
+    const showTicker = pos.beat.id === "graph" && opts.ticker && opts.ticker.length > 0;
+    this.tickerEl.hidden = !showTicker;
+    if (showTicker) {
+      const text = opts.ticker!.join("\n");
+      if (this.tickerEl.textContent !== text) this.tickerEl.textContent = text;
+    }
     // Copy sections: alpha from the active beat's cue windows
     for (const [id, el] of this.sections) {
       let alpha = 0;
