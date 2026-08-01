@@ -33,7 +33,7 @@ export class PhysicalRealm {
   private readonly dust: THREE.Points;
   private readonly dustMat: THREE.PointsMaterial;
 
-  constructor(scene: THREE.Scene, assets: BrickAssets, tier: TierReport) {
+  constructor(scene: THREE.Scene, assets: BrickAssets, tier: TierReport, hero?: WorkerRig | null) {
     scene.add(createBlueprintFloor());
 
     // Act 1 is DOM type over an empty stage: the mark lives in the fixed
@@ -66,7 +66,7 @@ export class PhysicalRealm {
     this.graph = new GraphViz(assets.data.pyramid, BUILD_POS, BUILD_YAW, this.structure.lift);
     scene.add(this.graph.group);
 
-    this.worker = createWorkerGreybox();
+    this.worker = hero ?? createWorkerGreybox();
     this.worker.root.scale.setScalar(ROBOT_SCALE);
     scene.add(this.worker.root);
 

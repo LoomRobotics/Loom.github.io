@@ -10,6 +10,7 @@ import { createScrollRig } from "./scroll";
 import { PhysicalRealm } from "./physical-realm";
 import { PerceptionRealm } from "./perception-realm";
 import { FeedSource } from "../scene/feed";
+import { loadHeroWorker } from "../scene/hero-model";
 import { loadBrickAssets } from "../scene/bricks";
 import { Structure } from "../scene/structure";
 import { bindKeys } from "../a11y/keys";
@@ -39,7 +40,10 @@ export async function mountJourney(tier: TierReport): Promise<JourneyHandle> {
   }
 
   const table = buildBeatTable(BEATS);
-  const realm = new PhysicalRealm(stage.scene, assets, tier);
+  // Authored hero model if one has been exported and passes the contract;
+  // otherwise the procedural greybox, silently.
+  const hero = await loadHeroWorker(import.meta.env.BASE_URL);
+  const realm = new PhysicalRealm(stage.scene, assets, tier, hero);
   const worker = realm.worker;
 
   // Act 4 renders in camera space, so the camera has to be in the graph.

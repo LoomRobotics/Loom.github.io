@@ -12,6 +12,30 @@ import { RoundedBoxGeometry } from "three/addons/geometries/RoundedBoxGeometry.j
  * this file's output with zero changes elsewhere.
  */
 
+/** Named nodes the journey drives. Any hero model must supply all of them;
+ * `hero-model.ts` validates an imported GLB against this list before it is
+ * allowed to replace the greybox. */
+export const RIG_NODES = [
+  "base",
+  "wheel_L",
+  "wheel_R",
+  "caster",
+  "camera",
+  "led_ring",
+  "arm_j1",
+  "arm_link1",
+  "arm_j2",
+  "arm_j3",
+  "arm_j4",
+  "gripper",
+  "hotspot_camera",
+  "hotspot_arm",
+  "hotspot_drive",
+  "hotspot_compute",
+  "hotspot_imu",
+  "hotspot_ring",
+] as const;
+
 export interface WorkerRig {
   root: THREE.Group;
   nodes: Record<string, THREE.Object3D>;
@@ -32,6 +56,13 @@ const CASTER_R = 0.018;
 const BASE_BOTTOM = 0.025;
 const ARM_LINKS = [0.1, 0.1, 0.08, 0.06];
 const ARM_SECTION = 0.026;
+
+/** Display pose: compactly folded, alert (kept low so the hero framing holds
+ * the whole robot). The journey drives joints, so an imported model should be
+ * exported at rest with its joints zeroed, not pre-posed. */
+const POSE = { link1: -0.15, j2: 1.55, j3: -2.05, j4: 0.85, yaw: -0.35 };
+/** Extended placement pose: the arm reaches forward-down toward a stud. */
+const PLACE_POSE = { link1: -0.05, j2: 0.75, j3: -0.85, j4: 0.55, yaw: 0.15 };
 
 function mat(opts: THREE.MeshStandardMaterialParameters): THREE.MeshStandardMaterial {
   return new THREE.MeshStandardMaterial(opts);
@@ -165,9 +196,6 @@ export function createWorkerGreybox(): WorkerRig {
     gripper.add(finger);
   }
 
-  // Display pose: compactly folded, alert (kept low so the hero framing
-  // holds the whole robot)
-  const POSE = { link1: -0.15, j2: 1.55, j3: -2.05, j4: 0.85, yaw: -0.35 };
   nodes["arm_link1"]!.rotation.z = POSE.link1;
   nodes["arm_j2"]!.rotation.z = POSE.j2;
   nodes["arm_j3"]!.rotation.z = POSE.j3;
@@ -188,7 +216,16 @@ export function createWorkerGreybox(): WorkerRig {
   anchor("hotspot_imu", hull, new THREE.Vector3(0.02, 0.025, 0.03));
   anchor("hotspot_ring", ledRing, new THREE.Vector3(0, 0.012, 0));
 
-  // ---- Behaviors ------------------------------------------------------
+  return attachRigBehaviours(root, nodes, ring);
+}
+
+/** The animation and highlight layer, shared by the procedural greybox and by
+ * an imported hero GLB — the two differ only in how the geometry got built. */
+export function attachRigBehaviours(
+  root: THREE.Group,
+  nodes: Record<string, THREE.Object3D>,
+  ring: THREE.MeshStandardMaterial
+): WorkerRig {
   let highlightRoot: THREE.Object3D | null = null;
   const flashable = new Map<THREE.MeshStandardMaterial, { color: THREE.Color; intensity: number }>();
 
@@ -229,8 +266,6 @@ export function createWorkerGreybox(): WorkerRig {
     }
   }
 
-  // Extended placement pose (arm reaches forward-down toward a stud)
-  const PLACE_POSE = { link1: -0.05, j2: 0.75, j3: -0.85, j4: 0.55, yaw: 0.15 };
   let extendK = 0;
   const mix = (a: number, b: number) => a + (b - a) * extendK;
 
@@ -238,11 +273,22 @@ export function createWorkerGreybox(): WorkerRig {
     extendK = Math.min(Math.max(k, 0), 1);
   }
 
+  // Roll about whatever local axis actually points along the axle, so an
+  // imported model does not have to adopt the greybox's x=PI/2 convention.
+  // With +X forward the axle is world Z; resolve that into each wheel's frame
+  // once, while the rig is still at the origin.
+  const wheelAxes = new Map<THREE.Object3D, THREE.Vector3>();
+  root.updateWorldMatrix(true, true);
+  for (const name of ["wheel_L", "wheel_R"]) {
+    const wheel = nodes[name];
+    if (!wheel) continue;
+    const q = new THREE.Quaternion();
+    wheel.getWorldQuaternion(q);
+    wheelAxes.set(wheel, new THREE.Vector3(0, 0, 1).applyQuaternion(q.invert()).normalize());
+  }
+
   function spinWheels(delta: number) {
-    for (const name of ["wheel_L", "wheel_R"]) {
-      // wheel groups are rotated x=PI/2; rolling = local y spin
-      nodes[name]!.rotation.y += delta;
-    }
+    for (const [wheel, axis] of wheelAxes) wheel.rotateOnAxis(axis, delta);
   }
 
   function update(elapsed: number) {
