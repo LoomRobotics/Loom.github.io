@@ -15,11 +15,17 @@ function holdShell(message: string) {
   if (status) status.textContent = message;
 }
 
+function showChrome() {
+  const chrome = document.getElementById("chrome");
+  if (chrome) chrome.hidden = false;
+}
+
 function showStatic() {
   const s = document.getElementById("static-journey");
   const end = document.getElementById("journey-end");
   if (s) s.hidden = false;
   if (end) end.hidden = false;
+  showChrome();
   boot?.classList.add("boot-done");
   window.setTimeout(() => boot?.remove(), 800);
 }
@@ -35,6 +41,7 @@ if (!report.webgl) {
     .then(() => {
       const end = document.getElementById("journey-end");
       if (end) end.hidden = false;
+      showChrome();
       boot?.classList.add("boot-done");
       window.setTimeout(() => boot?.remove(), 800);
     })

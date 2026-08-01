@@ -51,12 +51,16 @@ export const BEATS: BeatDef[] = [
     id: "brand",
     lengthUnits: LEN,
     holdAt: HOLD,
+    // Opens aimed just above the horizon: nothing but dust and a far grid
+    // dissolving into fog, so the headline lands on empty frame. The arena
+    // rises into view as the beat runs out — Act 2 gets a real reveal.
     camera: [
-      { t: 0, pos: [0, 1.22, 1.7], look: [0, 1.18, 0.8], fov: 40 },
-      { t: 0.5, pos: [0, 1.2, 1.55], look: [0, 1.16, 0.8], fov: 42 },
+      { t: 0, pos: [1.05, 1.5, 4.95], look: [0, 1.78, 0], fov: 32 },
+      { t: 0.5, pos: [1.22, 1.46, 4.72], look: [0, 1.62, 0], fov: 33 },
       { t: 1, pos: [2.8, 1.9, 3.2], look: [0, 0, 0], fov: 46 },
     ],
-    cues: [{ id: "brand", from: 0.05, to: 0.75 }],
+    // Full alpha from the very first frame — the headline is the landing page.
+    cues: [{ id: "brand", from: -0.2, to: 0.66 }],
   },
   {
     id: "swarm",

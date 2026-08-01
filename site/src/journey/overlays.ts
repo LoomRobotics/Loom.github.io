@@ -1,6 +1,14 @@
 import type * as THREE from "three";
 import type { BeatDef, BeatPosition } from "./beats";
-import { ACT_COPY, EXPLORE_HINT, EXPLORE_HINT_TOUCH, HOTSPOTS, RESUME_LABEL, type HotspotSpec } from "../content/journey-content";
+import {
+  ACT_COPY,
+  EXPLORE_HINT,
+  EXPLORE_HINT_TOUCH,
+  HOTSPOTS,
+  RESUME_LABEL,
+  SCROLL_CUE,
+  type HotspotSpec,
+} from "../content/journey-content";
 
 /** DOM overlay layer: act copy sections (cue-windowed), hotspot pins projected
  * from 3D anchors, the detail card, explore affordances, the beat-dot rail,
@@ -29,6 +37,7 @@ export class Overlays {
   private readonly hint: HTMLElement;
   private readonly resumePill: HTMLButtonElement;
   private readonly inspectBtn: HTMLButtonElement;
+  private readonly scrollCue: HTMLElement;
   private readonly dots: HTMLButtonElement[] = [];
   private readonly live: HTMLElement;
   private lastLiveBeat = -1;
@@ -47,6 +56,13 @@ export class Overlays {
       if (copy.variant === "hud") {
         el.className = "act-hud";
         el.textContent = copy.body;
+      } else if (copy.variant === "hero") {
+        // Act 1 is the page's headline: an h1 over the void, no logo on stage.
+        el.className = "act-hero";
+        el.innerHTML = `
+          ${copy.eyebrow ? `<span class="eyebrow">${copy.eyebrow}</span>` : ""}
+          <h1>${copy.heading ?? ""}</h1>
+          <p>${copy.body}</p>`;
       } else {
         el.className = copy.variant === "center" ? "act-copy center" : "act-copy";
         const ctas = copy.ctas
@@ -97,6 +113,15 @@ export class Overlays {
       cb.onHotspot(null);
     });
     root.appendChild(this.card);
+
+    // Opening scroll affordance: a scroll-driven page has to say so once.
+    this.scrollCue = document.createElement("div");
+    this.scrollCue.className = "scroll-cue";
+    this.scrollCue.setAttribute("aria-hidden", "true");
+    // Inner span carries the entrance animation: a filled animation on the
+    // cue itself would outrank the per-frame opacity the engine writes here.
+    this.scrollCue.innerHTML = `<span>${SCROLL_CUE}</span><i></i>`;
+    root.appendChild(this.scrollCue);
 
     // Explore affordances
     this.hint = document.createElement("div");
@@ -208,9 +233,14 @@ export class Overlays {
       }
       if (opts.exploring) alpha = 0;
       el.style.opacity = alpha.toFixed(3);
-      el.style.transform = `translateY(${(1 - alpha) * 14}px)`;
+      el.style.setProperty("--rise", `${((1 - alpha) * 14).toFixed(1)}px`);
       el.style.visibility = alpha > 0.01 ? "visible" : "hidden";
     }
+
+    // Scroll cue: only before the first gesture on the opening beat.
+    const cueAlpha = pos.index === 0 ? 1 - Math.min(pos.localT / 0.05, 1) : 0;
+    this.scrollCue.style.opacity = cueAlpha.toFixed(3);
+    this.scrollCue.style.visibility = cueAlpha > 0.01 ? "visible" : "hidden";
 
     // aria-live on beat change
     if (pos.index !== this.lastLiveBeat) {

@@ -8,8 +8,9 @@ export interface ActCopy {
   heading?: string;
   body: string;
   sim?: boolean;
-  /** "hud" = compact telemetry chip; "center" = centered hero block */
-  variant?: "hud" | "center";
+  /** "hero" = the Act 1 h1 open; "hud" = compact telemetry chip;
+   *  "center" = centered block */
+  variant?: "hero" | "hud" | "center";
   ctas?: Array<{ label: string; href: string; primary?: boolean }>;
 }
 
@@ -23,10 +24,10 @@ export interface HotspotSpec {
 
 export const ACT_COPY: Record<string, ActCopy> = {
   brand: {
-    eyebrow: "Loom Robotics",
+    // No eyebrow: the wordmark already sits in the fixed chrome above it.
     heading: "Decentralized robotic construction.",
     body: "WEAVE, the Workload Execution and Autonomous Verification Engine: a swarm that builds from a replicated assembly graph, with no one in charge.",
-    variant: "center",
+    variant: "hero",
   },
   swarm: {
     eyebrow: "The swarm",
@@ -105,6 +106,7 @@ export const HOTSPOTS: HotspotSpec[] = [
   },
 ];
 
+export const SCROLL_CUE = "Scroll";
 export const EXPLORE_HINT = "Drag to inspect · scroll to continue";
 export const EXPLORE_HINT_TOUCH = "Inspect in 3D";
 export const RESUME_LABEL = "Resume journey";

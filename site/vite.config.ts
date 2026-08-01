@@ -47,6 +47,38 @@ function serveLegacyAssets(): Plugin {
           res.end("ok");
         });
       });
+      // Dev-only: the capture tool needs the webfonts as data URIs, but the
+      // page can't fetch fonts.googleapis.com cross-origin. Node fetches and
+      // inlines them here so captures show the real typography.
+      let fontCssCache: string | null = null;
+      server.middlewares.use("/__fontcss", async (req, res) => {
+        res.setHeader("Content-Type", "text/css");
+        if (fontCssCache !== null) return res.end(fontCssCache);
+        const href = new URL(req.url ?? "/", "http://x").searchParams.get("href");
+        if (!href) return res.end("");
+        try {
+          const full = await (await fetch(href)).text();
+          // Latin subsets only: the cyrillic/greek/vietnamese faces would
+          // triple the payload for glyphs the site never sets.
+          const css = full
+            .split("@font-face")
+            .filter((block) => block.includes("U+0000-00FF"))
+            .map((block) => `@font-face${block}`)
+            .join("\n");
+          const urls = [...new Set([...css.matchAll(/url\((https:\/\/[^)]+)\)/g)].map((m) => m[1]!))];
+          let out = css;
+          for (const url of urls) {
+            const buf = Buffer.from(await (await fetch(url)).arrayBuffer());
+            out = out.split(url).join(`data:font/woff2;base64,${buf.toString("base64")}`);
+          }
+          fontCssCache = out;
+        } catch (err) {
+          console.warn("[loom] font proxy failed", err);
+          fontCssCache = "";
+        }
+        res.end(fontCssCache);
+      });
+
       server.middlewares.use((req, res, next) => {
         const url = (req.url ?? "").split("?")[0] ?? "";
         if (!url.startsWith("/assets/") && !url.startsWith("/images/")) return next();

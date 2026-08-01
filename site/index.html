@@ -8,7 +8,7 @@
       name="description"
       content="Loom Robotics develops decentralized robotic construction systems. WEAVE: a swarm of autonomous workers building from a replicated assembly graph with no central controller."
     />
-    <link rel="icon" href="/images/logo-mark.png" />
+    <link rel="icon" href="/images/favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -21,7 +21,27 @@
   <body>
     <a class="skip-link" href="#journey-end">Skip the intro</a>
     <div id="boot">
-      <img id="boot-mark" src="/images/transp-white.png" alt="Loom Robotics" width="280" />
+      <p id="boot-mark">
+        <svg class="mark" viewBox="0 0 4172 4092" aria-hidden="true" focusable="false">
+          <g fill="none" stroke="currentColor">
+            <path
+              stroke-width="271"
+              d="M1250 542V1280M1250 1716V3820M2796 508V2829M2796 3266V3580M542 1498H2578M3014 1498H3751M271 3047H1032M1468 3047H3521"
+            />
+            <circle cx="1250" cy="339" r="271" stroke-width="135" />
+            <circle cx="3765" cy="3047" r="325" stroke-width="163" />
+          </g>
+          <g fill="currentColor">
+            <circle cx="542" cy="1498" r="271" />
+            <circle cx="3751" cy="1498" r="271" />
+            <circle cx="271" cy="3047" r="271" />
+            <circle cx="2796" cy="508" r="271" />
+            <circle cx="2796" cy="3580" r="271" />
+            <circle cx="1250" cy="3820" r="271" />
+          </g>
+        </svg>
+        <span>Loom Robotics</span>
+      </p>
       <div id="boot-rule" role="progressbar" aria-label="Loading"><span></span></div>
       <p id="boot-status">Preview channel</p>
       <nav id="boot-links" aria-label="Site">
@@ -30,6 +50,37 @@
         <a href="/devlog.html">Dev Log</a>
       </nav>
     </div>
+
+    <!-- Persistent chrome: the mark rides the top-left corner for the whole
+         journey as the home affordance; the paper and the log stay one click
+         away. Deliberately quiet — it must never compete with the stage. -->
+    <header id="chrome" hidden>
+      <a class="brand" href="/" aria-label="Loom Robotics, back to the start">
+        <svg class="mark" viewBox="0 0 4172 4092" aria-hidden="true" focusable="false">
+          <g fill="none" stroke="currentColor">
+            <path
+              stroke-width="271"
+              d="M1250 542V1280M1250 1716V3820M2796 508V2829M2796 3266V3580M542 1498H2578M3014 1498H3751M271 3047H1032M1468 3047H3521"
+            />
+            <circle cx="1250" cy="339" r="271" stroke-width="135" />
+            <circle cx="3765" cy="3047" r="325" stroke-width="163" />
+          </g>
+          <g fill="currentColor">
+            <circle cx="542" cy="1498" r="271" />
+            <circle cx="3751" cy="1498" r="271" />
+            <circle cx="271" cy="3047" r="271" />
+            <circle cx="2796" cy="508" r="271" />
+            <circle cx="2796" cy="3580" r="271" />
+            <circle cx="1250" cy="3820" r="271" />
+          </g>
+        </svg>
+        <span class="brand-name">Loom<span> Robotics</span></span>
+      </a>
+      <nav class="chrome-nav" aria-label="Primary">
+        <a href="/technical.html">WEAVE paper</a>
+        <a href="/devlog.html">Dev log</a>
+      </nav>
+    </header>
 
     <div id="journey" hidden>
       <div id="journey-stage">
@@ -43,7 +94,7 @@
     <section id="static-journey" hidden aria-label="The LEGOSwarm story">
       <article class="static-panel">
         <span class="eyebrow">Loom Robotics</span>
-        <h2>Decentralized robotic construction.</h2>
+        <h1>Decentralized robotic construction.</h1>
         <p>WEAVE, the Workload Execution and Autonomous Verification Engine: a swarm that builds from a replicated assembly graph, with no one in charge.</p>
       </article>
       <article class="static-panel">

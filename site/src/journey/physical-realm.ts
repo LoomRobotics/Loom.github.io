@@ -30,36 +30,14 @@ export class PhysicalRealm {
   private readonly heroBrick: THREE.Mesh;
   private timelapseDone = 0;
 
-  private readonly wordmark: THREE.Mesh;
-  private readonly wordmarkMat: THREE.MeshBasicMaterial;
   private readonly dust: THREE.Points;
   private readonly dustMat: THREE.PointsMaterial;
 
   constructor(scene: THREE.Scene, assets: BrickAssets, tier: TierReport) {
     scene.add(createBlueprintFloor());
 
-    // Act 1: the wordmark resolves in the void above the arena, caught by
-    // bloom, dissolving as the pull-back reveals the build floor below.
-    const wordmark = new THREE.Mesh(new THREE.PlaneGeometry(1, 1));
-    this.wordmarkMat = new THREE.MeshBasicMaterial({
-      map: new THREE.TextureLoader().load(
-        `${import.meta.env.BASE_URL.replace(/\/next\/$/, "/")}images/transp-white.png`,
-        (tex) => {
-          // Size the plane from the image's true aspect — never stretch the mark.
-          const h = 0.55;
-          wordmark.scale.set((h * tex.image.width) / tex.image.height, h, 1);
-        }
-      ),
-      transparent: true,
-      opacity: 0,
-      depthWrite: false,
-      color: 0xf3f4f5,
-    });
-    wordmark.material = this.wordmarkMat;
-    this.wordmark = wordmark;
-    this.wordmark.position.set(0, 1.18, 0.8);
-    scene.add(this.wordmark);
-
+    // Act 1 is DOM type over an empty stage: the mark lives in the fixed
+    // chrome, not in the scene, so the open is dust, grid and distance.
     const dustGeo = new THREE.BufferGeometry();
     const n = 1200;
     const pos = new Float32Array(n * 3);
@@ -116,14 +94,6 @@ export class PhysicalRealm {
     const beat = pos.beat.id;
     const t = pos.localT;
 
-    // Act 1: wordmark resolves at the hold, dissolves during the pull-back.
-    if (beat === "brand") {
-      const up = THREE.MathUtils.smoothstep(t, 0, 0.25);
-      const down = 1 - THREE.MathUtils.smoothstep(t, 0.5, 0.8);
-      this.wordmarkMat.opacity = Math.min(up, down);
-    } else {
-      this.wordmarkMat.opacity = Math.max(this.wordmarkMat.opacity - dt * 2, 0);
-    }
     this.dust.rotation.y = time * 0.008;
     this.dustMat.opacity = beat === "brand" ? 0.4 : 0.18;
 

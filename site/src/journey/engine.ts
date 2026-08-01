@@ -102,6 +102,17 @@ export async function mountJourney(tier: TierReport): Promise<JourneyHandle> {
   window.addEventListener("pointerup", onPointerUp);
   window.addEventListener("wheel", onWheel, { passive: true });
 
+  // The chrome mark is a real link (middle-click, right-click, no-JS all work),
+  // but while the journey is mounted "home" means the top of the journey.
+  const brandLink = document.querySelector<HTMLAnchorElement>("#chrome .brand");
+  const onBrandClick = (e: MouseEvent) => {
+    if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    e.preventDefault();
+    exitExplore();
+    scroll.scrollToHold(0);
+  };
+  brandLink?.addEventListener("click", onBrandClick);
+
   const unbindKeys = bindKeys({
     next: () => scroll.scrollToHold(scroll.state.holdIndex + 1),
     prev: () => scroll.scrollToHold(scroll.state.holdIndex - 1),
@@ -111,19 +122,27 @@ export async function mountJourney(tier: TierReport): Promise<JourneyHandle> {
   });
 
   const tmp = new THREE.Vector3();
-  const toScreen = () => ({
-    x: ((tmp.x + 1) / 2) * canvas.clientWidth,
-    y: ((1 - tmp.y) / 2) * canvas.clientHeight,
-    visible: tmp.z < 1,
-  });
+  /** World point → screen px. Anchors behind the camera project to mirrored
+   * coordinates, and off-frame anchors would pile up against the viewport
+   * edges (into the fixed chrome), so both are culled here. */
+  const projectPoint = (world: THREE.Vector3): PinProjection => {
+    tmp.copy(world).applyMatrix4(stage.camera.matrixWorldInverse);
+    const inFront = tmp.z < -stage.camera.near;
+    tmp.applyMatrix4(stage.camera.projectionMatrix);
+    const x = ((tmp.x + 1) / 2) * canvas.clientWidth;
+    const y = ((1 - tmp.y) / 2) * canvas.clientHeight;
+    const inFrame = x >= 0 && y >= 0 && x <= canvas.clientWidth && y <= canvas.clientHeight;
+    return { x, y, visible: inFront && inFrame };
+  };
+  const worldTmp = new THREE.Vector3();
   const project = (anchor: string): PinProjection | null => {
     const obj = worker.nodes[anchor];
     if (!obj) return null;
-    obj.getWorldPosition(tmp).project(stage.camera);
-    return toScreen();
+    return projectPoint(obj.getWorldPosition(worldTmp));
   };
 
   if (import.meta.env.DEV) {
+    const { captureComposite } = await import("../dev/capture");
     (window as unknown as Record<string, unknown>).__loom = {
       table,
       scroll,
@@ -134,6 +153,7 @@ export async function mountJourney(tier: TierReport): Promise<JourneyHandle> {
       realm,
       // Lets verification tooling drive frames when the host pane freezes rAF.
       gsap,
+      capture: (name: string) => captureComposite(name, canvas),
     };
   }
 
@@ -148,8 +168,7 @@ export async function mountJourney(tier: TierReport): Promise<JourneyHandle> {
     const graphChips =
       graphFade > 0.02
         ? realm.graph.chipData().map((chip) => {
-            tmp.copy(chip.world).project(stage.camera);
-            const s = toScreen();
+            const s = projectPoint(chip.world);
             return {
               id: chip.id,
               x: s.x,
@@ -176,6 +195,7 @@ export async function mountJourney(tier: TierReport): Promise<JourneyHandle> {
     destroy() {
       gsap.ticker.remove(loop);
       unbindKeys();
+      brandLink?.removeEventListener("click", onBrandClick);
       canvas.removeEventListener("pointerdown", onPointerDown);
       canvas.removeEventListener("pointermove", onPointerMove);
       window.removeEventListener("pointerup", onPointerUp);
