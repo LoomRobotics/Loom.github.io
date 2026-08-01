@@ -44,8 +44,8 @@ const LEN = 1.2;
 const HOLD = 0.5;
 
 /** The journey beats: Act 1 (brand) → Act 2 (swarm) → Act 3 (hero worker)
- * → Act 6 (place & verify) → Act 7 (close). The software acts (perception,
- * graph) slot in after `place` in later phases, growing out of its close-up. */
+ * → Act 4 (perception) → Act 6 (place & verify) → Act 5 (the graph, grown out
+ * of the placement close-up) → Act 7 (close). */
 export const BEATS: BeatDef[] = [
   {
     id: "brand",
@@ -90,6 +90,21 @@ export const BEATS: BeatDef[] = [
       maxPolar: 1.5,
     },
     cues: [{ id: "worker", from: 0.28, to: 1 }],
+  },
+  {
+    // Act 4 lives entirely in camera space: a real capture covers the frame,
+    // so the rails hold Act 3's last pose and hand it straight to `place`.
+    id: "perceive",
+    lengthUnits: LEN,
+    holdAt: HOLD,
+    camera: [
+      { t: 0, pos: [0.36, 0.2, 0.44], look: [-0.04, 0.1, 0.03], fov: 40 },
+      { t: 1, pos: [0.36, 0.2, 0.44], look: [-0.04, 0.1, 0.03], fov: 40 },
+    ],
+    cues: [
+      { id: "perceive", from: 0.24, to: 0.72 },
+      { id: "error", from: 0.42, to: 0.72 },
+    ],
   },
   {
     id: "place",

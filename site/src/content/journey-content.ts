@@ -8,6 +8,8 @@ export interface ActCopy {
   heading?: string;
   body: string;
   sim?: boolean;
+  /** Marks the one beat that is physical hardware, not simulation. */
+  real?: boolean;
   /** "hero" = the Act 1 h1 open; "hud" = compact telemetry chip;
    *  "center" = centered block */
   variant?: "hero" | "hud" | "center";
@@ -39,6 +41,16 @@ export const ACT_COPY: Record<string, ActCopy> = {
     eyebrow: "Worker V1",
     heading: "One worker.",
     body: "A differential-drive base, a 4-DOF arm, one camera. The base does coarse positioning; the arm does fine placement. Drag to inspect. Tap a marker for the details.",
+  },
+  perceive: {
+    eyebrow: "Through the worker's eye",
+    heading: "One camera, no ground truth.",
+    body: "This frame is real: worker-001's camera, the parts as they actually lay. The boxes are the detector's own output, part number and confidence. The linework is the plan, rising one dependency wave at a time.",
+    real: true,
+  },
+  error: {
+    body: "e(t) = s_desired − s_current",
+    variant: "hud",
   },
   place: {
     eyebrow: "Build → Verify → Continue",

@@ -119,7 +119,8 @@ export class PhysicalRealm {
       // Reset the hero to home whenever we're on the rails before Act 6.
       // The build stays hidden until the place beat — it enters with its
       // own catch-up assembly as the camera dives in.
-      const before = beat === "brand" || beat === "swarm" || beat === "worker";
+      const before =
+        beat === "brand" || beat === "swarm" || beat === "worker" || beat === "perceive";
       if (before) {
         this.worker.root.position.set(0, 0, 0);
         this.worker.root.rotation.y = 0;

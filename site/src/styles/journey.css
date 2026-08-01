@@ -444,8 +444,8 @@ body {
 .act-hud {
   position: absolute;
   right: clamp(1.5rem, 6vw, 5rem);
-  top: 50%;
-  transform: translateY(calc(-50% + var(--rise, 0px)));
+  bottom: clamp(4rem, 16vh, 9rem);
+  transform: translateY(var(--rise, 0px));
   padding: 0.55rem 0.9rem;
   font-family: "SFMono-Regular", "Consolas", "Liberation Mono", Menlo, monospace;
   font-size: 0.72rem;
@@ -499,6 +499,64 @@ body {
   }
 }
 
+/* ---- Act 4: camera feed chrome ---------------------------------------- */
+
+/* Top inset clears the fixed chrome; the brackets must never cross the nav. */
+.feed-hud {
+  position: absolute;
+  inset: clamp(3.6rem, 9vh, 4.6rem) clamp(1.5rem, 4vw, 3rem) clamp(1.5rem, 4vh, 2.6rem);
+  pointer-events: none;
+}
+
+.feed-hud i {
+  position: absolute;
+  width: 1.6rem;
+  height: 1.6rem;
+  border: 1px solid rgba(255, 106, 19, 0.75);
+}
+
+.feed-hud .tl { top: 0; left: 0; border-right: 0; border-bottom: 0; }
+.feed-hud .tr { top: 0; right: 0; border-left: 0; border-bottom: 0; }
+.feed-hud .bl { bottom: 0; left: 0; border-right: 0; border-top: 0; }
+.feed-hud .br { bottom: 0; right: 0; border-left: 0; border-top: 0; }
+
+.feed-telemetry {
+  position: absolute;
+  bottom: 0.1rem;
+  left: 2.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  font-family: "SFMono-Regular", "Consolas", "Liberation Mono", Menlo, monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  color: rgba(255, 106, 19, 0.85);
+  text-shadow: 0 1px 6px rgba(21, 25, 30, 0.9);
+}
+
+.det-box {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 1px solid rgba(255, 106, 19, 0.9);
+  box-shadow: 0 0 12px rgba(255, 106, 19, 0.25);
+  pointer-events: none;
+}
+
+.det-box span {
+  position: absolute;
+  bottom: 100%;
+  left: -1px;
+  margin-bottom: 2px;
+  padding: 0.1rem 0.32rem;
+  font-family: "SFMono-Regular", "Consolas", "Liberation Mono", Menlo, monospace;
+  font-size: 0.56rem;
+  line-height: 1.35;
+  white-space: nowrap;
+  color: var(--j-charcoal);
+  background: rgba(255, 106, 19, 0.92);
+}
+
 .sim-chip {
   display: inline-block;
   margin-top: 0.8rem;
@@ -511,6 +569,13 @@ body {
   color: var(--j-steel);
   border: 1px solid var(--j-line);
   border-radius: 999px;
+  white-space: nowrap;
+}
+
+/* The one beat that is hardware, not simulation. */
+.sim-chip.real {
+  color: var(--j-orange);
+  border-color: rgba(255, 106, 19, 0.55);
 }
 
 /* ---- Hotspot pins + card ---------------------------------------------- */

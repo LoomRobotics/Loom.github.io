@@ -1,5 +1,6 @@
 import type * as THREE from "three";
 import type { BeatDef, BeatPosition } from "./beats";
+import type { FeedBox } from "./perception-realm";
 import {
   ACT_COPY,
   EXPLORE_HINT,
@@ -38,6 +39,8 @@ export class Overlays {
   private readonly resumePill: HTMLButtonElement;
   private readonly inspectBtn: HTMLButtonElement;
   private readonly scrollCue: HTMLElement;
+  private readonly feedHud: HTMLElement;
+  private readonly feedTelemetry: HTMLElement;
   private readonly dots: HTMLButtonElement[] = [];
   private readonly live: HTMLElement;
   private lastLiveBeat = -1;
@@ -75,6 +78,7 @@ export class Overlays {
           ${copy.heading ? `<h2>${copy.heading}</h2>` : ""}
           <p>${copy.body}</p>
           ${copy.sim ? `<span class="sim-chip">simulation</span>` : ""}
+          ${copy.real ? `<span class="sim-chip real">real capture</span>` : ""}
           ${ctas}`;
       }
       el.style.opacity = "0";
@@ -113,6 +117,17 @@ export class Overlays {
       cb.onHotspot(null);
     });
     root.appendChild(this.card);
+
+    // Act 4 feed chrome: corner brackets + capture provenance.
+    this.feedHud = document.createElement("div");
+    this.feedHud.className = "feed-hud";
+    this.feedHud.setAttribute("aria-hidden", "true");
+    this.feedHud.innerHTML = `<i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i>
+      <div class="feed-telemetry"></div>`;
+    this.feedTelemetry = this.feedHud.querySelector(".feed-telemetry")!;
+    this.feedHud.style.opacity = "0";
+    this.feedHud.style.visibility = "hidden";
+    root.appendChild(this.feedHud);
 
     // Opening scroll affordance: a scroll-driven page has to say so once.
     this.scrollCue = document.createElement("div");
@@ -169,6 +184,48 @@ export class Overlays {
 
   /** Graph-node text chips, keyed by node id (created on first use). */
   private readonly chipPool = new Map<string, HTMLElement>();
+  /** Act 4 detection boxes, pooled by index. */
+  private readonly boxPool: HTMLElement[] = [];
+
+  /** Act 4 camera-feed chrome: corner brackets plus a telemetry block. */
+  private renderFeed(alpha: number, boxes: FeedBox[], lines: string[]) {
+    this.feedHud.style.opacity = alpha.toFixed(3);
+    this.feedHud.style.visibility = alpha > 0.01 ? "visible" : "hidden";
+    if (alpha > 0.01 && this.feedTelemetry.childElementCount !== lines.length) {
+      this.feedTelemetry.replaceChildren(
+        ...lines.map((line) => {
+          const el = document.createElement("span");
+          el.textContent = line;
+          return el;
+        })
+      );
+    }
+
+    for (let i = 0; i < Math.max(boxes.length, this.boxPool.length); i++) {
+      let el = this.boxPool[i];
+      if (!el && i < boxes.length) {
+        el = document.createElement("div");
+        el.className = "det-box";
+        el.setAttribute("aria-hidden", "true");
+        el.innerHTML = "<span></span>";
+        this.root.appendChild(el);
+        this.boxPool[i] = el;
+      }
+      if (!el) continue;
+      const box = boxes[i];
+      if (!box || box.alpha <= 0.01) {
+        el.hidden = true;
+        continue;
+      }
+      el.hidden = false;
+      el.style.opacity = box.alpha.toFixed(3);
+      el.style.transform = `translate(${box.x.toFixed(1)}px, ${box.y.toFixed(1)}px)`;
+      el.style.width = `${box.w.toFixed(1)}px`;
+      el.style.height = `${box.h.toFixed(1)}px`;
+      const label = el.firstElementChild!;
+      if (label.textContent !== box.label) label.textContent = box.label;
+    }
+  }
 
   private renderCard(spec: HotspotSpec | null) {
     if (!spec) {
@@ -196,8 +253,11 @@ export class Overlays {
       touch: boolean;
       project: (anchor: string) => PinProjection | null;
       graphChips?: Array<{ id: string; x: number; y: number; visible: boolean; state: string; label: string; opacity: number }>;
+      feed?: { alpha: number; boxes: FeedBox[]; lines: string[] };
     }
   ) {
+    const feed = opts.feed;
+    this.renderFeed(feed?.alpha ?? 0, feed?.boxes ?? [], feed?.lines ?? []);
     // Graph-node text chips, overlaid on the bricks
     const chips = opts.graphChips ?? [];
     const active = new Set<string>();

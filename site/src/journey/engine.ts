@@ -8,6 +8,8 @@ import { ExploreMode } from "./explore";
 import { Overlays, type PinProjection } from "./overlays";
 import { createScrollRig } from "./scroll";
 import { PhysicalRealm } from "./physical-realm";
+import { PerceptionRealm } from "./perception-realm";
+import { FeedSource } from "../scene/feed";
 import { loadBrickAssets } from "../scene/bricks";
 import { Structure } from "../scene/structure";
 import { bindKeys } from "../a11y/keys";
@@ -39,6 +41,14 @@ export async function mountJourney(tier: TierReport): Promise<JourneyHandle> {
   const table = buildBeatTable(BEATS);
   const realm = new PhysicalRealm(stage.scene, assets, tier);
   const worker = realm.worker;
+
+  // Act 4 renders in camera space, so the camera has to be in the graph.
+  stage.scene.add(stage.camera);
+  const feed = await FeedSource.load(import.meta.env.BASE_URL).catch((err) => {
+    console.warn("[loom] camera feed unavailable; Act 4 falls back to the stage", err);
+    return null;
+  });
+  const perception = new PerceptionRealm(stage.camera, assets, feed);
 
   const director = new CameraDirector(stage.camera, table.beats);
   const explore = new ExploreMode(stage.camera, canvas);
@@ -164,6 +174,7 @@ export async function mountJourney(tier: TierReport): Promise<JourneyHandle> {
     director.apply(pos);
     explore.update();
     realm.update(pos, time, deltaMs / 1000);
+    perception.update(pos, time, stage.camera);
     const graphFade = realm.graph.fade;
     const graphChips =
       graphFade > 0.02
@@ -180,12 +191,14 @@ export async function mountJourney(tier: TierReport): Promise<JourneyHandle> {
             };
           })
         : undefined;
+    const boxes = perception.boxes(canvas.clientWidth, canvas.clientHeight);
     overlays.update(pos, {
       settled: scroll.state.settled,
       exploring: explore.active,
       touch: isTouch,
       project,
       graphChips,
+      feed: { alpha: perception.hudAlpha, boxes, lines: perception.hudLines() },
     });
     stage.render(deltaMs / 1000);
   };
