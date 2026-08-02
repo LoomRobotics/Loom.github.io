@@ -30,6 +30,7 @@ export async function mountJourney(tier: TierReport): Promise<JourneyHandle> {
   if (!container || !canvasEl || !ui) throw new Error("journey mounts missing");
   // Re-bound so the narrowing survives into the closures below.
   const canvas = canvasEl;
+  const stageEl = document.getElementById("journey-stage");
   container.hidden = false;
 
   const assets = await loadBrickAssets();
@@ -183,6 +184,9 @@ export async function mountJourney(tier: TierReport): Promise<JourneyHandle> {
    * the still exporter, so an exported still is the same frame the journey
    * would draw and cannot drift from it. */
   function renderFrame(at: BeatPosition, time: number, dt: number, settled: boolean) {
+    // Lets the phone layout special-case a beat — Act 1 is type over an empty
+    // void and wants the whole screen, not a stage band and an empty band.
+    if (stageEl && stageEl.dataset.beat !== at.beat.id) stageEl.dataset.beat = at.beat.id;
     director.apply(at);
     realm.update(at, time, dt);
     perception.update(at, time, stage.camera);

@@ -3,6 +3,9 @@
    legacy sheet is unreachable. */
 
 :root {
+  /* Phone layout: share of the stage given to the 3D scene, the rest to the
+     copy. Referenced by the phone block at the foot of this sheet. */
+  --stage-band: 58%;
   --j-charcoal: var(--charcoal, #15191e);
   --j-graphite: var(--graphite, #252b33);
   --j-line: var(--graphite-line, #323a44);
@@ -997,21 +1000,75 @@ button.explore-hint,
    rather than compete for the same corner. */
 
 @media (max-width: 48rem) {
-  .act-copy {
-    left: 1rem;
-    right: 1rem;
-    bottom: 1.5rem;
-    max-width: none;
-    padding: 1rem 1.1rem 1.15rem;
-    /* Near-opaque: at 0.88 an Act 4 detection label still ghosted through
-       behind the heading, which is the exact complaint this panel exists for. */
-    background: rgba(17, 20, 25, 0.95);
-    border-left: 2px solid rgba(255, 106, 19, 0.6);
+  /* Stop overlaying and start sharing. A phone is one portrait rectangle, and
+     a paragraph at this width is a third of it: any panel over the stage
+     covers the thing it is describing. So the stage takes the upper band and
+     the words take the lower one, and neither is ever on top of the other.
+     The scene is smaller but wholly visible, and the type sits on its own
+     ground with no scrim at all. It also un-crops the composition: the beats
+     are framed for landscape, and cover-fitting them into portrait was
+     throwing most of the shot away. */
+  #stage-canvas {
+    height: var(--stage-band);
   }
 
-  /* The panel does this job on a phone; two scrims would just muddy it. */
+  .act-copy {
+    top: var(--stage-band);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: none;
+    padding: 1.25rem 1.25rem 1.5rem;
+    background: var(--j-charcoal);
+    border-top: 1px solid var(--j-line);
+  }
+
+  /* No scrim needed once nothing is behind the words. */
   .act-copy::before {
     display: none;
+  }
+
+  /* Chips are inline by nature; as flex children they would stretch edge to edge. */
+  .act-copy .sim-chip,
+  .act-copy .act-ctas {
+    align-self: flex-start;
+  }
+
+  /* Act 1 is type over an empty void: it wants the whole screen, and a copy
+     band under it would just be a slab of nothing. */
+  #journey-stage[data-beat="brand"] #stage-canvas {
+    height: 100%;
+  }
+
+  .act-hero {
+    top: calc(var(--stage-band) / 2);
+  }
+
+  #journey-stage[data-beat="brand"] .act-hero {
+    top: 50%;
+  }
+
+  #journey-stage[data-beat="brand"] .beat-rail {
+    top: 50%;
+  }
+
+  #journey-stage[data-beat="brand"] .scroll-cue {
+    bottom: 1.6rem;
+  }
+
+  .beat-rail {
+    top: calc(var(--stage-band) / 2);
+  }
+
+  .feed-hud {
+    bottom: calc(100% - var(--stage-band) + 1rem);
+  }
+
+  .scroll-cue {
+    bottom: calc(100% - var(--stage-band) + 1.1rem);
   }
 
   .act-copy h2 {

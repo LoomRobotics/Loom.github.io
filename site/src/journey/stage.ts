@@ -84,8 +84,10 @@ export function createStage(canvas: HTMLCanvasElement, tier: TierReport): Stage 
   window.addEventListener("resize", resize);
   // Window 'resize' alone misses late layout (mount before first paint) and
   // container-only changes (mobile dvh, embedded panes) — observe the element.
+  // The canvas itself, not its parent: on phones the canvas is a fraction of
+  // the stage, so its height can change while the stage's does not.
   const observer = new ResizeObserver(() => resize());
-  observer.observe(canvas.parentElement ?? canvas);
+  observer.observe(canvas);
 
   function render(deltaSeconds: number) {
     if (composer) composer.render(deltaSeconds);
