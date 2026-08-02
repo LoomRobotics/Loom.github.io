@@ -59,7 +59,7 @@ export class FeedSource {
       uniforms: {
         uMap: { value: texture },
         uOpacity: { value: 0 },
-        uTint: { value: new THREE.Color(0x8d99a6) },
+        uTint: { value: new THREE.Color(0xc2cad4) },
       },
       vertexShader: /* glsl */ `
         varying vec2 vUv;
@@ -77,10 +77,11 @@ export class FeedSource {
           vec3 c = texture2D(uMap, vUv).rgb;
           float lum = dot(c, vec3(0.2126, 0.7152, 0.0722));
           c = mix(vec3(lum), c, 0.82);
-          c = pow(c, vec3(1.42)) * uTint;
-          // Corner falloff: reads as a lens, and keeps the act copy legible.
+          c = pow(c, vec3(1.15)) * uTint;
+          // Corner falloff: reads as a lens. Gentle — stacked on the tint and
+          // the gamma it was crushing the frame to mud on a phone screen.
           vec2 d = vUv - 0.5;
-          c *= 1.0 - 0.85 * dot(d, d);
+          c *= 1.0 - 0.45 * dot(d, d);
           // Feathered border: only visible while the frame is pulling in from
           // the lens, where a hard rectangle would read as a pasted-on photo.
           float edge = min(min(vUv.x, 1.0 - vUv.x), min(vUv.y, 1.0 - vUv.y));

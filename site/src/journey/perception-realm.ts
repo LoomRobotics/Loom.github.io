@@ -157,7 +157,8 @@ export class PerceptionRealm {
    * of the beat is legibility, not a density contest. */
   boxes(vw: number, vh: number): FeedBox[] {
     if (!this.feed || this.detAlpha <= 0.004) return [];
-    const dets = this.feed.meta.detections.slice(0, MAX_BOXES);
+    // A phone frame cannot carry eight labelled boxes and a paragraph.
+    const dets = this.feed.meta.detections.slice(0, vw < 700 ? 4 : MAX_BOXES);
     return dets.map((det, i) => {
       const rect = this.feed!.boxRect(det, vw, vh);
       const stagger = Math.min(Math.max((this.detAlpha - (i / dets.length) * 0.55) / 0.45, 0), 1);

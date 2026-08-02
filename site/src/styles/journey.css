@@ -220,6 +220,7 @@ body {
   }
 }
 
+
 /* ---- Journey stage ---------------------------------------------------- */
 
 #journey {
@@ -248,6 +249,33 @@ body {
   pointer-events: none;
 }
 
+/* ---- Overlay stacking --------------------------------------------------
+   The overlay children are appended in construction order, and the pooled
+   annotations (graph chips, detection boxes) are created lazily, so they land
+   last in the DOM and would paint over the copy. Order is declared here
+   instead: scene annotations sit under the words, affordances sit above. */
+
+.graph-chip,
+.det-box,
+.feed-hud {
+  z-index: 1;
+}
+
+.act-copy,
+.act-hero,
+.act-hud {
+  z-index: 2;
+}
+
+.pin,
+.hotspot-card,
+.explore-hint,
+.resume-pill,
+.scroll-cue,
+.beat-rail {
+  z-index: 3;
+}
+
 /* ---- Act copy --------------------------------------------------------- */
 
 /* `--rise` is the only transform channel the engine writes per frame; the
@@ -259,6 +287,23 @@ body {
   max-width: 24rem;
   transform: translateY(var(--rise, 0px));
   visibility: hidden;
+}
+
+/* Most beats put this copy over near-black, where it needs nothing. Act 4 puts
+   it over a photograph of a white sweep, where grey-on-light is unreadable. A
+   soft scrim costs nothing on the dark beats and rescues the bright one. */
+.act-copy::before {
+  content: "";
+  position: absolute;
+  inset: -2rem -5rem -2rem -2.5rem;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at 32% 50%,
+    rgba(17, 20, 25, 0.88) 0%,
+    rgba(17, 20, 25, 0.7) 48%,
+    rgba(17, 20, 25, 0) 78%
+  );
 }
 
 .act-copy .eyebrow {
@@ -940,4 +985,89 @@ button.explore-hint,
 
 .end-inner a:hover {
   border-color: var(--j-orange);
+}
+
+/* ---- Phones -------------------------------------------------------------
+   Last in the sheet on purpose: a media query carries no extra specificity,
+   so these have to come after the rules they override.
+
+   The stage fills the screen behind the words, and Act 4's frame is a
+   photograph, so correct stacking is not enough on its own. The copy needs
+   its own ground to sit on, and the instrumentation has to get out of its way
+   rather than compete for the same corner. */
+
+@media (max-width: 48rem) {
+  .act-copy {
+    left: 1rem;
+    right: 1rem;
+    bottom: 1.5rem;
+    max-width: none;
+    padding: 1rem 1.1rem 1.15rem;
+    background: rgba(17, 20, 25, 0.88);
+    border-left: 2px solid rgba(255, 106, 19, 0.6);
+  }
+
+  /* The panel does this job on a phone; two scrims would just muddy it. */
+  .act-copy::before {
+    display: none;
+  }
+
+  .act-copy h2 {
+    font-size: clamp(1.5rem, 7vw, 2rem);
+  }
+
+  .act-copy p {
+    font-size: 0.86rem;
+    line-height: 1.6;
+  }
+
+  /* Leave the beat rail its gutter. */
+  .act-hero {
+    width: calc(100vw - 5rem);
+  }
+
+  /* Bottom-right would collide with the copy panel; sit it under the frame
+     brackets instead, where the feed has nothing to say. */
+  .act-hud {
+    top: 4.6rem;
+    right: 1rem;
+    bottom: auto;
+    transform: translateY(var(--rise, 0px));
+    font-size: 0.6rem;
+  }
+
+  /* Provenance is supplementary, and the copy already names the camera. */
+  .feed-telemetry {
+    display: none;
+  }
+
+  .det-box span {
+    font-size: 0.5rem;
+    padding: 0.04rem 0.2rem;
+  }
+
+  .beat-rail {
+    right: 0.7rem;
+    gap: 0.7rem;
+  }
+
+  .hotspot-card {
+    right: 1rem;
+    left: 1rem;
+    width: auto;
+    bottom: auto;
+    top: 4.6rem;
+  }
+
+  /* The copy panel now owns the bottom of the screen, so the affordances
+     move above it rather than sitting on top of its chips. */
+  .explore-hint,
+  .resume-pill {
+    bottom: auto;
+    top: 4.6rem;
+  }
+
+  .scroll-cue {
+    bottom: 1.2rem;
+  }
 }

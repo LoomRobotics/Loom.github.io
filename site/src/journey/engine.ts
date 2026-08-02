@@ -187,9 +187,15 @@ export async function mountJourney(tier: TierReport): Promise<JourneyHandle> {
     realm.update(at, time, dt);
     perception.update(at, time, stage.camera);
     const graphFade = realm.graph.fade;
+    // Thirteen chips is a thicket on a phone. Blocked nodes are the least
+    // informative of the four states, so they drop out first.
+    const narrow = canvas.clientWidth < 700;
     const graphChips =
       graphFade > 0.02
-        ? realm.graph.chipData().map((chip) => {
+        ? realm.graph
+            .chipData()
+            .filter((chip) => !(narrow && chip.state === "blocked"))
+            .map((chip) => {
             const s = projectPoint(chip.world);
             return {
               id: chip.id,
