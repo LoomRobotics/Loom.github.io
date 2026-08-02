@@ -16,7 +16,9 @@ concurrency:
 
 env:
   # Set to "1" to serve the journey at / (cutover). Unset = journey at /next/.
-  JOURNEY_AT_ROOT: ""
+  # Cut over 2026-08-02. Rollback: set back to "" and push; the legacy home is
+  # kept at /home-legacy.html and becomes / again.
+  JOURNEY_AT_ROOT: "1"
 
 jobs:
   build:
