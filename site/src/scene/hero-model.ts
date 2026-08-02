@@ -108,7 +108,13 @@ function ringMaterial(ledRing: THREE.Object3D): THREE.MeshStandardMaterial {
   return mat;
 }
 
+declare const __HAS_HERO_MODEL__: boolean;
+
 export async function loadHeroWorker(base: string): Promise<WorkerRig | null> {
+  // In a production build the answer is known at bundle time, so no request is
+  // made until a model actually exists. Dev keeps probing, so dropping the file
+  // into public/media takes effect on reload.
+  if (!import.meta.env.DEV && !__HAS_HERO_MODEL__) return null;
   const url = `${base}media/worker.glb`;
   let gltf;
   try {

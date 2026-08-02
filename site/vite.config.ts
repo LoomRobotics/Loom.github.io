@@ -101,6 +101,12 @@ function serveLegacyAssets(): Plugin {
 export default defineConfig({
   base: atRoot ? "/" : "/next/",
   plugins: [serveLegacyAssets()],
+  define: {
+    // Whether an authored hero model was present at build time. Without this
+    // the loader's probe would 404 on every production load until the CAD
+    // lands. Dev still probes at runtime, so dropping the file in just works.
+    __HAS_HERO_MODEL__: JSON.stringify(existsSync(resolve(repoRoot, "site/public/media/worker.glb"))),
+  },
   build: {
     outDir: "dist-vite",
     assetsDir: "app",

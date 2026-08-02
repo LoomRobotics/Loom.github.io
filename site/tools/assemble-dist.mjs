@@ -38,6 +38,26 @@ cpSync(join(repo, "images"), join(out, "images"), { recursive: true });
 if (atRoot) {
   cpSync(join(repo, "index.html"), join(out, "home-legacy.html"));
   cpSync(viteOut, out, { recursive: true });
+  // /next/ was the staging channel through the whole build; anyone holding
+  // that link (or a bookmark) should land on the real thing, not a 404.
+  mkdirSync(join(out, "next"), { recursive: true });
+  writeFileSync(
+    join(out, "next", "index.html"),
+    `<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Loom Robotics</title>
+    <link rel="canonical" href="https://loom-robotics.com/" />
+    <meta name="robots" content="noindex" />
+    <meta http-equiv="refresh" content="0; url=/" />
+  </head>
+  <body>
+    <p>The preview channel is now the live site. <a href="/">Continue</a>.</p>
+  </body>
+</html>
+`
+  );
 } else {
   cpSync(join(repo, "index.html"), join(out, "index.html"));
   cpSync(viteOut, join(out, "next"), { recursive: true });
