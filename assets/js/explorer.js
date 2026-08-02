@@ -255,8 +255,35 @@
 			if (a === "zoom-out") { cy.zoom({ level: cy.zoom() * 0.8,  renderedPosition: { x: mount.clientWidth / 2, y: mount.clientHeight / 2 } }); }
 			if (a === "fit")      { fitAll(); }
 			if (a === "reset")    { clearHighlight(); closePanel(); fitAll(); }
+			if (a === "expand")   { toggleFullscreen(); }
 		});
 	}
+
+	/* --- Full screen: the graph is dense, and inside a text column the detail
+	   panel covers half of it. Pages without an expand button are unaffected. --- */
+	var stage = mount.closest(".arch-stage");
+	var expandBtn = controls ? controls.querySelector('[data-action="expand"]') : null;
+	function setFullscreen(on) {
+		if (!stage) { return; }
+		stage.classList.toggle("is-fullscreen", on);
+		// Both elements: which one actually scrolls varies, and locking only
+		// <body> lets the page slide around behind the overlay.
+		document.body.classList.toggle("arch-locked", on);
+		document.documentElement.classList.toggle("arch-locked", on);
+		if (expandBtn) {
+			expandBtn.setAttribute("aria-pressed", on ? "true" : "false");
+			expandBtn.title = on ? "Exit full screen" : "Expand to full screen";
+		}
+		// The stage changed size under Cytoscape; it has to be told.
+		cy.resize();
+		fitAll();
+	}
+	function toggleFullscreen() { setFullscreen(!stage || !stage.classList.contains("is-fullscreen")); }
+	document.addEventListener("keydown", function (e) {
+		if (e.key !== "Escape" || !stage || !stage.classList.contains("is-fullscreen")) { return; }
+		setFullscreen(false);
+		if (expandBtn) { expandBtn.focus(); }
+	});
 
 	/* --- Legend: built from layers; click isolates that layer --- */
 	var legend = document.getElementById("arch-legend");
