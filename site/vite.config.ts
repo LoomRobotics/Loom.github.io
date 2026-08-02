@@ -34,14 +34,21 @@ function serveLegacyAssets(): Plugin {
     configureServer(server) {
       // Dev-only verification endpoint: the page POSTs base64 frames here so
       // captures land on disk without huge strings crossing tool boundaries.
+      // Whitelist, not a path: `dir` arrives from the page, and this writes files.
+      const CAPTURE_DIRS = new Set(["captures", "public/media/stills"]);
       server.middlewares.use("/__capture", (req, res) => {
-        const name = (new URL(req.url ?? "/", "http://x").searchParams.get("name") ?? "capture")
-          .replace(/[^a-z0-9_-]/gi, "");
+        const params = new URL(req.url ?? "/", "http://x").searchParams;
+        const name = (params.get("name") ?? "capture").replace(/[^a-z0-9_-]/gi, "");
+        const target = params.get("dir") ?? "captures";
+        if (!CAPTURE_DIRS.has(target)) {
+          res.statusCode = 400;
+          return res.end(`unknown capture dir: ${target}`);
+        }
         let body = "";
         req.on("data", (c) => (body += c));
         req.on("end", async () => {
           const { mkdirSync, writeFileSync } = await import("node:fs");
-          const dir = resolve(import.meta.dirname, "captures");
+          const dir = resolve(import.meta.dirname, target);
           mkdirSync(dir, { recursive: true });
           writeFileSync(join(dir, `${name}.jpg`), Buffer.from(body, "base64"));
           res.end("ok");

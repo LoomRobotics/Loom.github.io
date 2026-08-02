@@ -25,9 +25,11 @@ export interface JourneyHandle {
 
 export async function mountJourney(tier: TierReport): Promise<JourneyHandle> {
   const container = document.getElementById("journey");
-  const canvas = document.getElementById("stage-canvas") as HTMLCanvasElement | null;
+  const canvasEl = document.getElementById("stage-canvas") as HTMLCanvasElement | null;
   const ui = document.getElementById("journey-ui");
-  if (!container || !canvas || !ui) throw new Error("journey mounts missing");
+  if (!container || !canvasEl || !ui) throw new Error("journey mounts missing");
+  // Re-bound so the narrowing survives into the closures below.
+  const canvas = canvasEl;
   container.hidden = false;
 
   const assets = await loadBrickAssets();
@@ -80,7 +82,7 @@ export async function mountJourney(tier: TierReport): Promise<JourneyHandle> {
     explore.enter(spec, isTouch);
     if (isTouch) {
       scroll.stopInput();
-      canvas!.style.touchAction = "none";
+      canvas.style.touchAction = "none";
     }
   }
 
@@ -89,7 +91,7 @@ export async function mountJourney(tier: TierReport): Promise<JourneyHandle> {
     explore.exit();
     if (isTouch) {
       scroll.resumeInput();
-      canvas!.style.touchAction = "";
+      canvas.style.touchAction = "";
     }
     director.endExplore({ index: pos.index, beat: pos.beat, localT: pos.beat.holdAt });
     return true;
@@ -155,6 +157,12 @@ export async function mountJourney(tier: TierReport): Promise<JourneyHandle> {
     return projectPoint(obj.getWorldPosition(worldTmp));
   };
 
+  // DEV route: export the static-variant stills from every beat's hold pose.
+  if (import.meta.env.DEV && new URLSearchParams(location.search).get("capture") === "stills") {
+    const { exportStills } = await import("./still-export");
+    console.info("[loom] stills exported", await exportStills({ table, canvas, renderFrame }));
+  }
+
   if (import.meta.env.DEV) {
     const { captureComposite } = await import("../dev/capture");
     (window as unknown as Record<string, unknown>).__loom = {
@@ -171,14 +179,13 @@ export async function mountJourney(tier: TierReport): Promise<JourneyHandle> {
     };
   }
 
-  const loop = (time: number, deltaMs: number) => {
-    pos = locate(table, scroll.state.progress);
-    // Scrollbar drags and programmatic jumps break the settle — leave explore.
-    if (explore.active && !scroll.state.settled) exitExplore();
-    director.apply(pos);
-    explore.update();
-    realm.update(pos, time, deltaMs / 1000);
-    perception.update(pos, time, stage.camera);
+  /** One frame at a given beat position. Shared by the scroll-driven loop and
+   * the still exporter, so an exported still is the same frame the journey
+   * would draw and cannot drift from it. */
+  function renderFrame(at: BeatPosition, time: number, dt: number, settled: boolean) {
+    director.apply(at);
+    realm.update(at, time, dt);
+    perception.update(at, time, stage.camera);
     const graphFade = realm.graph.fade;
     const graphChips =
       graphFade > 0.02
@@ -196,15 +203,23 @@ export async function mountJourney(tier: TierReport): Promise<JourneyHandle> {
           })
         : undefined;
     const boxes = perception.boxes(canvas.clientWidth, canvas.clientHeight);
-    overlays.update(pos, {
-      settled: scroll.state.settled,
+    overlays.update(at, {
+      settled,
       exploring: explore.active,
       touch: isTouch,
       project,
       graphChips,
       feed: { alpha: perception.hudAlpha, boxes, lines: perception.hudLines() },
     });
-    stage.render(deltaMs / 1000);
+    stage.render(dt);
+  }
+
+  const loop = (time: number, deltaMs: number) => {
+    pos = locate(table, scroll.state.progress);
+    // Scrollbar drags and programmatic jumps break the settle — leave explore.
+    if (explore.active && !scroll.state.settled) exitExplore();
+    explore.update();
+    renderFrame(pos, time, deltaMs / 1000, scroll.state.settled);
   };
   gsap.ticker.add(loop);
 

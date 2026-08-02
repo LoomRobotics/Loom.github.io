@@ -121,36 +121,50 @@
          live journey renders; unhidden by main.ts when the engine can't run. -->
     <section id="static-journey" hidden aria-label="The LEGOSwarm story">
       <article class="static-panel">
+        <img src="media/stills/act-brand.jpg" alt="A dozen worker robots spread across a dark blueprint grid, their status rings lit blue and green."
+             width="1265" height="720" loading="lazy" decoding="async" />
         <span class="eyebrow">Loom Robotics</span>
         <h1>Decentralized robotic construction.</h1>
         <p>WEAVE, the Workload Execution and Autonomous Verification Engine: a swarm that builds from a replicated assembly graph, with no one in charge.</p>
       </article>
       <article class="static-panel">
+        <img src="media/stills/act-swarm.jpg" alt="Workers circulating the build floor on separate lanes; one sits still with a red fault ring while the rest carry on."
+             width="1265" height="720" loading="lazy" decoding="async" />
         <span class="eyebrow">The swarm</span>
         <h2>No central controller.</h2>
         <p>Every worker carries its own copy of the build plan and pulls its own work. Jobs are claimed, never assigned. About three events per job, no polling. Lose a robot and its lease simply expires.</p>
       </article>
       <article class="static-panel">
+        <img src="media/stills/act-worker.jpg" alt="A single Worker V1 in close view: differential-drive base, four-jointed arm, camera mast and a lit white status ring."
+             width="1265" height="720" loading="lazy" decoding="async" />
         <span class="eyebrow">Worker V1</span>
         <h2>One worker.</h2>
         <p>A differential-drive base, a 4-DOF arm, one camera. A Raspberry Pi 5 runs the ROS 2 peer stack while a Pico 2 W handles motors in real time. The base does coarse positioning; the arm does fine placement.</p>
       </article>
       <article class="static-panel">
+        <img src="media/stills/act-perceive.jpg" alt="A real photograph from worker-001's camera: loose LEGO parts on a white surface, each ringed by an orange detection box labelled with its part number and confidence, with the target build drawn beside them as orange wireframe."
+             width="1265" height="720" loading="lazy" decoding="async" />
         <span class="eyebrow">Through the worker's eye</span>
         <h2>One camera, no ground truth.</h2>
         <p>A real frame from worker-001's camera, with the detector's own output on it: part number and confidence, after the inventory and geometry gates. The learned detector scores 70% against a 29% classical baseline on the worker's own imagery. Against it stands the desired state, the plan, one dependency wave at a time.</p>
       </article>
       <article class="static-panel">
+        <img src="media/stills/act-place.jpg" alt="The finished thirteen-brick pyramid on the build floor, a worker alongside it."
+             width="1265" height="720" loading="lazy" decoding="async" />
         <span class="eyebrow">Build → Verify → Continue</span>
         <h2>Place, then prove it.</h2>
         <p>A placement is never complete until it is verified against the plan. Pass, and dependents unlock. Fail, and the job is released for another worker to retry. Thirteen bricks across four dependency waves, assembled in the real build order from the real assembly graph.</p>
       </article>
       <article class="static-panel">
+        <img src="media/stills/act-graph.jpg" alt="The same pyramid overlaid with its assembly graph: one labelled chip per brick showing the job state and which worker completed it."
+             width="1265" height="720" loading="lazy" decoding="async" />
         <span class="eyebrow">Assembly Graph</span>
         <h2>A shared blueprint.</h2>
         <p>Every robot carries this graph: replicated, versioned, event-sourced, convergent. Each brick is a job node. Jobs unlock as their supports complete, a claim is three events on the wire, and a dead worker's lease simply expires.</p>
       </article>
       <article class="static-panel">
+        <img src="media/stills/act-close.jpg" alt="A worker at rest beside the completed build, the blueprint grid receding into the dark."
+             width="1265" height="720" loading="lazy" decoding="async" />
         <span class="eyebrow">This is WEAVE</span>
         <h2>No single robot holds the master plan.</h2>
         <p>Yet every robot knows exactly where the project stands. Everything above is our simulation, rendered live. Hardware bring-up is underway.</p>

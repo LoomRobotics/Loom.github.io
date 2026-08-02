@@ -91,7 +91,20 @@ async function domLayer(roots: HTMLElement[], w: number, h: number): Promise<HTM
   });
 }
 
-export async function captureComposite(name: string, canvas: HTMLCanvasElement): Promise<string> {
+export interface CaptureOptions {
+  /** Element ids composited over the stage. Defaults to the overlay plus the
+   * chrome; the still exporter drops the chrome and hides the prose. */
+  roots?: string[];
+  /** Output directory under site/, whitelisted by the dev middleware. */
+  dir?: "captures" | "public/media/stills";
+  quality?: number;
+}
+
+export async function captureComposite(
+  name: string,
+  canvas: HTMLCanvasElement,
+  opts: CaptureOptions = {}
+): Promise<string> {
   const w = canvas.clientWidth || window.innerWidth;
   const h = canvas.clientHeight || window.innerHeight;
   const out = document.createElement("canvas");
@@ -102,13 +115,14 @@ export async function captureComposite(name: string, canvas: HTMLCanvasElement):
   ctx.fillRect(0, 0, w, h);
   ctx.drawImage(canvas, 0, 0, w, h);
 
-  const roots = ["journey-ui", "chrome"]
+  const roots = (opts.roots ?? ["journey-ui", "chrome"])
     .map((id) => document.getElementById(id))
     .filter((el): el is HTMLElement => !!el);
   const layer = await domLayer(roots, w, h);
   if (layer) ctx.drawImage(layer, 0, 0);
 
-  const base64 = out.toDataURL("image/jpeg", 0.86).split(",")[1]!;
-  await fetch(`/__capture?name=${encodeURIComponent(name)}`, { method: "POST", body: base64 });
+  const base64 = out.toDataURL("image/jpeg", opts.quality ?? 0.86).split(",")[1]!;
+  const dir = opts.dir ? `&dir=${encodeURIComponent(opts.dir)}` : "";
+  await fetch(`/__capture?name=${encodeURIComponent(name)}${dir}`, { method: "POST", body: base64 });
   return `${name}.jpg (${w}x${h})`;
 }

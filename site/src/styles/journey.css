@@ -756,6 +756,23 @@ button.explore-hint,
   border: 0;
 }
 
+/* ---- Still export (dev route ?capture=stills) --------------------------
+   Keep the data overlays that are the point of their beats (graph chips,
+   detection boxes, the feed HUD, the telemetry chip); drop the prose and the
+   interactive affordances, which the static panel supplies as real HTML or
+   which do nothing in a still. */
+
+#journey-ui.stills-export .act-copy,
+#journey-ui.stills-export .act-hero,
+#journey-ui.stills-export .beat-rail,
+#journey-ui.stills-export .scroll-cue,
+#journey-ui.stills-export .explore-hint,
+#journey-ui.stills-export .resume-pill,
+#journey-ui.stills-export .hotspot-card,
+#journey-ui.stills-export .pin {
+  display: none !important;
+}
+
 /* ---- Static journey (reduced-motion / no-WebGL / SEO) ------------------ */
 
 #static-journey {
@@ -767,6 +784,16 @@ button.explore-hint,
 .static-panel {
   padding: 3rem 0;
   border-bottom: 1px solid var(--j-line);
+}
+
+/* Stills of each beat, for the readers who never see the live stage. */
+.static-panel img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-bottom: 1.6rem;
+  border: 1px solid var(--j-line);
+  background: var(--j-graphite);
 }
 
 .static-panel h2 {
