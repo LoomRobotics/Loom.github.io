@@ -1003,7 +1003,9 @@ button.explore-hint,
     bottom: 1.5rem;
     max-width: none;
     padding: 1rem 1.1rem 1.15rem;
-    background: rgba(17, 20, 25, 0.88);
+    /* Near-opaque: at 0.88 an Act 4 detection label still ghosted through
+       behind the heading, which is the exact complaint this panel exists for. */
+    background: rgba(17, 20, 25, 0.95);
     border-left: 2px solid rgba(255, 106, 19, 0.6);
   }
 
